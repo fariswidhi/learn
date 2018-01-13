@@ -73,6 +73,7 @@ class ModuleController extends Controller
     public function show($id)
     {
         //
+        return view($this->url.'/detail');
     }
 
     /**

@@ -24,7 +24,7 @@
           <td>{{$no++}}</td>
           <td>{{$data->name}}</td>
           <td>
-          <a class="btn btn-success" href="{{$url.'/detail/'.$data->id }}">Detail</a>
+          <a class="btn btn-success" href="{{$url.'/'.$data->id }}">Detail</a>
           <a class="btn btn-warning" href="{{$url.'/'.$data->id.'/edit' }}">Edit</a>
           <form action="{{@url('admin/materials/'.$data->id)}}" method="post" style="display: inline-block;">
           {{method_field('DELETE')}}
