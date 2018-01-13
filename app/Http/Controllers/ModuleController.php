@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Modules;
 use App\Subjects;
+use App\Questions;
+use App\Answers;
+
 class ModuleController extends Controller
 {
    /**
@@ -73,9 +76,29 @@ class ModuleController extends Controller
     public function show($id)
     {
         //
-        return view($this->url.'/detail');
+
+        $title = "Edit Modul";
+        $url = $this->url;
+
+        $data = Modules::find($id);
+
+        return view($this->url.'/detail',compact('data','url','title','id'));
     }
 
+    public function addQuestions(Request $request,$id){
+        $answer = $request->answer;
+        // print_r($request->all());
+        // $question = new Questions;
+        // $question->name = $request->question;
+        // $question->id_module = $id;
+        // $question->save();
+        // $question_id = $question->id;
+        $answers = $request->answers;
+        foreach ($answers as $data) {
+            
+        }        
+
+    }
     /**
      * Show the form for editing the specified resource.
      *

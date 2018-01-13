@@ -27,3 +27,4 @@ Route::resource('admin/subjects','SubjectController');
 Route::resource('admin/materials','MaterialController');
 Route::resource('admin/news','NewsController');
 Route::resource('admin/modules','ModuleController');
+Route::post('admin/modules/add-questions/{id}','ModuleController@addQuestions');
