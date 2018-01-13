@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Subjects extends Model
 {
     //
+    
         use SoftDeletes;
 
 }

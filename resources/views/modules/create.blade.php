@@ -11,16 +11,18 @@
     		{{csrf_field()}}
     		<label>Nama</label>
     			<input type="text" name="name" class="form-control" required>
-            <label>Materi</label>
-                <textarea required class="form-control" name="content"></textarea>
             <label>Mata Pelajaran</label>
             <select class="form-control" required name="subjects">  
                 <option value="">Pilih Mata Pelajaran</option>
-                @foreach ($datas as $data)
+                @foreach ($subjects as $data)
                     {{-- expr --}}
                     <option value="{{$data->id}}">{{$data->name}}</option>
                 @endforeach
             </select>
+            <label>Waktu</label>
+            <input type="number" name="time" class="form-control">
+            <label>Deskripsi</label>
+            <textarea name="desription" class="form-control"></textarea>
             <br>
     			<button type="submit" class="btn btn-success">Simpan</button>
     		</form>

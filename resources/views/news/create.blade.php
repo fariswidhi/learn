@@ -9,18 +9,10 @@
     		<form action="{{url('admin/'.$url)}}" method="post">
     		{{method_field('POST')}}
     		{{csrf_field()}}
-    		<label>Nama</label>
+    		<label>Judul</label>
     			<input type="text" name="name" class="form-control" required>
-            <label>Materi</label>
+            <label>Artikel</label>
                 <textarea required class="form-control" name="content"></textarea>
-            <label>Mata Pelajaran</label>
-            <select class="form-control" required name="subjects">  
-                <option value="">Pilih Mata Pelajaran</option>
-                @foreach ($datas as $data)
-                    {{-- expr --}}
-                    <option value="{{$data->id}}">{{$data->name}}</option>
-                @endforeach
-            </select>
             <br>
     			<button type="submit" class="btn btn-success">Simpan</button>
     		</form>

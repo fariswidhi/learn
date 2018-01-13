@@ -17,10 +17,10 @@
 </div>
 <div class="sidebar">
   <ul>
-    <li><a href="#"><i class="fa fa-desktop"></i><span>Mata Pelajaran</span></a></li>
-    <li><a href="#"><i class="fa fa-newspaper-o"></i><span>Berita </span></a></li>
-    <li><a href="#"><i class="fa fa-server"></i><span>Materi </span></a></li>
-    <li><a href="#"><i class="fa fa-calendar"></i><span>Modul Soal</span></a></li>
+    <li><a href="{{url('/admin/subjects')}}"><i class="fa fa-desktop"></i><span>Mata Pelajaran</span></a></li>
+    <li><a href="{{url('/admin/news')}}"><i class="fa fa-newspaper-o"></i><span>Berita </span></a></li>
+    <li><a href="{{url('/admin/materials')}}"><i class="fa fa-server"></i><span>Materi </span></a></li>
+    <li><a href="{{url('/admin/modules')}}"><i class="fa fa-calendar"></i><span>Modul Soal</span></a></li>
     <li><a href="#"><i class="fa fa-envelope-o"></i><span>Nilai</span></a></li>
     <li><a href="#"><i class="fa fa-envelope-o"></i><span>User</span></a></li>
 </div>

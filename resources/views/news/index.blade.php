@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="jumbotron">
-    <a href="subjects/create" class="btn btn-primary">Tambah</a>
+    <a href="{{$url}}/create" class="btn btn-primary">Tambah</a>
     @if (Session::has('success'))
     @component('alerts.success')
     @slot('title')
@@ -22,11 +22,11 @@
       @foreach ($datas as $data)
         <tr>
           <td>{{$no++}}</td>
-          <td>{{$data->name}}</td>
-          <td>
-          <a class="btn btn-success" href="{{$url.'/detail/'.$data->id }}">Detail</a>
+          <td>{{$data->title}}</td>
+          <td><a class="btn btn-success" href="{{$url.'/'.$data->id }}">Detail</a>
+         
           <a class="btn btn-warning" href="{{$url.'/'.$data->id.'/edit' }}">Edit</a>
-          <form action="{{@url('admin/materials/'.$data->id)}}" method="post" style="display: inline-block;">
+          <form action="{{@url('admin/subjects/'.$data->id)}}" method="post" style="display: inline-block;">
           {{method_field('DELETE')}}
           {{csrf_field()}}
           <button type="submit" class="btn btn-danger">Hapus</button></td>
