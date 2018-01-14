@@ -79,23 +79,33 @@ class ModuleController extends Controller
 
         $title = "Edit Modul";
         $url = $this->url;
+        $data = Questions::where('id_module',$id);
+        print_r($data);
+        // $data = Modules::find($id);
 
-        $data = Modules::find($id);
-
-        return view($this->url.'/detail',compact('data','url','title','id'));
+        // return view($this->url.'/detail',compact('data','url','title','id'));
     }
 
     public function addQuestions(Request $request,$id){
-        $answer = $request->answer;
+        $answer = $request->answer[0];
         // print_r($request->all());
-        // $question = new Questions;
-        // $question->name = $request->question;
-        // $question->id_module = $id;
-        // $question->save();
-        // $question_id = $question->id;
+        $question = new Questions;
+        $question->name = $request->question;
+        $question->id_module = $id;
+        $question->save();
+        $question_id = $question->id;
         $answers = $request->answers;
+        $no =1;
         foreach ($answers as $data) {
-            
+            // echo $no++."<br>";
+            $nos = $no++;
+            $newAnswer = new Answers;
+            $newAnswer->answer = $data;
+            $newAnswer->id_question = $question_id;
+            $newAnswer->true = $nos == $answer ? 1 : 0;
+            $newAnswer->save();
+            // echo $nos." = ".$answer."<br>";
+
         }        
 
     }
