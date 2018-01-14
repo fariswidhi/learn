@@ -92,4 +92,8 @@
             </div>
         </div>
     </body>
+
+    <!-- JavaScripts -->
+
 </html>
+

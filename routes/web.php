@@ -28,3 +28,6 @@ Route::resource('admin/materials','MaterialController');
 Route::resource('admin/news','NewsController');
 Route::resource('admin/modules','ModuleController');
 Route::post('admin/modules/add-questions/{id}','ModuleController@addQuestions');
+Route::get('/dashboard','DashboardController@index');
+Route::resource('/dashboard/kids','KidsController');
+Route::get('/dashboard/kids-activity','DashboardController@kidsActivity');

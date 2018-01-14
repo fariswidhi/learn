@@ -8,7 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../../../favicon.ico">
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Login</title>
 
     <!-- Bootstrap core CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
@@ -27,13 +27,14 @@
           
           <div class="card-body">
             <form class="form-signin">
+            
         <h2 class="form-signin-heading">Login</h2>
         <label>Email</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
+        <input type="email" autocomplete="off" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
         <br>
         <label>Password</label>
         <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input type="password"  autocomplete="off" id="inputPassword" class="form-control" placeholder="Password" required>
         <br>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
       </form>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 14, 2018 at 02:43 PM
+-- Generation Time: Jan 14, 2018 at 09:50 PM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.1.12-3+ubuntu16.04.1+deb.sury.org+1
 
@@ -85,10 +85,22 @@ INSERT INTO `answers` (`id`, `answer`, `id_question`, `true`, `deleted_at`, `cre
 
 CREATE TABLE `childrens` (
   `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `username` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_user` int(11) NOT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `childrens`
+--
+
+INSERT INTO `childrens` (`id`, `name`, `username`, `password`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, '', 'bagus', 'bagus', 12, NULL, NULL, NULL),
+(3, 'Bagus F', 'bagusf', '$2y$10$eHQWYXILwSbAtRuwTzZB2OsVOgT.RAxK.51UVZ0wUSSjX.ztxKI3G', 3, NULL, '2018-01-14 07:19:16', '2018-01-14 07:19:16');
 
 -- --------------------------------------------------------
 
@@ -290,7 +302,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `phone`, `address`, `gender`, `active`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ahmad@ahmad.com', 'ahmad.barjo@gmail.com', '$2y$10$.KUBYb5JkYdPtrFnse1mRepMfdq42WacTu7yhOKpFKwQl8QBrAZAu', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, '2018-01-13 02:28:18', '2018-01-13 02:28:18');
+(1, 'ahmad@ahmad.com', 'ahmad.barjo@gmail.com', '$2y$10$.KUBYb5JkYdPtrFnse1mRepMfdq42WacTu7yhOKpFKwQl8QBrAZAu', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, '2018-01-13 02:28:18', '2018-01-13 02:28:18'),
+(2, 'Ahmad', 'Ahmadbarjo@gmail.com', '$2y$10$K2d6PLB.yXJLgmXbCUiYVu/Cb6BBbYeWRx/g9FUClhORf8D5r9CCq', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, '2018-01-14 01:11:09', '2018-01-14 01:11:09'),
+(3, 'faris', 'fariswidhi@gmail.com', '$2y$10$E/gtUwlI7.wR2UOvb07iKO5J62zVuwCWRum8CJjHAm5Y5rw1khqtO', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, '2018-01-14 06:54:42', '2018-01-14 06:54:42');
 
 -- --------------------------------------------------------
 
@@ -441,7 +455,7 @@ ALTER TABLE `answers`
 -- AUTO_INCREMENT for table `childrens`
 --
 ALTER TABLE `childrens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `materials`
 --
@@ -481,7 +495,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `users_answers`
 --
