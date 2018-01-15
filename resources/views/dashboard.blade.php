@@ -9,10 +9,10 @@
 <div class="header">
   <a href="#" id="menu-action">
     <i class="fa fa-bars"></i>
-    <span>Close</span>
+
   </a>
   <div class="logo">
-    Simple Admin
+  Admin
   </div>
 </div>
 <div class="sidebar">
@@ -23,6 +23,8 @@
     <li><a href="{{url('/admin/modules')}}"><i class="fa fa-calendar"></i><span>Modul Soal</span></a></li>
     <li><a href="#"><i class="fa fa-envelope-o"></i><span>Nilai</span></a></li>
     <li><a href="#"><i class="fa fa-envelope-o"></i><span>User</span></a></li>
+  </ul>
+
 </div>
 
 <!-- Content -->
@@ -130,8 +132,8 @@ p {
 .sidebar.active,
 .sidebar.hovered {
   width: 250px;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
+/*  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;*/
 }
 .sidebar ul {
   list-style-type: none;
@@ -173,12 +175,7 @@ p {
 .sidebar ul li a:hover {
   background-color: #eee;
 }
-.sidebar ul li a:hover i {
-  -webkit-animation-name: swing;
-  -moz-animation-name: swing;
-  -o-animation-name: swing;
-  animation-name: swing;
-}
+
 .main {
   position: relative;
   display: block;
@@ -208,62 +205,6 @@ p {
   padding: 0;
   margin-bottom: 12px;
 }
-@-webkit-keyframes swing {
-  20% {
-    -webkit-transform: rotate3d(0, 0, 1, 15deg);
-    transform: rotate3d(0, 0, 1, 15deg);
-  }
-  40% {
-    -webkit-transform: rotate3d(0, 0, 1, -10deg);
-    transform: rotate3d(0, 0, 1, -10deg);
-  }
-  60% {
-    -webkit-transform: rotate3d(0, 0, 1, 5deg);
-    transform: rotate3d(0, 0, 1, 5deg);
-  }
-  80% {
-    -webkit-transform: rotate3d(0, 0, 1, -5deg);
-    transform: rotate3d(0, 0, 1, -5deg);
-  }
-  100% {
-    -webkit-transform: rotate3d(0, 0, 1, 0deg);
-    transform: rotate3d(0, 0, 1, 0deg);
-  }
-}
-@keyframes swing {
-  20% {
-    -webkit-transform: rotate3d(0, 0, 1, 15deg);
-    -ms-transform: rotate3d(0, 0, 1, 15deg);
-    transform: rotate3d(0, 0, 1, 15deg);
-  }
-  40% {
-    -webkit-transform: rotate3d(0, 0, 1, -10deg);
-    -ms-transform: rotate3d(0, 0, 1, -10deg);
-    transform: rotate3d(0, 0, 1, -10deg);
-  }
-  60% {
-    -webkit-transform: rotate3d(0, 0, 1, 5deg);
-    -ms-transform: rotate3d(0, 0, 1, 5deg);
-    transform: rotate3d(0, 0, 1, 5deg);
-  }
-  80% {
-    -webkit-transform: rotate3d(0, 0, 1, -5deg);
-    -ms-transform: rotate3d(0, 0, 1, -5deg);
-    transform: rotate3d(0, 0, 1, -5deg);
-  }
-  100% {
-    -webkit-transform: rotate3d(0, 0, 1, 0deg);
-    -ms-transform: rotate3d(0, 0, 1, 0deg);
-    transform: rotate3d(0, 0, 1, 0deg);
-  }
-}
-.swing {
-  -webkit-transform-origin: top center;
-  -ms-transform-origin: top center;
-  transform-origin: top center;
-  -webkit-animation-name: swing;
-  animation-name: swing;
-}
 
 </style>
 </body>
@@ -275,7 +216,7 @@ p {
 	$('#menu-action').click(function() {
   $('.sidebar').toggleClass('active');
   $('.main').toggleClass('active');
-  $(this).toggleClass('active');
+  // $(this).toggleClass('active');
 
   if ($('.sidebar').hasClass('active')) {
     $(this).find('i').addClass('fa-close');
@@ -287,9 +228,9 @@ p {
 });
 
 // Add hover feedback on menu
-$('#menu-action').hover(function() {
-    $('.sidebar').toggleClass('hovered');
-});
+// $('#menu-action').hover(function() {
+//     $('.sidebar').toggleClass('hovered');
+// });
 
 $(document).ready(function() {
     var max_fields      = 10; //maximum input boxes allowed
@@ -302,8 +243,9 @@ $(document).ready(function() {
         e.preventDefault();
         if(x < max_fields){ //max input box allowed
             x++; //text box increment
+
             var a = n++;
-            $(wrapper).append('<div><br><input style="float: left;" type="radio"  name="answer[]" value="'+a+'"><input type="text" name="answers[]" style="width: 85%;" class="form-control"/><a href="#" class="remove_field">Remove</a></div>'); //add input box
+            $(wrapper).append('<div><br><input style="float: left;margin-right: 10px;" type="radio"  name="answer[]" value="'+a+'"><input type="text" name="answers[]" style="width: 85%;"  class="form-control"/><a href="#" class="remove_field">Hapus</a>'); //add input box
         }
     });
     
@@ -312,4 +254,5 @@ $(document).ready(function() {
     })
 });
 </script>
+
 </html>

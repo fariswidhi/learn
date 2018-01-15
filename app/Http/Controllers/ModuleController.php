@@ -80,10 +80,11 @@ class ModuleController extends Controller
         $title = "Edit Modul";
         $url = $this->url;
         $data = Questions::where('id_module',$id);
-        print_r($data);
-        // $data = Modules::find($id);
-
-        // return view($this->url.'/detail',compact('data','url','title','id'));
+        // print_r($data);
+        $data = Modules::find($id);
+        $questions = Questions::where('id_module',$id)->get();
+        $no = 1;
+        return view($this->url.'/detail',compact('data','url','title','id','questions','no'));
     }
 
     public function addQuestions(Request $request,$id){
@@ -107,7 +108,8 @@ class ModuleController extends Controller
             // echo $nos." = ".$answer."<br>";
 
         }        
-
+$request->session()->flash('success', 'Berhasil Menambah Data');
+return redirect()->back();
     }
     /**
      * Show the form for editing the specified resource.

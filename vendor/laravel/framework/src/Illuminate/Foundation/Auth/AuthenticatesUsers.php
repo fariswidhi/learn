@@ -17,7 +17,7 @@ trait AuthenticatesUsers
      */
     public function showLoginForm()
     {
-        return view('auth.login-new');
+        return view('auth.login-rev');
     }
 
     /**
