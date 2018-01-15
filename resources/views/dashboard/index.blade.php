@@ -52,7 +52,7 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="">
+	            <a href="{{ url('dashboard/materials') }}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-book fa-5x"></i>

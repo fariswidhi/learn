@@ -29,5 +29,7 @@ Route::resource('admin/news','NewsController');
 Route::resource('admin/modules','ModuleController');
 Route::post('admin/modules/add-questions/{id}','ModuleController@addQuestions');
 Route::get('/dashboard','DashboardController@index');
-Route::resource('/dashboard/kids','KidsController');
+Route::resource('/dashboard/materials','Parent\MaterialController');
+Route::get('dashboard/materials/{material}/{subject}','Parent\MaterialController@detail');
+Route::resource('/dashboard/kids','Parent\KidsController');
 Route::get('/dashboard/kids-activity','DashboardController@kidsActivity');
