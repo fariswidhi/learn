@@ -11,7 +11,7 @@
 		<div class="col-lg-4">
 			<table class="table table-condensed">
 				<tr>
-					<td>Mata Pelajaran</td><td>:</td><td>Ipa</td>
+					<td>Mata Pelajaran</td><td>:</td><td>{{$subjectname}}</td>
 				</tr>
 			</table>
 		</div>

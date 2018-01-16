@@ -10,6 +10,7 @@ use App\Childrens;
 use Auth;
 use App\Material;
 use App\Subjects;
+use App\Modules;
 
 class QuestionsController extends Controller
 {
@@ -46,7 +47,7 @@ class QuestionsController extends Controller
         $no = 1;
         $explode = explode('-', $param);
         $id = end($explode);
-        $material = Material::where('id_subject',$id)->get();
+        $material = Modules::where('id_subjects',$id)->get();
 
         $data = [];
         $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
@@ -58,12 +59,19 @@ class QuestionsController extends Controller
             $data[] = [
             'name'=>$name,
             'permalink'=>$permalink,
-            'id'=>$m->id
+            'id'=>$m->id,
+            'time'=>$m->time,
             ];
         }
 
-            $param = $param;
+           $param = $param;
+
+
         return view('dashboard/question/detail',compact('no','data','param'));
+    }
+
+    public function detail($params){
+echo "string";
     }
 
 

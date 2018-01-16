@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 14, 2018 at 09:50 PM
+-- Generation Time: Jan 16, 2018 at 12:29 PM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
 -- PHP Version: 7.1.12-3+ubuntu16.04.1+deb.sury.org+1
 
@@ -75,7 +75,11 @@ CREATE TABLE `answers` (
 INSERT INTO `answers` (`id`, `answer`, `id_question`, `true`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (4, '2', '6', '0', NULL, '2018-01-13 09:31:35', '2018-01-13 09:31:35'),
 (5, '3', '6', '1', NULL, '2018-01-13 09:31:35', '2018-01-13 09:31:35'),
-(6, '4', '6', '0', NULL, '2018-01-13 09:31:35', '2018-01-13 09:31:35');
+(6, '4', '6', '0', NULL, '2018-01-13 09:31:35', '2018-01-13 09:31:35'),
+(7, '1', '7', '0', NULL, '2018-01-14 18:38:55', '2018-01-14 18:38:55'),
+(8, '4', '7', '1', NULL, '2018-01-14 18:38:55', '2018-01-14 18:38:55'),
+(9, '5', '7', '0', NULL, '2018-01-14 18:38:55', '2018-01-14 18:38:55'),
+(10, '6', '7', '0', NULL, '2018-01-14 18:38:55', '2018-01-14 18:38:55');
 
 -- --------------------------------------------------------
 
@@ -100,7 +104,9 @@ CREATE TABLE `childrens` (
 
 INSERT INTO `childrens` (`id`, `name`, `username`, `password`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, '', 'bagus', 'bagus', 12, NULL, NULL, NULL),
-(3, 'Bagus F', 'bagusf', '$2y$10$eHQWYXILwSbAtRuwTzZB2OsVOgT.RAxK.51UVZ0wUSSjX.ztxKI3G', 3, NULL, '2018-01-14 07:19:16', '2018-01-14 07:19:16');
+(3, 'Bagus F', 'bagusf', '$2y$10$eHQWYXILwSbAtRuwTzZB2OsVOgT.RAxK.51UVZ0wUSSjX.ztxKI3G', 3, NULL, '2018-01-14 07:19:16', '2018-01-14 07:19:16'),
+(4, 'Ronian', 'roni19', '$2y$10$yXTomTE5./noBLU/SpWA2uV2xJx1zIBF76/I1R9IJsVzREPBZ0CGW', 4, NULL, '2018-01-14 17:34:30', '2018-01-14 17:44:44'),
+(5, 'ahmad', 'ahmadin', '$2y$10$t.Tmwj3YqiVvSzuPRzRqmuKnO6Sz68PMTdE2rUs2JNS5wG9YsJfKO', 7, NULL, '2018-01-15 17:06:37', '2018-01-15 17:06:37');
 
 -- --------------------------------------------------------
 
@@ -113,6 +119,7 @@ CREATE TABLE `materials` (
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_subject` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -122,8 +129,8 @@ CREATE TABLE `materials` (
 -- Dumping data for table `materials`
 --
 
-INSERT INTO `materials` (`id`, `name`, `content`, `id_subject`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Materi Trigonometri Bab 1', 'Ini adalah Materi', 4, '2018-01-13 07:02:00', '2018-01-13 06:54:33', '2018-01-13 07:02:00');
+INSERT INTO `materials` (`id`, `name`, `content`, `id_subject`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Materi Trigonometri Bab 1', 'Ini adalah Materi', 4, NULL, NULL, '2018-01-13 06:54:33', '2018-01-13 07:02:00');
 
 -- --------------------------------------------------------
 
@@ -251,7 +258,8 @@ CREATE TABLE `questions` (
 --
 
 INSERT INTO `questions` (`id`, `name`, `id_module`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(6, '1+1=', '1', NULL, '2018-01-13 09:31:35', '2018-01-13 09:31:35');
+(6, '1+1=', '1', NULL, '2018-01-13 09:31:35', '2018-01-13 09:31:35'),
+(7, 'Pangkat 2 =...', '1', NULL, '2018-01-14 18:38:54', '2018-01-14 18:38:54');
 
 -- --------------------------------------------------------
 
@@ -274,7 +282,9 @@ CREATE TABLE `subjects` (
 INSERT INTO `subjects` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (2, 'Matematika', '2018-01-13 05:49:11', '2018-01-13 05:49:08', '2018-01-13 05:49:11'),
 (3, 'Ipa', '2018-01-13 06:22:33', '2018-01-13 05:55:31', '2018-01-13 06:22:33'),
-(4, 'Matematika', NULL, '2018-01-13 06:22:44', '2018-01-13 06:22:44');
+(4, 'Matematika', NULL, '2018-01-13 06:22:44', '2018-01-13 06:22:44'),
+(5, 'Bahasa Indonesia', NULL, '2018-01-14 18:16:53', '2018-01-14 18:16:53'),
+(6, 'Ilmu Pengetahuan Alam', NULL, '2018-01-14 18:17:07', '2018-01-14 18:17:07');
 
 -- --------------------------------------------------------
 
@@ -285,13 +295,15 @@ INSERT INTO `subjects` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) 
 CREATE TABLE `users` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `address` text COLLATE utf8mb4_unicode_ci,
-  `gender` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `active` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_parent` int(11) DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -301,10 +313,23 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `phone`, `address`, `gender`, `active`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ahmad@ahmad.com', 'ahmad.barjo@gmail.com', '$2y$10$.KUBYb5JkYdPtrFnse1mRepMfdq42WacTu7yhOKpFKwQl8QBrAZAu', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, '2018-01-13 02:28:18', '2018-01-13 02:28:18'),
-(2, 'Ahmad', 'Ahmadbarjo@gmail.com', '$2y$10$K2d6PLB.yXJLgmXbCUiYVu/Cb6BBbYeWRx/g9FUClhORf8D5r9CCq', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, '2018-01-14 01:11:09', '2018-01-14 01:11:09'),
-(3, 'faris', 'fariswidhi@gmail.com', '$2y$10$E/gtUwlI7.wR2UOvb07iKO5J62zVuwCWRum8CJjHAm5Y5rw1khqtO', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, '2018-01-14 06:54:42', '2018-01-14 06:54:42');
+INSERT INTO `users` (`id`, `name`, `email`, `username`, `password`, `type`, `phone`, `address`, `gender`, `active`, `id_parent`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'ahmad@ahmad.com', 'ahmad.barjo@gmail.com', '', '$2y$10$.KUBYb5JkYdPtrFnse1mRepMfdq42WacTu7yhOKpFKwQl8QBrAZAu', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-13 02:28:18', '2018-01-13 02:28:18'),
+(2, 'Ahmad', 'Ahmadbarjo@gmail.com', '', '$2y$10$K2d6PLB.yXJLgmXbCUiYVu/Cb6BBbYeWRx/g9FUClhORf8D5r9CCq', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-14 01:11:09', '2018-01-14 01:11:09'),
+(3, 'faris', 'fariswidhi@gmail.com', '', '$2y$10$E/gtUwlI7.wR2UOvb07iKO5J62zVuwCWRum8CJjHAm5Y5rw1khqtO', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-14 06:54:42', '2018-01-14 06:54:42'),
+(4, 'Bambang', 'bambang@gmail.com', '', '$2y$10$3QqfvgYNaiUZMYGXbuDlquPDJiavfL9L9TRot8qeaDG731Qcvvzg.', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, 'zWhMKAaxtZgT1kcBeVjDrtn4mQXREaGPPTKusbm0QHpOJeERD6pRCz4zZ4IU', '2018-01-14 17:31:27', '2018-01-14 17:31:27'),
+(5, 'budi', 'budi12@gmail.com', '', '$2y$10$aBXtT.UF..O7jMP0ccvlTuctx1390O3gzkmv7F3zO8yVVZsdywQXm', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, 'BJaOk9GsVznyHJ9xF7Qw9XOmkn3HP9ijDV0OIIashVrdSLnnbyDJeFJnWbqr', '2018-01-14 18:10:10', '2018-01-14 18:10:10'),
+(6, 'Ahmad Budiawan', 'ahmadbudi123@gmail.com', '', '$2y$10$ylsPixS29xDRm/J/FglqrukjKFR/4G8g2UnAweW/y1fL.bhOfw7/u', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-14 19:05:47', '2018-01-14 19:05:47'),
+(7, 'Yanto', 'suyanto@gmail.com', '', '$2y$10$CuE2kVZCvt9BWB4UZ4dP2ezfrXHePnkNQnhpSqmvEFv0lnUfPqRZG', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, 'zlqF3DZPo519xqzsvnaC7Cc2kJTvWw7KvUttkz0u0xjaXHbk05zwylQ2tepz', '2018-01-15 17:05:23', '2018-01-15 17:05:23'),
+(8, 'yanto', 'yanto@gmail.com', 'yanto', '$2y$10$BccOfsmYI2S9PwNJk/nJx./MD7OopFhHcZwlJ7rmdDfHj3APZfc5y', '2', '08211233423', NULL, 'laki-laki', '0', NULL, 'RYnwPfdZw4BiDxJk660RswChV4L91QHDVmRDsa1ZZOX1bUOtzFXhDkZmp159', '2018-01-15 17:40:16', '2018-01-15 17:40:16'),
+(9, 'Toni', NULL, 'toni', '$2y$10$9nm2k.wQZob.xt1rj7V28OXaJw7kwDUenec19vSY0Pwhg0x74czvK', '3', NULL, NULL, NULL, '1', 8, NULL, '2018-01-15 20:39:12', '2018-01-15 20:39:49'),
+(10, 'yanto', 'yanto@yahoo.com', 'yanto12', '$2y$10$OL6b9.ZeaP7ba0INSO6hJ.Sl6SW6pPKWkZEXiY52tfWYTADSiRV2K', '2', '018276543', NULL, 'laki-laki', '0', NULL, 'c3K2MPJrdPYPaxrPPTryuO9m98rUjfQjhANnFjqHwhU9jUhPP06NVWhzu1aD', '2018-01-15 21:02:29', '2018-01-15 21:02:29'),
+(11, 'toni abdullah', NULL, 'tonia', '$2y$10$bf05phynlovD2mCdisv9sOdCmS5sCBkFOqsLN.l1E27YKIBygrALS', '3', NULL, NULL, NULL, '1', 10, NULL, '2018-01-15 21:02:56', '2018-01-15 21:02:56'),
+(12, 'budi', 'budi@mail.com', 'budiawan', '$2y$10$DhVKfR4ZhrrfwK4IAniUE.NMdVcgxg/f5f.HigDht3u4Yhs4dPjGW', '2', '0812712', NULL, 'laki-laki', '0', NULL, 'A6tTGcrrfmnZG379tZgjWrzawNoDvB2hRMR1mZ6dBQvS0xNwWTefSmGtch0R', '2018-01-15 21:09:23', '2018-01-15 21:09:23'),
+(14, 'ahmad budiawan', 'budiawan@mail.com', 'budiawan19', '$2y$10$6oxYUzhCxOrv99AVsd6vv.vWrJHrqqGj3SbNXRLKGVdJfMDBFTOtK', '3', NULL, NULL, NULL, '1', 12, 'eoMmIj5A90m24dlvIYocFvPToFBnizmmtzaIdNgAdzJs0AYxdrxMjzoeL16e', '2018-01-15 21:19:08', '2018-01-15 21:19:08'),
+(15, 'jjj', 'jjj@gmail.com', 'username', '$2y$10$4HiTSEr459ggeW9sdUhzWOseyrISz0oIcei0RDVsT.URWoe0Ec.0.', '2', '9929929299', NULL, 'laki-laki', '0', NULL, 'V5f5uuECg3e4kbMEVx1swiua4742TTmu8YijMBmskOLxgoXrksr9xb3dAMFr', '2018-01-15 21:47:46', '2018-01-15 21:47:46'),
+(16, 'faris', 'fariswidhiarta123@gmail.com', 'faris', '$2y$10$T3yURq0j9Boi/578vRcNUu/M2D3uP2f22z7Qb1cFhZywDSoX6HUAi', '3', NULL, NULL, NULL, '1', 15, 'BmY2MDkNw509x54JSJR3Z5Ku22mp4pXOT3Zw843jxCKgdOA6fcMRcxOcMl9W', '2018-01-15 21:49:01', '2018-01-15 21:49:01'),
+(17, 'adam', 'adam@adam.com', 'admin', '$2y$10$k5LTN7hEsvYDu0GtjnsAG.KfvPe2VD2S.Rh7JAtG5p2J1MbC0k5ce', '2', '08182812', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-15 22:27:51', '2018-01-15 22:27:51');
 
 -- --------------------------------------------------------
 
@@ -450,12 +475,12 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `childrens`
 --
 ALTER TABLE `childrens`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `materials`
 --
@@ -485,17 +510,17 @@ ALTER TABLE `points`
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `users_answers`
 --

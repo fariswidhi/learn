@@ -130,8 +130,9 @@ class MaterialController extends Controller
         $explode = explode('-', $material);
         $id = end($explode);
         $data = Material::find($id);
+        $subjectname = $data->name;
         // print_r($material);
-        return view('dashboard/materials/detail-material',compact('data'));
+        return view('dashboard/materials/detail-material',compact('data','subjectname'));
 
     }
 
