@@ -33,6 +33,16 @@
                                 </div>
 
 
+                        <div class="form-group">
+                            <label for="password-confirm" class="control-label">Username</label>
+
+                                <input id="password-confirm" type="text" class="form-control" name="username" required>
+                                    @if ($errors->has('username'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
 
                           <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class=" control-label">E-Mail</label>
@@ -78,7 +88,7 @@
                         <div class="form-group">
                             <label for="password-confirm" class="control-label">Nomor Hp</label>
 
-                                    <input type="number" name="phone" class="form-control">
+                                    <input type="number" name="phone" class="form-control" value="{{ old('phone') }}">
 
                         </div>
 

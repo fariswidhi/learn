@@ -51,10 +51,13 @@ class RegisterController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed',
+            'username' => 'required|string|min:5|unique:users'
         ]);
     }
 
+
     /**
+
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
@@ -67,6 +70,7 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'username'=>$data['username'],
             'password' => bcrypt($data['password']),
             'type'=>2,
             'gender'=>$data['gender'],

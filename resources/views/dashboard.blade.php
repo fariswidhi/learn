@@ -2,8 +2,8 @@
 <html>
 <head>
 	<title></title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+	<link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
 </head>
 <body>
 <div class="header">
@@ -36,7 +36,7 @@
 </div>
 
 <style type="text/css">
-	@import url('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css');
+
 @import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
 *,
 *:before,
@@ -115,7 +115,7 @@ p {
   -webkit-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.sidebar {
+.sidebar{
   position: fixed;
   z-index: 10;
   left: 0;

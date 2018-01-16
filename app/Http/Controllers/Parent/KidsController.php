@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Childrens;
 use Auth;
+use App\User;
 
 class KidsController extends Controller
 {
@@ -23,7 +24,7 @@ class KidsController extends Controller
         //
         $url = $this->url;
         $userid = Auth::id();
-        $data =  Childrens::where('id_user',$userid)->get();
+        $data =  User::where('id_parent',$userid)->get();
         return view('dashboard/kids',compact('url','data'));
     }
 
@@ -51,16 +52,19 @@ class KidsController extends Controller
         //e
 
     $username = $request->username;
-    $find = Childrens::where('username',$username);
+    $find = User::where('username',$username);
     // echo $count;
     $userid = Auth::user()->id;
 // echo Auth::user()->id;
     if ($find->count() == 0) {
-        $class = new Childrens;
+        $class = new User;
         $class->name = $request->name;
         $class->username  = $username;
         $class->password = bcrypt($request->password);
-        $class->id_user = $userid;
+        $class->id_parent = $userid;
+        $class->type = 3;
+        $class->active = 1;
+        $class->email = $request->email;
         $class->save();
         $request->session()->flash('success', 'Berhasil Menambah Data');
         return redirect('dashboard/kids');
@@ -93,7 +97,7 @@ class KidsController extends Controller
     public function edit($id)
     {
         //
-        $data = Childrens::find($id);
+        $data = User::find($id);
         return view('dashboard/kids/edit',compact('data'));
     }
 
@@ -108,7 +112,7 @@ class KidsController extends Controller
     {
         //
         $password = $request->password;
-        $update = Childrens::find($id);
+        $update = User::find($id);
         if (empty($password)) {
             $update->name = $request->name;
         }
@@ -135,7 +139,7 @@ class KidsController extends Controller
     public function destroy($id,Request $request)
     {
         //
-        $delete = Childrens::find($id);
+        $delete = User::find($id);
         $delete->delete();
         $request->session()->flash('success', 'Berhasil Menghapus Data');
         return redirect('dashboard/kids');

@@ -91,7 +91,7 @@
                         <div class="form-group">
                             <label  >Nomor Hp</label>
 
-                                    <input type="number" name="phone" class="form-control">
+                                    <input type="number" name="phone" class="form-control" value="{{ old('phone') }}">
 
                         </div>
 

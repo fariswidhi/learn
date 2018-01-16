@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('login/kids','LoginController@kidslogin');
+Route::post('login/kids','LoginController@kidsloginPost');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -30,6 +32,7 @@ Route::resource('admin/modules','ModuleController');
 Route::post('admin/modules/add-questions/{id}','ModuleController@addQuestions');
 Route::get('/dashboard','DashboardController@index');
 Route::resource('/dashboard/materials','Parent\MaterialController');
+Route::resource('/dashboard/questions','Kids\QuestionsController');
 Route::get('dashboard/materials/{material}/{subject}','Parent\MaterialController@detail');
 Route::resource('/dashboard/kids','Parent\KidsController');
 Route::get('/dashboard/kids-activity','DashboardController@kidsActivity');

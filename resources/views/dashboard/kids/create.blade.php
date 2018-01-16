@@ -22,6 +22,8 @@
 				<input type="text" name="name" class="form-control" required  autocomplete="off">
 				<label>Username</label>
 				<input type="text" name="username" class="form-control" required  autocomplete="off">
+				<label>Email</label>
+				<input type="text" name="email" class="form-control" required  autocomplete="off">
 				<label>Password</label>
 				<input type="password" name="password" class="form-control" required  autocomplete="off">
 				<br>

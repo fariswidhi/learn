@@ -23,6 +23,8 @@
 				<input type="text" name="name" class="form-control" required  autocomplete="off" value="{{$data->name}}">
 				<label>Username</label>
 				<input type="text" name="username" class="form-control"   autocomplete="off" value="{{$data->username}}" readonly>
+				<label>Email</label>
+				<input type="text" name="email" class="form-control" required  autocomplete="off" value="{{$data->email}}">
 				<label>Password</label>
 				<input type="password" name="password" class="form-control"   autocomplete="off">
 				<br>

@@ -14,21 +14,19 @@
     
     <div class="col-md-4">
       <section class="login-form" >
+        <form method="post" action="{{ url('login/kids') }}" role="login" >
 
-      <form class="form-signin" method="POST" action="{{ route('login') }}" role="login">
-        {{ csrf_field() }}
+        {{csrf_field()}}
           <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+        
+
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="password" class=" control-label">Email</label>
 
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus autocomplete="off" placeholder="Email">
+                                <input id="email" type="text" class="form-control" name="username" required autofocus autocomplete="off" placeholder="Email">
 
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
+
                             </div>
 
 
