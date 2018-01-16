@@ -7,7 +7,7 @@
 {{-- 
 		<h3>{{$data->name}}</h3> --}}
 
-
+tes
 	</div>
 </div>
 @endsection
