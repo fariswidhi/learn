@@ -1,0 +1,82 @@
+.card{
+	background: #fff;
+
+}
+body{
+	background: #fafafa;
+}
+	a:hover{
+				color: #444;
+	text-decoration: none;
+	}
+	
+	.panel a{
+		color: #444;
+	}
+	i{
+		color: #444;
+	}
+	.card{
+
+				transition: 0.1s ease-in-out;
+	}
+	.panel:hover{
+		background: rgba(0,0,0,0.1);
+		transition: 0.1s ease-in-out;
+	}
+	.bg-blue{
+
+		background: #01b2ff;
+
+	}
+	.bg-blue a{
+				color: #fff;
+	}
+  .child a{
+    color: #333;
+  }
+  .footer-bottom {
+    background-color: #777;
+    min-height: 33px;
+    width: 100%;
+    margin-top: 80px; 
+}
+.copyright {
+    color: #fff;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 7px 0;
+}
+.design {
+    color: #fff;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 7px 0;
+    text-align: right;
+}
+.design a {
+    color: #fff;
+}
+
+.footer-bottom {
+    background-color: #777;
+    min-height: 30px;
+    width: 100%;
+    margin-top: 90px;
+}
+.copyright {
+    color: #fff;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 7px 0;
+}
+.design {
+    color: #fff;
+    line-height: 30px;
+    min-height: 30px;
+    padding: 7px 0;
+    text-align: right;
+}
+.design a {
+    color: #fff;
+}

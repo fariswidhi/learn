@@ -3,7 +3,8 @@
 <head>
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="{{@asset('/bootstrap/css/bootstrap.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{@asset('/font-awesome/css/font-awesome.min.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{@asset('/font-awesome/css/font-awesome.min.css')}}">
+	<link rel="stylesheet" type="text/css" href="{{@asset('css/dashboard.css')}}">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg bg-blue">
@@ -63,45 +64,33 @@
 
 </div>
 
-<style type="text/css">
-.card{
-	background: #fff;
+<div class="footer-bottom">
 
-}
-body{
-	background: #fafafa;
-}
-	a:hover{
-				color: #444;
-	text-decoration: none;
-	}
-	
-	.panel a{
-		color: #444;
-	}
-	i{
-		color: #444;
-	}
-	.card{
+  <div class="container">
 
-				transition: 0.1s ease-in-out;
-	}
-	.panel:hover{
-		background: rgba(0,0,0,0.1);
-		transition: 0.1s ease-in-out;
-	}
-	.bg-blue{
+    <div class="row">
 
-		background: #01b2ff;
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 
-	}
-	.bg-blue a{
-				color: #fff;
-	}
-  .child a{
-    color: #333;
-  }
-</style>
+        <div class="copyright">
+
+          © 2018 LEARN UFA
+
+        </div>
+
+      </div>
+
+      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+
+        <div class="design">
+
+           Suported By  |  <a target="_blank" href="http://www.smktiufa.sch.id">Web Designer SMK Umar Fatah Rembang</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 
     <!-- JavaScripts -->

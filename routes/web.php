@@ -12,18 +12,18 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('dashboard');
 });
 
 Auth::routes();
 Route::get('login/kids','LoginController@kidslogin');
 Route::post('login/kids','LoginController@kidsloginPost');
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/admin', 'AdminController@index');
 Route::resource('admin/subjects','SubjectController');
 Route::resource('admin/materials','MaterialController');
