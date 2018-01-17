@@ -72,7 +72,7 @@ $(document).on('click','.map',function(){
 			subj = res.subject;
 			$("#question").html(subj);
 			for (var i = 0; i < res.answer.length; i++) {
-				answers += "<input type='radio' id='s"+res.answer[i].id+"' name='answer[]' value='"+res.answer[i].id+"'> <label for='s"+res.answer[i].id+"'>"+res.answer[i].data+"</label><br>";
+				answers += "<input type='radio' class='radio-custom' id='s"+res.answer[i].id+"' name='answer[]' value='"+res.answer[i].id+"'> <label class='radio-custom-label' for='s"+res.answer[i].id+"'>"+res.answer[i].data+"</label><br>";
 			}
 			answers += "<br><button class='pull-left btn btn-primary'>Sebelumnya</button>";
 			answers += "<button class='pull-right btn btn-primary'>Selanjutnya</button>";
@@ -87,56 +87,53 @@ $(document).on('click','.map',function(){
 </script>
 @endpush
 
-<style type="text/css">
-	[type="radio"]:checked,
-[type="radio"]:not(:checked) {
-    position: absolute;
-    left: -9999px;
-}
-[type="radio"]:checked + label,
-[type="radio"]:not(:checked) + label
-{
-    position: relative;
-    padding-left: 28px;
-    cursor: pointer;
-    line-height: 20px;
-    display: inline-block;
-    color: #666;
-}
-[type="radio"]:checked + label:before,
-[type="radio"]:not(:checked) + label:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 18px;
-    height: 18px;
-    border: 1px solid #ddd;
-    border-radius: 100%;
-    background: #fff;
-}
-[type="radio"]:checked + label:after,
-[type="radio"]:not(:checked) + label:after {
-    content: '';
-    width: 12px;
-    height: 12px;
-    background: #F87DA9;
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    border-radius: 100%;
-    -webkit-transition: all 0.2s ease;
-    transition: all 0.2s ease;
-}
-[type="radio"]:not(:checked) + label:after {
+<style type="text/css">/* only demo styles */
+
+
+.checkbox-custom, .radio-custom {
     opacity: 0;
-    -webkit-transform: scale(0);
-    transform: scale(0);
+    position: absolute;   
 }
-[type="radio"]:checked + label:after {
-    opacity: 1;
-    -webkit-transform: scale(1);
-    transform: scale(1);
+
+.checkbox-custom, .checkbox-custom-label, .radio-custom, .radio-custom-label {
+    display: inline-block;
+    vertical-align: middle;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.checkbox-custom-label, .radio-custom-label {
+    position: relative;
+}
+
+.checkbox-custom + .checkbox-custom-label:before, .radio-custom + .radio-custom-label:before {
+    content: '';
+    background: #fff;
+    border: 2px solid #ddd;
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    padding: 2px;
+    margin-right: 10px;
+    text-align: center;
+}
+
+.checkbox-custom:checked + .checkbox-custom-label:before {
+    background: rebeccapurple;
+}
+
+.radio-custom + .radio-custom-label:before {
+    border-radius: 50%;
+}
+
+.radio-custom:checked + .radio-custom-label:before {
+    background: #333;
+}
+
+
+.checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
+  outline: 1px solid #ddd; /* focus style */
 }
 </style>
 @endsection
