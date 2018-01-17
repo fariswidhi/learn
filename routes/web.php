@@ -41,3 +41,4 @@ Route::get('api/question/{id}','Kids\QuestionsController@getQuestionById');
 Route::resource('/dashboard/kids','Parent\KidsController');
 Route::get('/dashboard/kids-activity','DashboardController@kidsActivity');
 Route::get('/berita','BeritaController@index');
+Route::get('/berita/detail/{id}','BeritaController@store');
