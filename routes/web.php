@@ -12,14 +12,14 @@
 */
 
 Route::get('/', function () {
-    return redirect('dashboard');
+    return redirect('home');
 });
 
 Auth::routes();
 Route::get('login/kids','LoginController@kidslogin');
 Route::post('login/kids','LoginController@kidsloginPost');
 
-// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 

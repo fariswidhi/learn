@@ -4,8 +4,34 @@
     <title></title>
     <link rel="stylesheet" type="text/css" href="{{@asset('bootstrap/css/bootstrap.min.css')}}">
 </head>
+<style type="text/css">
+    .fixed{
+  background-color: #3498db;
+  /*position: fixed;*/
+  color: white;
+  width: 100%;
+  z-index: 999;
+  /*
+  box-shadow: 0 5px 5px #ccc;*/
+}
+.baken:hover{
+  background-color: #2980b9;
+  color:#fff;
+  cursor: pointer;
+}
+
+</style>
 <body>
 
+<nav class="navbar navbar-light fixed" style="color: #fff;">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url('home') }}" style="color: #fff;">Learn</a>
+            <div class="pull-right">
+                <a class="btn btn-default baken" href="{{ route('login') }}" style="color: #fff;" >Login</a>
+                <a class="btn btn-default baken" href="{{ route('register') }}" style="color: #fff;">Daftar</a>
+            </div>
+      </div>
+    </nav>
 
 <div class="container">
   
@@ -16,7 +42,8 @@
       <section class="login-form"> 
       <form role="login" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
-          
+          <center><h2>Daftar</h2></center>
+          <hr>
 
 
         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

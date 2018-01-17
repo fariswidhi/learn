@@ -4,8 +4,33 @@
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="{{@asset('bootstrap/css/bootstrap.min.css')}}">
 </head>
+<style type="text/css">
+  .fixed{
+  background-color: #3498db;
+  position: fixed;
+  color: white;
+  width: 100%;
+  z-index: 999;
+  /*
+  box-shadow: 0 5px 5px #ccc;*/
+}
+.baken:hover{
+  background-color: #2980b9;
+  color:#fff;
+  cursor: pointer;
+}
+</style>
 <body>
 
+<nav class="navbar navbar-light fixed" style="color: #fff;">
+      <div class="container">
+        <a class="navbar-brand" href="{{ url('home') }}" style="color: #fff;">Learn</a>
+            <div class="pull-right">
+                <a class="btn btn-default baken" href="{{ route('login') }}" style="color: #fff;" >Login</a>
+                <a class="btn btn-default baken" href="{{ route('register') }}" style="color: #fff;">Daftar</a>
+            </div>
+      </div>
+    </nav>
 
 <div class="container">
   
@@ -17,7 +42,10 @@
 
       <form class="form-signin" method="POST" action="{{ route('login') }}" role="login">
         {{ csrf_field() }}
-          <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" />
+          {{-- <img src="http://i.imgur.com/RcmcLv4.png" class="img-responsive" alt="" /> --}}
+
+          <center><h2>Login</h2></center>
+          <hr>
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="password" class=" control-label">Email</label>
@@ -36,7 +64,7 @@
                             <label for="password" class=" control-label">Password</label>
 
                            
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" placeholder="Password" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">

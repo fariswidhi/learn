@@ -50,7 +50,7 @@
                             <label for="password" class=" control-label">Password</label>
 
                            
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" placeholder="password" name="password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
