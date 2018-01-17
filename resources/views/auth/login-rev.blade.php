@@ -57,12 +57,11 @@
           
           
           
-          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Sign in</button>
+          <button type="submit" name="go" class="btn btn-lg btn-primary btn-block">Masuk</button>
           <div>
             <a class="btn btn-default btn-block btn-lg" href="{{ url('/register') }}">Daftar Sekarang</a> 
           </div>
-                    <div>
-            <button type="button" id="kidslogin" class="btn btn-default btn-block btn-lg" ">Masuk Sebagai Anak</button>
+
           </div>
           
         </form>

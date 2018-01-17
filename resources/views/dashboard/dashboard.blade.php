@@ -59,10 +59,8 @@
 <!-- navbar -->
 <br><br>
 
-<div class="container">
 	@yield('content')
 
-</div>
 
 <div class="footer-bottom">
 
@@ -113,5 +111,7 @@ Turbolinks.setProgressBarDelay(3000)
 
     </script> --}}
 <!-- container -->
+@stack('scripts')
+    
 </body>
 </html>
