@@ -1,7 +1,7 @@
 @extends('dashboard.dashboard')
 
 @section('content')
-
+<div class="container">
 
 		<div class="row">
 
@@ -23,8 +23,6 @@
 
 		</div>
 	</div>
-</div>
-
 
 
 {{--             'name'=>$name,

@@ -58,10 +58,8 @@
 <!-- navbar -->
 <br><br>
 
-<div class="container">
 	@yield('content')
 
-</div>
 
 <style type="text/css">
 .card{
@@ -124,5 +122,7 @@ Turbolinks.setProgressBarDelay(3000)
 
     </script> --}}
 <!-- container -->
+@stack('scripts')
+    
 </body>
 </html>

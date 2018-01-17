@@ -35,5 +35,8 @@ Route::resource('/dashboard/materials','Parent\MaterialController');
 Route::resource('/dashboard/questions','Kids\QuestionsController');
 Route::get('dashboard/materials/{material}/{subject}','Parent\MaterialController@detail');
 Route::get('dashboard/question/{material}/{subject}','Kids\QuestionsController@detail');
+Route::get('dashboard/question/{material}/{subject}/start','Kids\QuestionsController@start');
+Route::get('dashboard/question/{material}/{subject}/json','Kids\QuestionsController@listQuestions');
+Route::get('api/question/{id}','Kids\QuestionsController@getQuestionById');
 Route::resource('/dashboard/kids','Parent\KidsController');
 Route::get('/dashboard/kids-activity','DashboardController@kidsActivity');

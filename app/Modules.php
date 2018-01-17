@@ -12,4 +12,8 @@ class Modules extends Model
     //
     
         use SoftDeletes;
+
+        public function subject(){
+        	return $this->belongsTo('App\Subjects','id_subjects');
+        }
 }

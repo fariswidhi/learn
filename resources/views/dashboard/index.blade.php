@@ -1,6 +1,7 @@
 @extends('dashboard.dashboard')
 
 @section('content')
+<div class="container">
 
 	<div class="row">
 	@if ($level == 2)
@@ -128,6 +129,7 @@
 		</div>
 
 	@endif
+</div>
 
 		</div>
 @endsection
