@@ -229,6 +229,7 @@ public function getQuestionById($id){
     $arr = [];
         $data = UsersAnswer::where(['id_question'=>$ids,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
         $count = UsersAnswer::where(['id_question'=>$ids,'id_children'=>Auth::id(),'sessid'=>$sessid])->count();
+        // echo ;
         // $id_answer = $data->id_answer;
     foreach ($dataAnswer as $d) {
 
@@ -236,7 +237,7 @@ public function getQuestionById($id){
         $arr[] = [
         'id'=>$d->id,
         'data'=>$d->answer,
-        'selected'=> $count == 0 ? 'false' : 'true'
+        'selected'=> $count == 0 ? 'false' : $d->id != $data->id_answer ? $d->id:'true'
         ];
     }
 
@@ -257,17 +258,29 @@ public function insertAnswer(Request $request){
 
 
     $count = $data->count();
-
+// echo $count;
 
     // print_r($count);
     // echo $getId;
+    $d = UsersQuestions::where('id',$id_question)->first();
+    // echo $d->usersQuestions();
+    $question = $d->id_question;
+    $answer = Answers::where(['id_question'=>$question,'true'=>1])->first();
+    $true = $answer->id;
+    $full = 100;
+    $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
+    $subject_no = Modules::find(1)->subject_number;    
+    $point = 100/$subject_no;
+    // echo $point;
+    // echo $id_question;
     if ($count ==0 ) {
     $class = new UsersAnswer;
     $class->id_children = $id_children;
     $class->id_question = $id_question;
     $class->id_answer = $id_answer;
     $class->sessid = $sessid;
-    $class->point = 0;
+    $class->point = $id_answer == $true ? $point : 0;
+    $class->on_going = 1; 
     $class->save();
     }
     else{
@@ -276,6 +289,7 @@ public function insertAnswer(Request $request){
         // $getId = $data->first()->id;
         $class = UsersAnswer::find($find->id);
         $class->id_answer = $id_answer;
+        $class->point = $id_answer == $true ? $point : 0;
         $class->save();
     }
 }
