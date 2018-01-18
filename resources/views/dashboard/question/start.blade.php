@@ -32,28 +32,67 @@
 			<div id="answer">
 				
 			</div>
-			<div id="pagination">
+			<div id="pagination" class="pull-left" style="width: 100%;">
 
 				<button class='pull-right btn btn-primary btn-pagination btn-prev'>Selanjutnya</button>
 				<button class='pull-right btn btn-primary btn-pagination btn-next'>Selanjutnya</button>
 			</div>
+			<br><br>
+			<div class="pull-left" style="width: 100%;">
+<button type="button" style="width: 100%;" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">
+	<i class="fa fa-exclamation-triangle"></i> Berhenti
+</button>
+</div>
+
 			</div>
 		</div>
 	</div>
 
 </div>
 
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Konfirmasi </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+	Apakah Anda Ingin Berhenti?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 @push('scripts')
 <script>
 
+
+$('#exampleModal').on('shown.bs.modal', function () {
+	$(".close-btn").focus();
+})
+
 $(document).ready(function(){
+
+
 	$.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
     }
 });
 
-	$.ajax({
+});
+load();
+
+function load(){
+		$.ajax({
 	url: "{{ url($current."/json") }}",
 	method: "GET",
 	dataType: "json",
@@ -62,7 +101,7 @@ $(document).ready(function(){
 		var no =1;
 		for (var i = 0; i < res.length; i++) {
 			var n = no++;
-			html += "<button data-value="+res[i].iduser+" data-num="+res[i].num+" data-max="+res[i].max+" data-min="+res[i].min+" data-id="+res[i].id+" class='btn btn-outline-success map num"+n+"'>"+n+"</button> ";
+			html += "<button  data-value="+res[i].iduser+" data-num="+res[i].num+" data-max="+res[i].max+" data-min="+res[i].min+" data-id="+res[i].id+" class='"+(res[i].answered == "true" ? "btn btn-success" : "btn btn-outline-success"   )+" map num"+n+"'>"+n+"</button> ";
 		}
 
 		$("#subject").html(html);
@@ -70,7 +109,8 @@ $(document).ready(function(){
 
 	}
 });
-});
+}
+
 
 function parse(id,max,min,num,value){
 
@@ -155,9 +195,18 @@ $(document).on('click','.choices',function(){
 		dataType: "json",
 		success:function(res){
 			console.log(res);
+
 		}
+
 	})
+				load();
 });
+
+
+
+
+
+
 $(document).on('click','.map',function(){
 	var id = $(this).attr('data-id');
 	var max = $(this).attr('data-max');
@@ -298,6 +347,28 @@ $(document).on('click','.btn-prev',function(){
 	}
 	});
 });
+
+		$.ajax({
+	url: "{{ url($current."/json") }}",
+	method: "GET",
+	dataType: "json",
+	success:function(res){
+		var html = '';
+		var no =1;
+
+			parse(res[0].id,res[0].max,res[0].min,res[0].num,res[0].value);
+			// html += "<button  data-value="+res[i].iduser+" data-num="+res[i].num+" data-max="+res[i].max+" data-min="+res[i].min+" data-id="+res[i].id+" class='"+(res[i].answered == "true" ? "btn btn-success" : "btn btn-outline-success"   )+" map num"+n+"'>"+n+"</button> ";
+
+
+		// tes
+
+	}
+});
+
+// $(document).on('ready',function(e){
+// 	e.preventDefault();
+// 	alert($("#subject").text());
+// });
 </script>
 @endpush
 

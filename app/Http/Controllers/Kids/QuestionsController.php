@@ -177,7 +177,7 @@ class QuestionsController extends Controller
         // $max = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>$userid])->max('id_question');
     $datas = [];
     $num = 0;
-    
+        
 
     $max = count($data)-1;
     $min = 0;
@@ -194,6 +194,7 @@ class QuestionsController extends Controller
         //     $a
         // ];
         // print_r($min);
+        $answered = UsersAnswer::where(['id_children'=>Auth::id(),'id_question'=>$value->id,'sessid'=>$sessid])->count();
 
         $datas[] = [
         'iduser'=>$value->id,
@@ -201,6 +202,7 @@ class QuestionsController extends Controller
         'max'=> $num == $max ? 'true':'false',
         'min'=> $num == $min ? 'true':'false',
         'num'=>$num++,
+        'answered'=>$answered == 0 ? 'false' :'true'
         ];
     }
     // print_r(Session::all());
