@@ -24,11 +24,14 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');
+Route::post('dashboard/question/answer/insert','Kids\QuestionsController@insertAnswer');
+
 Route::get('/admin', 'AdminController@index');
 Route::resource('admin/subjects','SubjectController');
 Route::resource('admin/materials','MaterialController');
 Route::resource('admin/news','NewsController');
 Route::resource('admin/modules','ModuleController');
+
 Route::post('admin/modules/add-questions/{id}','ModuleController@addQuestions');
 Route::get('/dashboard','DashboardController@index');
 Route::resource('/dashboard/materials','Parent\MaterialController');

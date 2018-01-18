@@ -24,13 +24,18 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-4">
-			<div class="card">
+	<div class="col-lg-4" >
+			<div class="card" style="min-height: 500px;">
 			<div class="card-body">
 			<h5>Jawaban</h5>
 			<hr>
 			<div id="answer">
 				
+			</div>
+			<div id="pagination">
+
+				<button class='pull-right btn btn-primary btn-pagination btn-prev'>Selanjutnya</button>
+				<button class='pull-right btn btn-primary btn-pagination btn-next'>Selanjutnya</button>
 			</div>
 			</div>
 		</div>
@@ -42,6 +47,12 @@
 <script>
 
 $(document).ready(function(){
+	$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
 	$.ajax({
 	url: "{{ url($current."/json") }}",
 	method: "GET",
@@ -51,16 +62,62 @@ $(document).ready(function(){
 		var no =1;
 		for (var i = 0; i < res.length; i++) {
 			var n = no++;
-			html += "<button data-id="+res[i].id+" class='btn btn-primary map'>"+n+"</button> ";
+			html += "<button data-value="+res[i].iduser+" data-num="+res[i].num+" data-max="+res[i].max+" data-min="+res[i].min+" data-id="+res[i].id+" class='btn btn-outline-success map num"+n+"'>"+n+"</button> ";
 		}
+
 		$("#subject").html(html);
+		// tes
 
 	}
 });
 });
 
-$(document).on('click','.map',function(){
-	var id = $(this).data('id');
+function parse(id,max,min,num,value){
+
+	// var max  = $(this).attr('data-max');
+	// var min = $(this).attr('data-min');
+
+		var pagination = "";
+		pagination += "<button ";
+		var statePrev = "";
+		var stateNext = "";
+
+		var number = parseInt(num)+1;
+
+		var next = $(".num"+number).attr('data-id');
+
+		var numbermin = parseInt(num)-1;
+		var prev = $(".num"+numbermin).attr('data-id');
+
+
+		var newmax = $(".num"+number).attr('data-max');
+		var newmin = $(".num"+numbermin).attr('data-min');
+
+
+		if(min == "true" ){
+		statePrev = "disabled ";
+
+		}
+		else{
+			statePrev = "";
+		}
+		if(max == "true"){
+			stateNext = "disabled ";
+		}
+		else{
+			stateNext = "";
+		}
+
+
+
+		 pagination += statePrev+  " data-id='"+prev+"' data-num='"+parseInt(num-1)+"' data-max='"+max+"' data-min='"+min+"'";
+		 pagination += "class='pull-left btn btn-primary btn-pagination btn-prev'>Sebelumnya</button>";
+		 pagination += "<button ";
+		 pagination +=   stateNext+" data-id='"+next+"' data-num='"+parseInt(number)+"' data-max='"+max+"' data-min='"+min+"'";
+		 pagination += "class='pull-right btn btn-primary btn-pagination btn-next'>Selanjutnya</button>";
+
+		$("#pagination").html(pagination);
+
 	$.ajax({
 		url: "{{ url('api/question/') }}/"+id,
 		dataType: "json",
@@ -72,18 +129,175 @@ $(document).on('click','.map',function(){
 			subj = res.subject;
 			$("#question").html(subj);
 			for (var i = 0; i < res.answer.length; i++) {
-				answers += "<input type='radio' class='radio-custom' id='s"+res.answer[i].id+"' name='answer[]' value='"+res.answer[i].id+"'> <label class='radio-custom-label' for='s"+res.answer[i].id+"'>"+res.answer[i].data+"</label><br>";
+				answers += "<input  data-value='"+value+"' data-question="+id+" type='radio' class='radio-custom choices' "+(res.answer[i].selected == "true" ? "checked":"")+" id='s"+res.answer[i].id+"' name='answer[]' value='"+res.answer[i].id+"'> <label class='radio-custom-label' for='s"+res.answer[i].id+"'>"+res.answer[i].data+"</label><br>";
 			}
-			answers += "<br><button class='pull-left btn btn-primary'>Sebelumnya</button>";
-			answers += "<button class='pull-right btn btn-primary'>Selanjutnya</button>";
+
+			// answers += "<br><button  data-id='"+id+"' class='pull-left btn btn-primary btn-prev'>Sebelumnya</button>";
+			// answers += "<button class='pull-right btn btn-primary'>Selanjutnya</button>";
 
 			$("#answer").html(answers);
 
 		}
 
-	})
-})
+	});
+}
 
+$(document).on('click','.choices',function(){
+	var id = $(this).attr('value');	
+	var question = $(this).attr('data-value');
+	$.ajax({
+		url: "{{ url('dashboard/question/answer/insert') }}",
+		type: "POST",
+		data: {
+			question: question,
+			id: id
+		},
+		dataType: "json",
+		success:function(res){
+			console.log(res);
+		}
+	})
+});
+$(document).on('click','.map',function(){
+	var id = $(this).attr('data-id');
+	var max = $(this).attr('data-max');
+	var min = $(this).attr('data-min');
+	var num = $(this).attr('data-num');
+	var value = $(this).attr('data-value');
+	parse(id,max,min,num,value);
+
+});
+
+
+$(document).on('click','.btn-next',function(){ 
+	var id = $(this).attr('data-id');
+	var max = $(this).attr('data-max');
+	var min = $(this).attr('data-min');
+	var num = $(this).attr('data-num');
+
+	$(this).attr('data-num',parseInt(num)+1);
+	$(".btn-prev").attr('data-num',parseInt($(".btn-prev").attr('data-num'))+1);
+	var prevNum = $(".btn-prev").attr('data-num');
+	if(prevNum <0){
+	$(".btn-prev").attr('disabled','disabled');
+	}
+	else{
+		$(".btn-prev").removeAttr('disabled');
+	}
+	var nextNum = $(this).attr('data-num');
+	var last = $(".map:last-child").attr('data-num');
+	if(nextNum > last){
+	$(this).attr('disabled','disabled');
+	}
+	else{
+		$(this).removeAttr('disabled');
+	}
+	
+
+	$.ajax({
+	url: "{{ url($current."/json") }}",
+	type: "GET",
+	dataType: "json",
+	success:function(res){
+		var html  = "";
+		var id = res[num].id;
+		var iduser = res[num].iduser;
+		 $(this).attr('data-value',iduser);
+		var value = $(this).attr('data-value');
+
+	$.ajax({
+		url: "{{ url('api/question/') }}/"+id,
+		dataType: "json",
+		method:"GET",
+		success: function(res){
+			var subj = "";
+			var answers = "";
+
+			subj = res.subject;
+			$("#question").html(subj);
+			for (var i = 0; i < res.answer.length; i++) {
+				answers += "<input "+(res.answer[i].selected == "true" ? "checked":"")+" data-value='"+value+"' data-question="+id+" type='radio' class='radio-custom choices' id='s"+res.answer[i].id+"' name='answer[]' value='"+res.answer[i].id+"'> <label class='radio-custom-label' for='s"+res.answer[i].id+"'>"+res.answer[i].data+"</label><br>";
+			}
+
+			// answers += "<br><button  data-id='"+id+"' class='pull-left btn btn-primary btn-prev'>Sebelumnya</button>";
+			// answers += "<button class='pull-right btn btn-primary'>Selanjutnya</button>";
+
+			$("#answer").html(answers);
+
+		}
+
+	});
+
+	}
+	});
+
+
+});
+
+$(document).on('click','.btn-prev',function(){ 
+	var id = $(this).attr('data-id');
+	var max = $(this).attr('data-max');
+	var min = $(this).attr('data-min');
+	var num = $(this).attr('data-num');
+
+
+	$(this).attr('data-num',parseInt(num)-1);
+	var prevNum = $(this).attr('data-num');
+	if(prevNum <0){
+	$(this).attr('disabled','disabled');
+	}
+	else{
+		$(this).removeAttr('disabled');
+	}
+	$(".btn-next").attr('data-num',parseInt($(".btn-next").attr('data-num'))-1);
+	var nextNum = $(".btn-next").attr('data-num');
+	var last = $(".map:last-child").attr('data-num');
+	if(nextNum > last){
+
+	$(".btn-next").attr('disabled','disabled');
+	}
+	else{
+		$(".btn-next").removeAttr('disabled');
+	}
+
+	$.ajax({
+	url: "{{ url($current."/json") }}",
+	type: "GET",
+	dataType: "json",
+	success:function(res){
+		var html  = "";
+		var id = res[num].id;
+
+
+		var iduser = res[num].iduser;
+		$(this).attr('data-value',iduser);
+		var value = $(this).attr('data-value');
+	$.ajax({
+		url: "{{ url('api/question/') }}/"+id,
+		dataType: "json",
+		method:"GET",
+		success: function(res){
+			var subj = "";
+			var answers = "";
+
+			subj = res.subject;
+			$("#question").html(subj);
+			for (var i = 0; i < res.answer.length; i++) {
+				answers += "<input "+(res.answer[i].selected == "true" ? "checked":"")+" data-value="+value+" data-question="+id+" type='radio' class='radio-custom choices' id='s"+res.answer[i].id+"' name='answer[]' value='"+res.answer[i].id+"'> <label class='radio-custom-label' for='s"+res.answer[i].id+"'>"+res.answer[i].data+"</label><br>";
+			}
+
+			// answers += "<br><button  data-id='"+id+"' class='pull-left btn btn-primary btn-prev'>Sebelumnya</button>";
+			// answers += "<button class='pull-right btn btn-primary'>Selanjutnya</button>";
+
+			$("#answer").html(answers);
+
+		}
+
+	});
+
+	}
+	});
+});
 </script>
 @endpush
 

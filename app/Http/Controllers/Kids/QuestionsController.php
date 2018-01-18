@@ -16,7 +16,8 @@ use App\Questions;
 use DB;
 use Session;
 use App\Answers;
-
+use App\UsersAnswer;
+use App\UsersQuestions;
 
 class QuestionsController extends Controller
 {
@@ -111,74 +112,95 @@ class QuestionsController extends Controller
         Session::put('subject_number',$limit);
         $limitsess =  Session::get('subject_number');
         // echo $limitsess;
-        $data = Questions::where('id_module',$id)->orderBy(DB::raw('RAND()'))->limit($limit)->get();
         // return $data->toJson();
-        $arr = [];
-        foreach ($data as $d) {
-            # code...
-            $arr [] = [
-            'id'=>$d->id
-            ];
+
+        $code = rand(1,100000);
+
+        // Session::forget('sessid');
+        $sessid =  Session::get('sessid');
+
+        if (empty($sessid)) {
+            Session::put('sessid',$code);
         }
 
+        $arr = [];
 
-// echo $limitsess;
+        $questions = Questions::where('id_module',$id)->orderBy(DB::raw('RAND()'))->limit($limit);
+        $questionCount = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->count();
 
-        Session::push('user.questions', $arr);
-    
+        if ($questionCount == 0) {
+            # code...
+
+        $data = $questions->get();
+        foreach ($data as $d) {
+            # code...
+            // $arr [] = [
+            // 'id'=>$d->id
+            // ];
+
+        $count = UsersQuestions::where(['sessid'=>$sessid,'id_question'=>$d->id])->count();
+        if ($count ==0 ) {
+            # code...
+
+        $class = new UsersQuestions;
+        $class->id_module = $id;
+        $class->sessid = $sessid;
+        $class->id_question = $d->id;
+        $class->id_user = Auth::id();
+        $class->save();
+        }
+        }
+
+        }
+        // $d = [];
+
+        // $d = [
+        // 'data'=>$arr,
+        // 'max'=>max($arr),
+        // 'min'=>min($arr)
+        // ];
+
+
+// // echo $limitsess;
+
+        // Session::push('user.questions', $d);
+        // Session::flush();
         $current = "dashboard/question/".$params."/".$str;
     	return view('dashboard/question/start',compact('current'));
     }
 
     public function listQuestions($params,$str){
-        // Session::flush();
-
-    $questions = Session::get('user.questions');
-
-        // echo count($questions);
-        // echo $limitsess;
-        // print_r(Session::all());
-    //     if ($limitsess != count($questions)) {
-// echo $limitsess;
-
-    //     }
-    //     else{
-
-
-//                 $count = count($questions[0]);
-// echo count($questions[0]);
-
-//  if ($count == 0) {
-//                  Session::push('user.questions', $arr);
-//             if ($limitsess != count($questions)) {
-                 // Session::push('user.questions', $arr);
-//             }
-//             else{
-                    // Session::flush();
-//             }
-//     }
-    // if (count($questions) > 0 ) {
-    //     Session::flush();
-    // }
-    // else{
-
-    // }
-// elseif (count($questions) > 1) {
-
-// }
-
-    // if (count($questions) == 1) {
+        $sessid =  Session::get('sessid');
+        $userid = Auth::id();
+        $data = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>$userid])->get();
+        // $min = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>$userid])->min('id_question');
+        // $max = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>$userid])->max('id_question');
     $datas = [];
-    foreach ($questions[0] as $value) {
+    $num = 0;
+    
+
+    $max = count($data)-1;
+    $min = 0;
+
+    foreach ($data as $value) {
         # code...
         // echo $n++;
         // print_r($n++);
         // echo count($value);
         // print_r($value);
         // print_r($value['id']);
-        
+        // $a= $num++;
+        // $min[] = [
+        //     $a
+        // ];
+        // print_r($min);
+
         $datas[] = [
-        'id'=>$value['id']
+        'iduser'=>$value->id,
+        'id'=>$value->id_question,
+        'max'=> $num == $max ? 'true':'false',
+        'min'=> $num == $min ? 'true':'false',
+        'num'=>$num++,
         ];
     }
     // print_r(Session::all());
@@ -193,15 +215,26 @@ class QuestionsController extends Controller
 
 public function getQuestionById($id){
     $question = Questions::find($id);
-    $data = Answers::where('id_question',$id)->get();
+    $dataAnswer = Answers::where('id_question',$id)->get();
+    // $userAnswer = UsersAnswer::where(['id_question'=>$id,'id_children'=>Auth::id()])->first();
+    // $answer = $userAnswer->id_answer;
+    $sessid = Session::get('sessid');
+    $find = UsersQuestions::where(['id_question'=>$id,'id_user'=>Auth::id(),'sessid'=>$sessid])->first();
+    $ids = $find->id;
 
+
+// echo $id;
     $arr = [];
+        $data = UsersAnswer::where(['id_question'=>$ids,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
+        $count = UsersAnswer::where(['id_question'=>$ids,'id_children'=>Auth::id(),'sessid'=>$sessid])->count();
+        // $id_answer = $data->id_answer;
+    foreach ($dataAnswer as $d) {
 
-    foreach ($data as $d) {
 
         $arr[] = [
         'id'=>$d->id,
-        'data'=>$d->answer
+        'data'=>$d->answer,
+        'selected'=> $count == 0 ? 'false' : 'true'
         ];
     }
 
@@ -213,9 +246,36 @@ public function getQuestionById($id){
     
     echo json_encode($json);
 }
-public function getAnswerById($id){
+public function insertAnswer(Request $request){
+    $sessid = Session::get('sessid');
+    $id_children = Auth::id();
+    $id_question = $request->question;
+    $id_answer  = $request->id;
+    $data = UsersAnswer::where(['id_children'=>$id_children,'id_question'=>$id_question,'sessid'=>$sessid]);
 
 
+    $count = $data->count();
+
+
+    // print_r($count);
+    // echo $getId;
+    if ($count ==0 ) {
+    $class = new UsersAnswer;
+    $class->id_children = $id_children;
+    $class->id_question = $id_question;
+    $class->id_answer = $id_answer;
+    $class->sessid = $sessid;
+    $class->point = 0;
+    $class->save();
+    }
+    else{
+        // echo $getI;
+        $find = UsersAnswer::where(['id_question'=>$id_question,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
+        // $getId = $data->first()->id;
+        $class = UsersAnswer::find($find->id);
+        $class->id_answer = $id_answer;
+        $class->save();
+    }
 }
 
 
