@@ -24,7 +24,7 @@
       		
         <div class="col-md-4" >
         	<div class="card">
-        		 <div class="card-body">
+        		 <div class="card-bsody">
           <h2>{{ $data->title }}</h2>
           <p>{{ $data->content }}</p>
           <p><a class="btn btn-default" href="{{ url('berita/detail/'.$data->id) }}" role="button">Baca details &raquo;</a></p>
