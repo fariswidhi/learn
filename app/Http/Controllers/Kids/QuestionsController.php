@@ -18,6 +18,7 @@ use Session;
 use App\Answers;
 use App\UsersAnswer;
 use App\UsersQuestions;
+use App\Points;
 
 class QuestionsController extends Controller
 {
@@ -90,6 +91,38 @@ class QuestionsController extends Controller
         $time = $data->time;
         $param1 = $params; 
         $param2 = $str;
+
+         $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+$code = '';
+ $max = strlen($characters) - 1;
+ for ($i = 0; $i < 7; $i++) {
+      $code .= $characters[mt_rand(0, $max)];
+ }
+
+$validation = UsersAnswer::where('sessid',$code)->count();
+if ($validation != 0) {
+ for ($i = 0; $i < 7; $i++) {
+      $code .= $characters[mt_rand(0, $max)];
+ }
+ $sessid = strtoupper($code);
+}else{
+    $sessid = strtoupper($code);
+}
+
+
+
+
+
+        // Session::forget('sessid');
+        Session::put('sessid',$sessid);
+        
+        $sessid =  Session::get('sessid');
+            Session::put('sessid',$sessid);
+        if (empty($sessid)) {
+            Session::put('sessid',$sessid);
+        }
+        
+
 		return view('dashboard/question/question-detail',compact('data','time','subject','param1','param2'));
     }
 
@@ -105,6 +138,8 @@ class QuestionsController extends Controller
     	// // $class->id= $id;
     	// // $class->save();
         // $current =  URL::current();
+        $sessid = Session::get('sessid');
+
         $explode = explode('-', $str);
         $id = end($explode);
         $limit = Modules::find($id)->subject_number;
@@ -114,14 +149,7 @@ class QuestionsController extends Controller
         // echo $limitsess;
         // return $data->toJson();
 
-        $code = rand(1,100000);
 
-        // Session::forget('sessid');
-        $sessid =  Session::get('sessid');
-
-        if (empty($sessid)) {
-            Session::put('sessid',$code);
-        }
 
         $arr = [];
 
@@ -262,17 +290,16 @@ public function insertAnswer(Request $request){
 
     // print_r($count);
     // echo $getId;
+    // echo $point;
+    // echo $id_question;
+
+
     $d = UsersQuestions::where('id',$id_question)->first();
     // echo $d->usersQuestions();
     $question = $d->id_question;
+
     $answer = Answers::where(['id_question'=>$question,'true'=>1])->first();
     $true = $answer->id;
-    $full = 100;
-    $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
-    $subject_no = Modules::find(1)->subject_number;    
-    $point = 100/$subject_no;
-    // echo $point;
-    // echo $id_question;
     if ($count ==0 ) {
     $class = new UsersAnswer;
     $class->id_children = $id_children;
@@ -282,9 +309,38 @@ public function insertAnswer(Request $request){
     $class->point = $id_answer == $true ? $point : 0;
     $class->on_going = 1; 
     $class->save();
+
+
+    $full = 100;
+    $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
+    $subject_no = Modules::find(1)->subject_number;    
+    $point = 100/$subject_no;
+
+            $find = UsersAnswer::where(['id_question'=>$id_question,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
+        // $getId = $data->first()->id;
+        $class = UsersAnswer::find($find->id);
+        $class->id_answer = $id_answer;
+        $class->point = $id_answer == $true ? $point : 0;
+        $class->save();
+
     }
     else{
         // echo $getI;
+
+         $d = UsersQuestions::where('id',$id_question)->first();
+    // echo $d->usersQuestions();
+    $question = $d->id_question;
+
+    $answer = Answers::where(['id_question'=>$question,'true'=>1])->first();
+    $true = $answer->id;
+    $full = 100;
+    $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
+    $subject_no = Modules::find(1)->subject_number;    
+    $point = 100/$subject_no;
+
+            $find = UsersAnswer::where(['id_question'=>$id_question,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
+
+
         $find = UsersAnswer::where(['id_question'=>$id_question,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
         // $getId = $data->first()->id;
         $class = UsersAnswer::find($find->id);
@@ -292,6 +348,36 @@ public function insertAnswer(Request $request){
         $class->point = $id_answer == $true ? $point : 0;
         $class->save();
     }
+}
+
+public function end(){
+    $sessid = Session::get('sessid');
+    $userid = Auth::id();
+
+    // $data = UsersAnswer::where(['id_children'=>$userid,'sessid'=>$sessid])->sum('point')->groupBy('sessid')->get();
+$data = DB::table("users_answers")->select(DB::raw("SUM(point) as count"))->groupBy(DB::raw("sessid"));                                                                                                     $score = $data->first()->count;
+
+    
+    $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
+
+    $point = new Points;
+    $point->id_module =$id_module;
+    $point->sessid = $sessid;
+    $point->point = $score;
+    $point->id_user = $userid;
+    $point->save();
+
+
+    Session::forget('sessid');
+    $response = [
+    'success'=>'true',
+    'point'=>$score
+    ];
+    echo json_encode($response);
+
+
+
+
 }
 
 

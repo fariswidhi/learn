@@ -65,8 +65,26 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary btn-done">Save changes</button>
+        <button type="button" class="btn btn-primary btn-done">OK</button>
       </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nilai Anda </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<center><h3>		Nilai Anda</h3></center>
+<center><h2 class="point"></h2></center>
+      </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -77,8 +95,30 @@
 
 $('#exampleModal').on('shown.bs.modal', function () {
 	$(".close-btn").focus();
-})
+});
 
+$(document).on('click','.btn-done',function(){
+	$.ajax({
+		url: "{{ url('/api/questions/end') }}",
+		type: "POST",
+		dataType: "json",
+		success: function(res){
+			if(res.success == 'true'){
+				$("#exampleModal").modal('toggle');
+				$('#success').modal({backdrop: 'static', keyboard: false})  
+				$("#success").modal("show");
+				$(".point").text(res.point);
+				 window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "{{ url('/dashboard') }}";
+
+    }, 3000);
+
+			}
+		}
+	});
+});
 $(document).ready(function(){
 
 
