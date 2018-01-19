@@ -48,15 +48,15 @@
 // Route::post('/api/questions/end','Kids\QuestionsController@end');
 
 
-Route::get('/', function () {
-    return redirect('home');
-});
+// Route::get('/', function () {
+//     return redirect('home');
+// });
 
 Auth::routes();
 Route::get('login/kids','LoginController@kidslogin');
 Route::post('login/kids','LoginController@kidsloginPost');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 
 Auth::routes();
 

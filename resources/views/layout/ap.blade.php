@@ -79,12 +79,19 @@
         <a class="navbar-brand" href="{{ url('home') }}" style="color: #fff;">PINTARIN</a>
 
             <div class="pull-right nav-desktop">
+            @if (!Auth::check())
+              {{-- expr --}}
+
                 <a class="btn btn-default baken" href="{{ route('login') }}" style="color: #fff;" >Login</a>
                 <a class="btn btn-default baken" href="{{ route('register') }}" style="color: #fff;">Daftar</a>
+              @else
+                <a class="btn btn-default baken" href="{{ url('/panel') }}" style="color: #fff;">Panel</a>
+              
+            @endif
                 <a class="btn btn-default baken" href="{{ url('berita') }}" style="color: #fff;">Berita</a>
             </div>
             <div class="pull-right open-wrapper">
-                <button class="pull-right btn btn-outline-primary btn-nav btn-open" style="color:#fff;border:1px solid #ddd;">&#9776;</button>
+                <button class="pull-right btn btn-outline-primary btn-nav btn-open" >&#9776;</button>
             </div>
       </div>
     </nav>
@@ -92,8 +99,14 @@
     <div  class="nav-mobile">
       <button class="btn btn-default btn-close pull-right" style="margin: 10px;"><i class="fa fa-times"></i></button>
       <ul>
-        <li><a class="" href="{{ route('login') }}" style="color: #777;" >Login</a></li>
-        <li><a class="" href="{{ route('register') }}" style="color: #777;" >Daftar</a></li>
+         @if (!Auth::check())
+              {{-- expr --}}
+        <li><a href="{{ route('login') }}" style="color: #777;" >Login</a></li>
+        <li><a href="{{ route('register') }}" style="color: #777;" >Daftar</a></li>
+        @else
+        <li><a href="{{ url('panel') }}" style="color: #777;" >Panel</a></li>
+
+        @endif
         <li><a class="" href="{{ url('berita') }}" style="color: #777;" >Berita</a></li>
       </ul>
   </div>

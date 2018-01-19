@@ -27,7 +27,7 @@
     <div class="container" id="second" style="margin-bottom: 100px;">
         <div style="height: 50px;"></div>
         <div class="row">
-            <div class="col-md-12" style="margin-top: 40px;">
+            <div class="col-md-12">
                 <center><h1>Apa masalah yang terjadi?</h1></center>
             </div>
         </div><hr>
@@ -35,8 +35,7 @@
             <div class="col-md12">
                 <center>
                 <p class="lead mb-0">
-                    Kami membantu anak anda untuk meraih prestasi dengan belajar yang lebih mudah dan menyenangkan dengan inovasi
-                    terbaru
+                Banyak anak yang mengalami penurunan prestasi, hal yang menyebabkan itu salah satunya adalah kurangnya perhatian orang tua terhadap putra-putrinya
     
                 </p>
                 </center>
@@ -49,7 +48,7 @@
         <div class="row no-gutters" style="background-color: #ddd;">
 
           <div class="col-lg-6 order-lg-2 text-white showcase-img">
-            <center><img src="{{ asset('img/content.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+            <center><img class="img-intro" src="{{ asset('img/content.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
           <div class="col-lg-6 order-lg-1 my-auto showcase-text">
             <h2 style="margin-top: -100px;">Pintarin</h2>
@@ -62,40 +61,51 @@
 
         <div class="row no-gutters">
           <div class="col-lg-6 text-white showcase-img" >
-            <center><img src="{{ asset('img/books.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+            <center><img class="img-intro" src="{{ asset('img/books.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
           <div class="col-lg-6 my-auto showcase-text">
             <h2 style="margin-top: -100px;">Banyak Materi</h2>
             <hr>
             <p class="lead mb-0">
-                Di Aplikasi ini anda bisa menemukan banyak materi yang mendidik dan bermanfaat untuk anak. 
+                Disini anda bisa menemukan banyak materi yang mendidik dan bermanfaat untuk anak. 
             </p>
           </div>
         </div>
 
         <div class="row no-gutters" style="background-color: #ddd;">
           <div class="col-lg-6 order-lg-2 text-white showcase-img">
-            <center><img src="{{ asset('img/questions.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+            <center><img class="img-intro" src="{{ asset('img/questions.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
           <div class="col-lg-6 order-lg-1 my-auto showcase-text">
             <h2 style="margin-top: -100px;">Bank Soal</h2>
             <hr>
             <p class="lead mb-0">
-              Ada beberapa soal yang bisa anak-anak kerjakan sesuai materi yang telah dibaca
+              Ada kumpulan soal yang bisa anak-anak kerjakan sesuai materi yang telah dibaca.
              </p>
           </div>
         </div>
 
         <div class="row no-gutters">
           <div class="col-lg-6 text-white showcase-img">
-            <center><img src="{{ asset('img/learning.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
           <div class="col-lg-6 my-auto showcase-text" style="margin-top: -100px;">
-            <h2 style="margin-top: -100px;">Aktifitas Anak</h2>
+            <h2 style="margin-top: -100px;">Aktivitas Anak</h2>
             <hr>
             <p class="lead mb-0">
-                Aktifitas anak bisa dipantau orang tua. <br>
-                Dengan begini anak tidak bisa sewenang-wenang menggunakannya  .
+              Anda bisa melihat aktivitas anak di Aplikasi ini. Mulai dari Membaca Materi, Mengerjakan Soal dan lain sebagainya 
+            </p>
+          </div>
+        </div>
+
+
+        <div class="row no-gutters">
+
+          <div class="col-lg-12 my-auto showcase-text" style="margin-top: -100px;">
+
+            <p class="lead mb-0">
+        <center><h3>Apa Yang anda Bisa lakukan disini?</h3></center>
+
             </p>
           </div>
         </div>
@@ -103,4 +113,12 @@
       </div>
     </section>
 
+<style>
+  @media(max-width: 768px){
+    .img-intro{
+      width: 70%;
+      height: 200px;
+    }
+  }
+</style>
 @endsection

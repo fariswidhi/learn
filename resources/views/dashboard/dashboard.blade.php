@@ -11,10 +11,9 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg bg-blue">
-  <a class="navbar-brand" href="{{@url('panel')}}">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+
+  <a class="navbar-brand" href="{{@url('panel')}}">Pintarin</a>
+    
   @if (Auth::user()->type ==2)
     {{-- expr --}}
   @if (!empty(Request::segment(2)))
@@ -44,6 +43,9 @@
 
 
                                 <ul class="nav navbar-nav navbar-right">
+                                  @if (!empty(Request::segment(2)))
+                                <li><button class="btn btn-default pull-left btn-menu"><i class="fa fa-bars"></i></button></li>
+                                @else
                                     <li>
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
@@ -55,13 +57,80 @@
                                             {{ csrf_field() }}
                                         </form>
                                     </li>
+                                  @endif
                                 </ul>
 
 
 </nav>
+<div  class="nav-mobile">
+      <button class="btn btn-default btn-close pull-right" style="margin: 10px;"><i class="fa fa-times"></i></button>
+      <ul>
+        <li><a class="" href="{{ route('login') }}" style="color: #777;" >Login</a></li>
+        <li><a class="" href="{{ route('register') }}" style="color: #777;" >Daftar</a></li>
+        <li><a class="" href="{{ url('berita') }}" style="color: #777;" >Berita</a></li>
+      </ul>
+  </div>
+
+
 <!-- navbar -->
 <br><br>
 
+<style type="text/css">
+    
+  @media(min-width: 552px){
+    .nav-mobile{
+      display: none;
+    }
+    .btn-menu{
+      display: none;
+    }
+  }
+
+
+  @media(max-width: 552px){
+      .open-wrapper{
+    display: block;
+  }
+    .nav-desktop{
+         display: none;
+    }
+  .btn-open,.btn-close{
+    display: block;
+  }
+   .nav-mobile{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: #f0f0f0;
+    z-index: 9999;
+    top: 0;
+    left: -100%;
+    transition: 0.1s ease-out;
+  }
+  .nav-mobile ul{
+    display: block;
+    left: 0;
+    margin-top: 50px;
+  }
+  .nav-mobile ul li{
+    list-style: none;
+    display: block;
+    padding: 10px;
+  }
+  .nav-mobile ul li:hover{
+    background-color: #fff;
+  } 
+  .nav-mobile ul li a{
+    text-decoration: none;
+    display: block;;
+  }
+  .slide{
+    left: 0;
+    transition: 0.1s ease-out;
+  }
+  }
+
+</style>
 	@yield('content')
 
 
@@ -100,23 +169,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
 
-{{--     <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.1.1/turbolinks.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ujs/1.2.1/rails.min.js"></script>
-    <style type="text/css">
-        .turbolinks-progress-bar {
-  height: 2px;
-  background-color: white;
-}
-    </style> --}}
-{{--     <script type="text/javascript">
-if (Turbolinks.supported) {
-  // ...
-Turbolinks.setProgressBarDelay(3000)
-
-}
-
-    </script> --}}
-<!-- container -->
+<script type="text/javascript">
+  $(document).on('click','.btn-menu',function(){
+    $(".nav-mobile").toggleClass('slide');
+  });
+  $(document).on('click','.btn-close',function(){
+    $(".nav-mobile").toggleClass('slide');
+  });
+</script>
 @stack('scripts')
     
 </body>

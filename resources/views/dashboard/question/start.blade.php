@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="row" style="width: 95%;margin: 0 auto;">
-	<div class="col-lg-3">
+	<div class="col-lg-3" style="margin-bottom: 50px;">
 			<div class="card">
 			<div class="card-body">
 			<h5>Daftar Soal</h5>
@@ -13,7 +13,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-5">
+	<div class="col-lg-5" style="margin-bottom: 50px;">
 			<div class="card">
 			<div class="card-body">
 			<h5>Soal</h5>
@@ -24,7 +24,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-lg-4" >
+	<div class="col-lg-4" style="margin-bottom: 50px;">
 			<div class="card" style="min-height: 500px;">
 			<div class="card-body">
 			<h5>Jawaban</h5>
@@ -97,6 +97,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Waktu Habis </h5>
+
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -118,11 +119,7 @@ $('#exampleModal').on('shown.bs.modal', function () {
 	$(".close-btn").focus();
 });
 
-setTimeout(
-	function(){
-		$("#timeout").modal('toggle');
-	}
-	, 1000)
+
 $(document).on('click','.btn-done',function(){
 	$.ajax({
 		url: "{{ url('/api/questions/end') }}",
