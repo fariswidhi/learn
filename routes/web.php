@@ -83,4 +83,3 @@ Route::get('/panel/aktivitas-anak','DashboardController@kidsActivity');
 Route::get('/berita','BeritaController@index');
 Route::get('/berita/detail/{id}','BeritaController@store');
 Route::post('/api/questions/end','Kids\QuestionsController@end');
-kkjih

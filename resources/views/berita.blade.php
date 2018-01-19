@@ -9,11 +9,11 @@
 
 	
 	<div class="jumbotron">
-		<h1>Berita</h1><hr>
       <div class="container">
+		<h1>Berita</h1>  <hr>
         <h1>{{$data1->title}}</h1>
         <p>{{$data1->content}}</p>
-        <p><a class="btn btn-primary btn-lg" href="{{ url('berita/detail/'.'0') }}" role="button">Baca selanjutnya &raquo;</a></p>
+        <p><a class="btn btn-primary btn-lg" href="{{ url('berita/detail/'.$data1->id) }}" role="button">Baca selanjutnya &raquo;</a></p>
       </div>
     </div>
 
@@ -24,10 +24,11 @@
       		
         <div class="col-md-4" >
         	<div class="card">
-        		 <div class="card-bsody">
+            <img src="{{url('uploads/'.$data->photo)}}" class="img img-responsive" style="width: 100%;height: 200px;">
+             <div class="card-body">
           <h2>{{ $data->title }}</h2>
-          <p>{{ $data->content }}</p>
-          <p><a class="btn btn-default" href="{{ url('berita/detail/'.$data->id) }}" role="button">Baca details &raquo;</a></p>
+
+          <p><a class="btn btn-default" href="{{ url('berita/detail/'.$data->id) }}" role="button">Baca detail &raquo;</a></p>
         	</div>
         	</div>
         </div>

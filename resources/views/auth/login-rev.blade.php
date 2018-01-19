@@ -113,6 +113,7 @@ body {
 
 .login-form {
 	margin-top: 60px;
+  margin-bottom: 76px;
 }
 
 form[role=login] {
@@ -123,7 +124,7 @@ form[role=login] {
 	form[role=login] img {
 		display: block;
 		margin: 0 auto;
-		margin-bottom: 35px;
+  	margin-bottom: 100px;
 	}
 	form[role=login] input,
 	form[role=login] button {

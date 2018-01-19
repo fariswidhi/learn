@@ -10,13 +10,13 @@
 	<div class="container">
 		<h1 class="berita">Detail Berita</h1><hr>
 		<div class="title">
-			<h2>{{ $data->title }}</h2>
+			<h3>{{ $data->title }}</h3>
 		</div>
-		<hr>
+		{{-- <hr> --}}
 		<div class="content">
-			<h5>{{ $data->content }}</h5>
+			<p>{{ $data->content }}</p>
 		</div>
-		<a href="{{ url('berita') }}" class="btn btn-info btn-md">Kembali</a>
+		<a href="{{ url('berita') }}" class="btn btn-info btn-md" style="margin-bottom: 100px;">Kembali</a>
 	</div>
 
 @endsection

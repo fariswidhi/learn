@@ -15,7 +15,7 @@ class BeritaController extends Controller
         $url = $this->url;
     	$datas = News::all();
     	$data1 = News::first();
-    	$data2 = News::paginate(3);
+    	$data2 = News::orderBy('created_at', 'desc')->paginate(3);
     	return view('berita', compact('datas','data1','data2'));
     	// print_r($data1);
     }

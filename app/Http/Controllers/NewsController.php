@@ -51,7 +51,7 @@ class NewsController extends Controller
         $requests = $request->except(['_token','_method']);
         $class = new News;
         $class->title = $request->name;
-        $class->content = $request->content;
+        $class->content = nl2br($request->content);
         $class->photo = $name;
 
         $save = $class->save();

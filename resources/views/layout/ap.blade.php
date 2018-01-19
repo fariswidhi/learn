@@ -82,7 +82,7 @@
                 <a class="btn btn-default baken" href="{{ url('berita') }}" style="color: #fff;">Berita</a>
             </div>
             <div class="pull-right open-wrapper">
-                <button class="pull-right btn btn-outline-primary btn-nav btn-open" >&#9776;</button>
+                <button class="pull-right btn btn-outline-primary btn-nav btn-open" style="color:#fff;border:1px solid #ddd;">&#9776;</button>
             </div>
       </div>
     </nav>

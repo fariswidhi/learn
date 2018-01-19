@@ -140,6 +140,7 @@ body {
 
 .login-form {
     margin-top: 60px;
+  margin-bottom: 76px;
 }
 
 form[role=login] {

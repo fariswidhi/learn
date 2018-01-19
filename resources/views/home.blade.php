@@ -27,7 +27,7 @@
     <div class="container" id="second" style="margin-bottom: 100px;">
         <div style="height: 50px;"></div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-top: 40px;">
                 <center><h1>Apa masalah yang terjadi?</h1></center>
             </div>
         </div><hr>
@@ -35,7 +35,7 @@
             <div class="col-md12">
                 <center>
                 <p class="lead mb-0">
-                    KAMI membantu anak anda untuk meraih prestasi dengan belajar yang lebih mudah dan menyenangkan dengan inovasi
+                    Kami membantu anak anda untuk meraih prestasi dengan belajar yang lebih mudah dan menyenangkan dengan inovasi
                     terbaru
     
                 </p>
