@@ -19,7 +19,7 @@
 
 	<div class="container">
       <!-- Example row of columns -->
-      aas
+      
       <div class="row">
       	@foreach ($data2 as $data)
       		

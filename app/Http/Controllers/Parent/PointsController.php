@@ -9,12 +9,28 @@ use App\Childrens;
 use App\Material;
 use App\Subjects;
 use Auth;
+use App\Points;
+use App\User;
 
-
-class PointsController extends AnotherClass
+class PointsController 
 {
 	
 	public function index(){
-		return view('dashboard/point');
+		$id = Auth::id();
+		$data = User::where('id_parent',$id)->get();
+
+		$arr = [];
+		foreach ($data as $d) {
+			# code...
+			$arr[] = [
+			$d->id
+			];
+		}
+
+		$points = Points::whereIn('id_user',$arr)->get();
+
+
+		$no=1;
+		return view('dashboard/point',compact('points','no'));
 	}
 }
