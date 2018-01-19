@@ -368,11 +368,14 @@ $data = DB::table("users_answers")->select(DB::raw("SUM(point) as count"))->grou
     $point->save();
 
 
-    Session::forget('sessid');
+
     $response = [
     'success'=>'true',
     'point'=>$score
     ];
+
+    UsersAnswer::where('sessid',$sessid)->where('id_children',$userid)->update(['on_going'=>0]);
+    Session::forget('sessid');
     echo json_encode($response);
 
 
