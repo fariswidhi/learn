@@ -39,7 +39,9 @@ header.masthead {
         font-size: 3rem; } }
 
 .showcase .showcase-text {
-  padding: 3rem; }
+  padding: 3rem;
+  margin-top: -100px;
+   }
 
 .showcase .showcase-img {
   min-height: 30rem;

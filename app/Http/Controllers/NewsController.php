@@ -45,10 +45,15 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //
+        $file = $request->file('foto');
+        $name = time().'.'.$file->getClientOriginalExtension();
+        $file->move(public_path('uploads'),$name);
         $requests = $request->except(['_token','_method']);
         $class = new News;
         $class->title = $request->name;
         $class->content = $request->content;
+        $class->photo = $name;
+
         $save = $class->save();
 
         if ($save == true) {

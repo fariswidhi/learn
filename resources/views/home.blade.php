@@ -8,7 +8,7 @@
           <div class="col-xl-9 mx-auto">
             <h1 class="mb-2">Ayo Belajar</h1>
             <h4 class="mb-4">
-                Selamat datang diaplikasi Learn
+                Selamat datang diaplikasi Pintarin
             </h4>
             <h6>
                 Yang mana anak-anak bisa belajar dengan mudah dan aman dengan pemantauan orang tua ,
@@ -49,34 +49,54 @@
         <div class="row no-gutters" style="background-color: #ddd;">
 
           <div class="col-lg-6 order-lg-2 text-white showcase-img">
-            <center><img src="{{ asset('img/gambar.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+            <center><img src="{{ asset('img/content.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
           <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2>#LEARN Keren</h2>
+            <h2 style="margin-top: -100px;">Pintarin</h2>
             <hr>
-            <p class="lead mb-0">Sebuah inovasi yang tak terduga bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
+            <p class="lead mb-0">Pintarin adalah Aplikasi yang digunakan untuk belajar anak-anak dan dibawah pemantauan orang tua
+              .<br><br>
+            </p>
           </div>
         </div>
 
         <div class="row no-gutters">
-          <div class="col-lg-6 text-white showcase-img">
-            <center><img src="{{ asset('img/gambar.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+          <div class="col-lg-6 text-white showcase-img" >
+            <center><img src="{{ asset('img/books.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
           <div class="col-lg-6 my-auto showcase-text">
-            <h2>#LEARN Keren</h2>
+            <h2 style="margin-top: -100px;">Banyak Materi</h2>
             <hr>
-            <p class="lead mb-0">Sebuah inovasi yang tak terduga bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
+            <p class="lead mb-0">
+                Di Aplikasi ini anda bisa menemukan banyak materi yang mendidik dan bermanfaat untuk anak. 
+            </p>
           </div>
         </div>
 
         <div class="row no-gutters" style="background-color: #ddd;">
           <div class="col-lg-6 order-lg-2 text-white showcase-img">
-            <center><img src="{{ asset('img/gambar.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+            <center><img src="{{ asset('img/questions.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
           <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2>#LEARN Keren</h2>
+            <h2 style="margin-top: -100px;">Bank Soal</h2>
             <hr>
-            <p class="lead mb-0">Sebuah inovasi yang tak terduga bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla </p>
+            <p class="lead mb-0">
+              Ada beberapa soal yang bisa anak-anak kerjakan sesuai materi yang telah dibaca
+             </p>
+          </div>
+        </div>
+
+        <div class="row no-gutters">
+          <div class="col-lg-6 text-white showcase-img">
+            <center><img src="{{ asset('img/learning.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
+          </div>
+          <div class="col-lg-6 my-auto showcase-text" style="margin-top: -100px;">
+            <h2 style="margin-top: -100px;">Aktifitas Anak</h2>
+            <hr>
+            <p class="lead mb-0">
+                Aktifitas anak bisa dipantau orang tua. <br>
+                Dengan begini anak tidak bisa sewenang-wenang menggunakannya  .
+            </p>
           </div>
         </div>
 
