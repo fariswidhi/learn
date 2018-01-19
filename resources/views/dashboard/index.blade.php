@@ -8,7 +8,7 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="{{@url('panel/anak')}}">
+	            <a href="{{@url('panel/daftar-anak')}}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-child fa-5x"></i>
@@ -38,7 +38,7 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="">
+	            <a href="{{@url('/panel/nilai')}}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-trophy fa-5x"></i>
@@ -70,7 +70,7 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="">
+	            <a href="{{ url('/panel/daftar-soal') }}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-list fa-5x"></i>

@@ -20,7 +20,7 @@
 		<div class="row">
 
 				@foreach ($data as $d)
-					<div class="col-lg-3" style="padding: 10px;">
+					<div class="col-6 col-lg-3" style="padding: 10px;">
 					<a href="{!! url("/panel/daftar-materi/".$d['permalink'].'-'.$d['id']) !!}">
 						<div class="card" style="height: 200px">
 							<div class="card-body">

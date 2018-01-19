@@ -82,4 +82,10 @@ Route::get('api/question/{id}','Kids\QuestionsController@getQuestionById');
 Route::get('/panel/aktivitas-anak','DashboardController@kidsActivity');
 Route::get('/berita','BeritaController@index');
 Route::get('/berita/detail/{id}','BeritaController@store');
+// <<<<<<< HEAD
 Route::post('/api/questions/end','Kids\QuestionsController@end');
+// =======
+Route::post('/api/questions/end','Kids\QuestionsController@end');
+
+Route::get('panel/nilai','Parent\PointsController@index');
+// >>>>>>> 4e9bff22f7106a396bd0ace05d2d501c867febc7

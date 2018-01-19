@@ -6,6 +6,8 @@
   <link rel="stylesheet" type="text/css" href="{{@asset('/font-awesome/css/font-awesome.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{@asset('css/dashboard.css')}}">
   <meta name="csrf-token" content="{{ csrf_token() }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg bg-blue">
