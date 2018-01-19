@@ -13,6 +13,7 @@ class DashboardController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+                $this->middleware('isUser');
         // if (Session::get('logged') != 'true') {
         //     # code...
         // }
@@ -29,6 +30,7 @@ class DashboardController extends Controller
         // print_r(Session::get('logged'));
              // $this->redirecting();
         // return "as";
+
         $level = Auth::user()->type;
     	return view('dashboard/index',compact('level'));
     }

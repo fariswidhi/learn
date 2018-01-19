@@ -99,16 +99,35 @@
         </div>
 
 
+
+
         <div class="row no-gutters">
-
-          <div class="col-lg-12 my-auto showcase-text" style="margin-top: -100px;">
-
-            <p class="lead mb-0">
-        <center><h3>Apa Yang anda Bisa lakukan disini?</h3></center>
-
-            </p>
+          <div class="container" style="width: 60%;">
+            <div class="row">
+              <div class="col-lg-3">
+            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
+                
+              </div>
+              <div class="col-lg-3">
+            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
+                
+              </div>
+              <div class="col-lg-3">
+            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
+                
+              </div>
+              
+              <div class="col-lg-3">
+            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
+                
+              </div>
+            </div>
           </div>
         </div>
+
+
+
+
 
       </div>
     </section>

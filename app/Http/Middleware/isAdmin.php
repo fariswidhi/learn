@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 use Session;
-class IsUser
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -19,8 +19,8 @@ class IsUser
 
 
 
-        if(Auth::user() &&  Auth::user()->type == 1){
-            return redirect('/admin');
+        if(Auth::user() &&  (Auth::user()->type == 2 || Auth::user()->type == 2)){
+            return redirect('/panel');
         }
 
             return $next($request);
