@@ -19,7 +19,7 @@
 				{{-- expr --}}
 				<tr>
 				<td>{{$no++}}</td>
-					<td><a href="{{ url('dashboard/materials/'.$param.'/'.$d['permalink'].'-'.$d['id']) }}">{{$d['name'] }}</a></td>
+					<td><a href="{{ url('panel/materi/'.$param.'/'.$d['permalink'].'-'.$d['id']) }}">{{$d['name'] }}</a></td>
 				</tr>
 			@endforeach
 			</tbody>

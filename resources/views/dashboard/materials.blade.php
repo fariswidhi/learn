@@ -21,8 +21,8 @@
 
 				@foreach ($data as $d)
 					<div class="col-lg-3" style="padding: 10px;">
-					<a href="{!! url("/dashboard/materials/".$d['permalink'].'-'.$d['id']) !!}">
-						<div class="card">
+					<a href="{!! url("/panel/daftar-materi/".$d['permalink'].'-'.$d['id']) !!}">
+						<div class="card" style="height: 200px">
 							<div class="card-body">
 							<center><h3>{{$d['name']}}</h3></center>
 							</div>

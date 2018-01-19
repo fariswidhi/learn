@@ -1,7 +1,8 @@
 @extends('dashboard.dashboard')
 
 @section('content')
-
+<div class="container">
+	
 <div class="card">
 	<div class="card-body">
 	<div class="row">
@@ -16,7 +17,7 @@
     @endif
 
 		<h3>Tambah Data Anak</h3>
-			<form action="{{@route('kids.store')}}" method="post">
+			<form action="{{@route('daftar-anak.store')}}" method="post">
 				{{csrf_field()}}
 				<label>Nama</label>
 				<input type="text" name="name" class="form-control" required  autocomplete="off">
@@ -32,5 +33,6 @@
 		</div>
 	</div>
 	</div>
+</div>
 </div>
 @endsection

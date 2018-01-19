@@ -20,7 +20,7 @@
 									</tr>
 								</table>
 								<center>
-								<a class="btn btn-primary" href="{{ url('/dashboard/question/'.$param1.'/'.$param2.'/start') }}">Mulai</a>
+								<a class="btn btn-primary" href="{{ url('/panel/soal/'.$param1.'/'.$param2.'/mulai') }}">Mulai</a>
 								</center>
 							</div>
 							</div>

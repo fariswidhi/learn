@@ -1,7 +1,8 @@
 @extends('dashboard.dashboard')
 
 @section('content')
-
+<div class="container">
+	
 <div class="card">
 	<div class="card-body">
 	<div class="row">
@@ -16,7 +17,7 @@
     @endif
 
 		<h3>Ubah Data Anak</h3>
-			<form action="{{@route('kids.update',$data->id)}}" method="post">
+			<form action="{{@route('daftar-anak.update',$data->id)}}" method="post">
 				{{csrf_field()}}
 				{{method_field('PUT')}}
 				<label>Nama</label>
@@ -33,5 +34,6 @@
 		</div>
 	</div>
 	</div>
+</div>
 </div>
 @endsection

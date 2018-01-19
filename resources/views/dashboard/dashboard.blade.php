@@ -9,7 +9,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg bg-blue">
-  <a class="navbar-brand" href="{{@url('dashboard')}}">Navbar</a>
+  <a class="navbar-brand" href="{{@url('panel')}}">Navbar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>

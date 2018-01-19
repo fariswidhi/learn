@@ -70,6 +70,7 @@
     </div>
   </div>
 </div>
+
 <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -89,7 +90,27 @@
   </div>
 </div>
 
+
 @push('scripts')
+<div class="modal fade" id="timeout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Waktu Habis </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+<center><h3>		Maaf Waktu Sudah Habis</h3></center>
+<center><h2></h2></center>
+      </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script>
 
 
@@ -97,6 +118,11 @@ $('#exampleModal').on('shown.bs.modal', function () {
 	$(".close-btn").focus();
 });
 
+setTimeout(
+	function(){
+		$("#timeout").modal('toggle');
+	}
+	, 1000)
 $(document).on('click','.btn-done',function(){
 	$.ajax({
 		url: "{{ url('/api/questions/end') }}",
@@ -111,7 +137,7 @@ $(document).on('click','.btn-done',function(){
 				 window.setTimeout(function(){
 
         // Move to a new location or you can do something else
-        window.location.href = "{{ url('/dashboard') }}";
+        window.location.href = "{{ url('/panel') }}";
 
     }, 3000);
 

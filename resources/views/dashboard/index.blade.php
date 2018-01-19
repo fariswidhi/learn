@@ -8,7 +8,7 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="{{@url('dashboard/kids')}}">
+	            <a href="{{@url('panel/anak')}}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-child fa-5x"></i>
@@ -23,7 +23,7 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="{{@url('dashboard/kids-activity')}}">
+	            <a href="{{@url('panel/aktivitas-anak')}}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-history fa-5x"></i>
@@ -54,7 +54,7 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="{{ url('dashboard/materials') }}">
+	            <a href="{{ url('panel/materi') }}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-book fa-5x"></i>
@@ -100,7 +100,7 @@
 	@elseif($level == 3)
 			<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="{{ url('dashboard/materials') }}">
+	            <a href="{{ url('panel/daftar-materi') }}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-book fa-5x"></i>
@@ -116,12 +116,26 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="{{ url('dashboard/questions') }}">
+	            <a href="{{ url('panel/daftar-soal') }}">
 			<div class="menu-item blue ">
 			<center>
 	                <i class="fa fa-list fa-5x"></i>
 	                <br><br>
 	                <p>Soal</p>
+	        </center>
+             </div>
+	            </a>
+         	</div>
+		</div>
+
+		<div class="col-6 col-lg-4" style="padding: 10px;">
+			<div class="card panel card-body">
+	            <a href="{{ url('panel/questions') }}">
+			<div class="menu-item blue ">
+			<center>
+	                <i class="fa fa-list fa-5x"></i>
+	                <br><br>
+	                <p>Nilai</p>
 	        </center>
              </div>
 	            </a>

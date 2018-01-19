@@ -25,8 +25,8 @@
 				@foreach ($data as $d)
   <li class="list-group-item"><h4 class="child">
   <a href="#">{{$d->username}}</a></h4>
-  <a class="btn btn-outline-warning" href="{{@route('kids.edit',$d->id)}}"><i class="fa fa-pencil"></i> Ubah</a>
-<form onsubmit="return confirm('Yakin?');" action="{{ route('kids.destroy',$d->id) }}" style="display: inline-block;" method="post">
+  <a class="btn btn-outline-warning" href="{{@route('daftar-anak.edit',$d->id)}}"><i class="fa fa-pencil"></i> Ubah</a>
+<form onsubmit="return confirm('Yakin?');" action="{{ route('daftar-anak.destroy',$d->id) }}" style="display: inline-block;" method="post">
 
 	{{csrf_field()}}
 	{{method_field('DELETE')}}

@@ -7,7 +7,7 @@
 
 				@foreach ($data as $d)
 					<div class="col-lg-3" style="padding: 10px;">
-					<a href="{!! url("/dashboard/question/".$param.'/'.$d['permalink'].'-'.$d['id']) !!}">
+					<a href="{!! url("/panel/soal/".$param.'/'.$d['permalink'].'-'.$d['id']) !!}">
 						<div class="card">
 							<div class="card-body">
 							<center><h3>{{$d['name']}}</h3>
