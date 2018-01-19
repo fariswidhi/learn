@@ -102,24 +102,47 @@
 
 
         <div class="row no-gutters">
-          <div class="container" style="width: 60%;">
+          <div class="container container-use">
+          <center><h3>Bagaimana Cara Memulai?</h3></center>
             <div class="row">
-              <div class="col-lg-3">
-            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
+
+              <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+            <center><i class="fa fa-sign-in fa-3x"></i>
+            <br>
+            <br>
+    <h4>Daftar</h4>
+            </center>
+            </div>
                 
               </div>
-              <div class="col-lg-3">
-            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
+              </div>
+
+              <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+            <center><i class="fa fa-certificate fa-3x"></i>
+            <br>
+            <br>
+    <h4>Verifikasi Akun</h4>
+            </center>
+            </div>
                 
               </div>
-              <div class="col-lg-3">
-            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
+              </div>
+
+              <div class="col-lg-4">
+              <div class="card">
+                <div class="card-body">
+            <center><i class="fa fa-check fa-3x"></i>
+            <br>
+            <br>
+    <h4>Selesai</h4>
+            </center>
+            </div>
                 
               </div>
-              
-              <div class="col-lg-3">
-            <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="100px" height="100px" style="margin-top: 50px;"></center>
-                
               </div>
             </div>
           </div>
@@ -130,14 +153,39 @@
 
 
       </div>
-    </section>
+      <br>
 
-<style>
-  @media(max-width: 768px){
-    .img-intro{
-      width: 70%;
-      height: 200px;
-    }
-  }
-</style>
+<br>
+<br>
+
+<br>
+<br>
+
+        <div class="row no-gutters">
+
+<div class="container" >
+<center><h4>Berita Terbaru</h4></center>
+<br>
+  <div class="row">
+    <div class="col-lg-3">
+      <div class="card">
+        <div class="card-body">
+            <img src="http://10.42.0.142:8000/img/learning.png" style="width: 100%;height: 200px;">
+            <br>
+            <br>
+            <h4>Judul</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+    </section>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+
 @endsection

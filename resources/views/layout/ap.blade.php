@@ -8,75 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 </head>
-<style type="text/css">
 
-
-  .nav-desktop{
-    display: block;
-  }
-
-  .open-wrapper{
-    display: none;
-  }
-
-  .btn-open,.btn-close{
-    display: none;
-  }
-  @media(min-width: 552px){
-    .nav-mobile{
-      display: none;
-    }
-  }
-
-  @media(max-width: 552px){
-      .open-wrapper{
-    display: block;
-  }
-    .nav-desktop{
-         display: none;
-    }
-  .btn-open,.btn-close{
-    display: block;
-  }
-   .nav-mobile{
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: #f0f0f0;
-    z-index: 1000;
-    left: -100%;
-    transition: 0.1s ease-out;
-  }
-  .nav-mobile ul{
-    display: block;
-    left: 0;
-    margin-top: 50px;
-  }
-  .nav-mobile ul li{
-    list-style: none;
-    display: block;
-    padding: 10px;
-  }
-  .nav-mobile ul li:hover{
-    background-color: #fff;
-  } 
-  .nav-mobile ul li a{
-    text-decoration: none;
-    display: block;;
-  }
-  .slide{
-    left: 0;
-    transition: 0.1s ease-out;
-  }
-  }
-
-
-</style>
 <body>
 
     <nav class="navbar navbar-light fixed" style="color: #fff;">
       <div class="container">
-        <a class="navbar-brand" href="{{ url('home') }}" style="color: #fff;">PINTARIN</a>
+        <a class="navbar-brand" href="{{ url('') }}" style="color: #fff;">PINTARIN</a>
 
             <div class="pull-right nav-desktop">
             @if (!Auth::check())
