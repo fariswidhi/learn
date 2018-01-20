@@ -5,7 +5,7 @@
 
     <h4>{{$title}}</h4>
     <div class="row">
-    	<div class="col-md-4">
+    	<div class="col-md-6">
     		<form action="{{url('admin/'.$url)}}" method="post" enctype="multipart/form-data">
     		{{method_field('POST')}}
     		{{csrf_field()}}

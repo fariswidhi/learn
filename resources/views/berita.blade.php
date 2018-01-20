@@ -8,20 +8,20 @@
 @section('content')
 
 	
-	<div class="jumbotron">
-      <div class="container">
+	<div class="jumbotron" style='background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("{{ url('uploads/'.$data1->photo) }}")   no-repeat center center fixed;background-size: cover;color: #fff'>
+      <div class="container" >
 		<h1>Berita</h1>  <hr>
         <h1>{{$data1->title}}</h1>
-        <p>{{$data1->content}}</p>
-        <p><a class="btn btn-primary btn-lg" href="{{ url('berita/detail/'.$data1->id) }}" role="button">Baca selanjutnya &raquo;</a></p>
+
+        <p><a class="btn btn-primary btn-lg" href="{{ url('berita/'.$data1->id) }}" role="button">Baca  &raquo;</a></p>
       </div>
     </div>
 
 	<div class="container">
       <!-- Example row of columns -->
       
-      <div class="row">
-      	@foreach ($data2 as $data)
+ {{--      <div class="row">
+
       		
         <div class="col-md-4" >
         	<div class="card">
@@ -34,14 +34,36 @@
         	</div>
         </div>
 
-      	@endforeach
+
+      </div> --}}
+
+
+  <div class="row">
+          @foreach ($data2 as $data)
+
+    <div class="col-lg-3" style="padding: 10px;">
+      <div class="card">
+        <div class="card-body">
+            <img src="{{url('uploads/'.$data->photo)}}" style="width: 100%;height: 200px;">
+            <br>
+            <br>
+            <a href="{{ url('berita/'.$data->id) }}" >
+            <h4>{{$data->title}}</h4>
+            </a>
+        </div>
       </div>
+    </div>
+
+            @endforeach
+
   </div>
-  	<center>
-  		<div class="pag" style="margin-left: 50%;padding: 10px;">
-      	{{ $data2->links('vendor.pagination.bootstrap-4') }}
+      <center>
+      <div class="pag" style="margin-left: 50%;padding: 10px;">
+        {{ $data2->links('vendor.pagination.bootstrap-4') }}
       </div>
-  	</center>
+    </center>
+
+  </div>
 
 
 

@@ -176,6 +176,28 @@
   $(document).on('click','.btn-close',function(){
     $(".nav-mobile").toggleClass('slide');
   });
+  
+$(document).ready(function() {
+    var max_fields      = 10; 
+    var wrapper         = $(".input_fields_wrap"); 
+    var add_button      = $(".add_field_button"); 
+    
+    var x = 1; 
+    var n = 2;
+    $(add_button).click(function(e){ 
+        e.preventDefault();
+        if(x < max_fields){ 
+            x++; 
+
+            var a = n++;
+            $(wrapper).append('<div><br><input style="float: left;margin-right: 10px;" type="radio"  name="answer[]" value="'+a+'"><input type="text" name="answers[]" style="width: 85%;"  class="form-control"/><a href="#" class="remove_field">Hapus</a>'); 
+        }
+    });
+    
+    $(wrapper).on("click",".remove_field", function(e){ 
+        e.preventDefault(); $(this).parent('div').remove(); x--;
+    })
+});
 </script>
 @stack('scripts')
     

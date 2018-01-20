@@ -121,7 +121,7 @@ class NewsController extends Controller
     public function destroy($id,Request $request)
     {
         //
-        $class = Material::find($id);
+        $class = News::find($id);
         $delete = $class->delete();
         // if ($delete == true) {
                 $request->session()->flash('success', 'Berhasil Menghapus Data');

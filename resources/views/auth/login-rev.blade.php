@@ -74,78 +74,8 @@
   </div>
 
   
-  <!-- <p>
-    <a href="http://validator.w3.org/check?uri=http%3A%2F%2Fbootsnipp.com%2Fiframe%2FW00op" target="_blank"><small>HTML</small><sup>5</sup></a>
-    <br>
-    <br>
-    
-  </p>      -->
-  
-  
 </div>
 
-<style type="text/css">
 
-
-/*
-Reference:
-http://www.bootstrapzen.com/item/135/simple-login-form-logo/
-*/
-
-* {
-    -webkit-box-sizing: border-box;
-	   -moz-box-sizing: border-box;
-	        box-sizing: border-box;
-	outline: none;
-}
-
-    .form-control {
-	  position: relative;
-	  font-size: 16px;
-	  height: auto;
-	  padding: 10px;
-
-	}
-
-body {
-	background-color: #3498db;
-}
-
-.login-form {
-	margin-top: 60px;
-  margin-bottom: 76px;
-}
-
-form[role=login] {
-	color: #5d5d5d;
-	background: #f2f2f2;
-	padding: 26px;
-}
-	form[role=login] img {
-		display: block;
-		margin: 0 auto;
-  	margin-bottom: 100px;
-	}
-	form[role=login] input,
-	form[role=login] button {
-		font-size: 18px;
-		margin: 16px 0;
-	}
-	form[role=login] > div {
-		text-align: center;
-	}
-	
-.form-links {
-
-	margin-top: 1em;
-	margin-bottom: 50px;
-}
-	.form-links a {
-		color: #fff;
-	}
-	label{
-		float: left;
-	}
-</style>
 
 @endsection

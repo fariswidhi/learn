@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>@yield('title')</title>
+    <title>Pintarin</title>
     <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
-  <link rel="stylesheet" type="text/css" href="{{ asset('css/styleberanda.css') }}">
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}">
+  @if (Request::segment(1)=='login')
+    {{-- expr --}}
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/login.css') }}">
+  @endif
     <link rel="stylesheet" type="text/css" href="{{ asset('font-awesome/css/font-awesome.min.css') }}">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -19,13 +23,17 @@
             @if (!Auth::check())
               {{-- expr --}}
 
-                <a class="btn btn-default baken" href="{{ route('login') }}" style="color: #fff;" >Login</a>
+                <a class="btn btn-default baken" href="{{ route('login') }}" style="color: #fff;" >Masuk</a>
                 <a class="btn btn-default baken" href="{{ route('register') }}" style="color: #fff;">Daftar</a>
               @else
                 <a class="btn btn-default baken" href="{{ url('/panel') }}" style="color: #fff;">Panel</a>
               
             @endif
-                <a class="btn btn-default baken" href="{{ url('berita') }}" style="color: #fff;">Berita</a>
+            @if (Request::segment(1) == 'berita')
+                <a class="btn btn-default baken" href="{{ url('/berita') }}" style="color: #fff;">Berita</a>
+              @else
+                  <a class="btn btn-default baken" href="#berita" style="color: #fff;">Berita</a>
+            @endif
             </div>
             <div class="pull-right open-wrapper">
                 <button class="pull-right btn btn-outline-primary btn-nav btn-open" >&#9776;</button>
@@ -50,39 +58,85 @@
     @yield('content')
 
 
-    <div class="footer-bottom">
+@if (Request::segment(1) != 'login')
 
+<footer class="mainfooter" role="contentinfo">
+
+  <div class="footer">
   <div class="container">
-
     <div class="row">
-
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-
-        <div class="copyright">
-
-          © 2018 PINTARIN UFA
-
+      <div class="col-md-4 col-sm-6">
+        <!--Column1-->
+        <div class="footer-pad">
+          <h4>Alamat</h4>
+          <address>
+          Jalan Raya Rembang - Blora Km 2.5 Rembang
+              </address>
         </div>
-
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="footer-pad">
+          <h4>Informasi</h4>
+          <ul class="list-unstyled">
+            <li><a href="{{ url('/berita') }}">Berita</a></li>
+            <li><a href="#">Karir</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4 col-sm-6">
+        <div class="footer-pad">
+          <h4>Tentang</h4>
+          Pintarin adalah aplikasi edukasi yang bisa digunakan untuk mengontrol pendidikasn anak
+        </div>
       </div>
 
-      <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-
-        <div class="design">
-
-           Suported By  |  <a target="_blank" href="http://www.smktiufa.sch.id">Web Designer SMK Umar Fatah Rembang</a>
+    </div>
+  </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <p class="text-xs-center">&copy; {{date('Y')}} Pintarin</p>
         </div>
       </div>
     </div>
   </div>
-</div>
+</footer>
+@endif
 
-
-<style type="text/css">
-  
-</style>
 <script src="{{ asset('js/jquery.min.js') }}"></script>
 <script>
+
+$(document).on('click', 'a[href^="#"]', function (event) {
+    event.preventDefault();
+
+    $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+    }, 1000);
+});
+
+
+@if (Request::segment(1) == '')
+  {{-- expr --}}
+$(window).scroll(function(){
+  if($(window).scrollTop() > 500){
+    $(".navbar").addClass('hidden');
+   $(".navbar").removeClass('hidden');
+     $(".navbar").addClass('blue');
+  }
+  else{
+
+    $(".navbar").addClass('hidden');
+    $(".navbar").removeClass('hidden');
+     $(".navbar").removeClass('blue');
+     // $(".navbar").addClass('top');
+
+  }
+});
+@else
+    $(".navbar").addClass('blue');
+@endif
   $(document).on('click','.btn-open',function(){
     $(".nav-mobile").toggleClass('slide');
   });
@@ -90,29 +144,6 @@
     $(".nav-mobile").toggleClass('slide');
   });
 </script>
-    <script type="text/javascript">
-        window.smoothScroll = function(target) {
-    var scrollContainer = target;
-    do { //find scroll container
-        scrollContainer = scrollContainer.parentNode;
-        if (!scrollContainer) return;
-        scrollContainer.scrollTop += 1;
-    } while (scrollContainer.scrollTop == 0);
 
-    var targetY = 0;
-    do { //find the top of target relatively to the container
-        if (target == scrollContainer) break;
-        targetY += target.offsetTop;
-    } while (target = target.offsetParent);
-
-    scroll = function(c, a, b, i) {
-        i++; if (i > 30) return;
-        c.scrollTop = a + (b - a) / 30 * i;
-        setTimeout(function(){ scroll(c, a, b, i); }, 20);
-    }
-    // start scrolling
-    scroll(scrollContainer, scrollContainer.scrollTop, targetY, 0);
-}
-    </script>
 </body>
 </html>

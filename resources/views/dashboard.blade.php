@@ -22,6 +22,7 @@
     <li><a href="{{url('/admin/news')}}"><i class="fa fa-newspaper-o"></i><span>Berita </span></a></li>
     <li><a href="{{url('/admin/materials')}}"><i class="fa fa-server"></i><span>Materi </span></a></li>
     <li><a href="{{url('/admin/modules')}}"><i class="fa fa-calendar"></i><span>Modul Soal</span></a></li>
+    <li><a href="{{url('/admin/levels')}}"><i class="fa fa-calendar"></i><span>Jenjang</span></a></li>
     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 
@@ -62,29 +63,24 @@
   }
 });
 
-// Add hover feedback on menu
-// $('#menu-action').hover(function() {
-//     $('.sidebar').toggleClass('hovered');
-// });
-
 $(document).ready(function() {
-    var max_fields      = 10; //maximum input boxes allowed
-    var wrapper         = $(".input_fields_wrap"); //Fields wrapper
-    var add_button      = $(".add_field_button"); //Add button ID
+    var max_fields      = 10; 
+    var wrapper         = $(".input_fields_wrap"); 
+    var add_button      = $(".add_field_button"); 
     
-    var x = 1; //initlal text box count
+    var x = 1; 
     var n = 2;
-    $(add_button).click(function(e){ //on add input button click
+    $(add_button).click(function(e){ 
         e.preventDefault();
-        if(x < max_fields){ //max input box allowed
-            x++; //text box increment
+        if(x < max_fields){ 
+            x++; 
 
             var a = n++;
-            $(wrapper).append('<div><br><input style="float: left;margin-right: 10px;" type="radio"  name="answer[]" value="'+a+'"><input type="text" name="answers[]" style="width: 85%;"  class="form-control"/><a href="#" class="remove_field">Hapus</a>'); //add input box
+            $(wrapper).append('<div><br><input style="float: left;margin-right: 10px;" type="radio"  name="answer[]" value="'+a+'"><input type="text" name="answers[]" style="width: 85%;"  class="form-control"/><a href="#" class="remove_field">Hapus</a>'); 
         }
     });
     
-    $(wrapper).on("click",".remove_field", function(e){ //user click on remove text
+    $(wrapper).on("click",".remove_field", function(e){ 
         e.preventDefault(); $(this).parent('div').remove(); x--;
     })
 });

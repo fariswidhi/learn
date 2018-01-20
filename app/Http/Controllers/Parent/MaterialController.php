@@ -57,8 +57,8 @@ class MaterialController extends Controller
     {
         //
         $url = $this->url;
-
-        return view('dashboard/kids/create',compact('url'));
+        $subjects = Subjects::all();
+        return view('dashboard/materials/create',compact('url','subjects'));
     }
 
     /**
@@ -71,26 +71,18 @@ class MaterialController extends Controller
     {
         //e
 
-    $username = $request->username;
-    $find = Childrens::where('username',$username);
-    // echo $count;
-    $userid = Auth::user()->id;
-// echo Auth::user()->id;
-    if ($find->count() == 0) {
-        $class = new Childrens;
+        $requests = $request->except(['_token','_method']);
+        $class = new Material;
         $class->name = $request->name;
-        $class->username  = $username;
-        $class->password = bcrypt($request->password);
-        $class->id_user = $userid;
-        $class->save();
-        $request->session()->flash('success', 'Berhasil Menambah Data');
-        return redirect('dashboard/kids');
-    }
-    else{
+        $class->content = $request->content;
+        $class->id_subject = $request->subjects;
+        $save = $class->save();
 
-        $request->session()->flash('failed', 'Silahkan Cari Username Lain');
-        return redirect()->back()->withInput();
-    }
+        if ($save == true) {
+            $request->session()->flash('success', 'success');
+            return redirect('panel/daftar-materi');
+        }
+
 
     }
 

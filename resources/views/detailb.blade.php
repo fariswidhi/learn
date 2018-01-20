@@ -1,21 +1,33 @@
 @extends('layout.ap')
 
-<style type="text/css">
-	.berita{
-		margin-top: 100px;
-	}
-</style>
+
 @section('content')
 
-	<div class="container">
-		<h1 class="berita">Detail Berita</h1><hr>
-		<div class="title">
-			<h3>{{ $data->title }}</h3>
-		</div>
-		{{-- <hr> --}}
+	<div class="container" style="margin-top: 100px">
+	<div class="row">
+		<div class="col-lg-12">
+			
+	<div class="card">
+		<div class="card-body">
+		<h1 >{{ $data->title }}</h1>
+		<time>{{$data->created_at}}</time>
+		<hr>
+				@if ($data->photo != null)
+
+			{{-- expr --}}
+			<img src="{{ url('/uploads/'.$data->photo) }}" class="img-fluid">
+		@endif
+
+
 		<div class="content">
-			<p>{{ $data->content }}</p>
+			<p>{!! $data->content !!}</p>
 		</div>
+		</div>
+	</div>
+
+		</div>
+	</div>
+	<br>
 		<a href="{{ url('berita') }}" class="btn btn-info btn-md" style="margin-bottom: 100px;">Kembali</a>
 	</div>
 

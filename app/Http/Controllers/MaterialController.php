@@ -47,11 +47,12 @@ class MaterialController extends Controller
     public function store(Request $request)
     {
         //
-        $requests = $request->except(['_token','_method']);
+
         $class = new Material;
         $class->name = $request->name;
         $class->content = $request->content;
         $class->id_subject = $request->subjects;
+        $class->id_user = Auth::id();
         $save = $class->save();
 
         if ($save == true) {
@@ -59,6 +60,7 @@ class MaterialController extends Controller
             return redirect('admin/'.$this->url);
         }
     }
+
 
     /**
      * Display the specified resource.

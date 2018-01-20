@@ -384,4 +384,6 @@ $data = DB::table("users_answers")->select(DB::raw("SUM(point) as count"))->grou
 }
 
 
+
+
 }

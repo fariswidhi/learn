@@ -26,7 +26,7 @@
           <td><a class="btn btn-success" href="{{$url.'/'.$data->id }}">Detail</a>
          
           <a class="btn btn-warning" href="{{$url.'/'.$data->id.'/edit' }}">Edit</a>
-          <form action="{{@url('admin/subjects/'.$data->id)}}" method="post" style="display: inline-block;">
+          <form action="{{@url('admin/news/'.$data->id)}}" method="post" style="display: inline-block;">
           {{method_field('DELETE')}}
           {{csrf_field()}}
           <button type="submit" class="btn btn-danger">Hapus</button></td>

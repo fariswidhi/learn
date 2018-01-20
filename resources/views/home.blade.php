@@ -1,69 +1,51 @@
 @extends('layout.ap')
 
 @section('content')
-    <header class="masthead text-white text-center">
+    <header class="header text-white text-center">
       <div class="overlay"></div>
       <div class="container">
         <div class="row">
           <div class="col-xl-9 mx-auto">
-            <h1 class="mb-2">Ayo Belajar</h1>
-            <h4 class="mb-4">
-                Selamat datang diaplikasi Pintarin
-            </h4>
-            <h6>
-                Yang mana anak-anak bisa belajar dengan mudah dan aman dengan pemantauan orang tua ,
-                karena untuk mengetahui statistik nilai.
-            </h6>
+            <h3 class="mb-4 intro-text" id="intro-text">
+      Banyak anak yang mengalami penurunan prestasi,salah satu hal yang menyebabkan  adalah kurangnya perhatian dari orang tua terhadap putra-putrinya
+    
+  </h3>
           </div>
           <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
-            <div style="height: 15px;margin-top: 100px;">
-                <div class="first"><button type="button" onclick="smoothScroll(document.getElementById('second'))" class="btn btn-primary">Pelajari lebih lanjut</button></div>
+            <div style="height: 100px;margin-top: 100px;">
+                <div class="first"><a href="#pelajari" class="btn btn-primary">Pelajari lebih lanjut</a></div>
             </div>
           </div>
         </div>
       </div>
     </header>
 
-    <div class="container" id="second" style="margin-bottom: 100px;">
-        <div style="height: 50px;"></div>
-        <div class="row">
-            <div class="col-md-12">
-                <center><h1>Apa masalah yang terjadi?</h1></center>
-            </div>
-        </div><hr>
-        <div class="row">
-            <div class="col-md12">
-                <center>
-                <p class="lead mb-0">
-                Banyak anak yang mengalami penurunan prestasi, hal yang menyebabkan itu salah satunya adalah kurangnya perhatian orang tua terhadap putra-putrinya
-    
-                </p>
-                </center>
-            </div>
-        </div>
-    </div>
 
-    <section class="showcase">
+    <section class="section" id="pelajari">
       <div class="container-fluid p-0">
         <div class="row no-gutters" style="background-color: #ddd;">
 
-          <div class="col-lg-6 order-lg-2 text-white showcase-img">
-            <center><img class="img-intro" src="{{ asset('img/content.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
-          </div>
-          <div class="col-lg-6 order-lg-1 my-auto showcase-text">
-            <h2 style="margin-top: -100px;">Pintarin</h2>
+
+          <div class="col-lg-12 my-auto section-text" style="width: 100%;">
+
+            <p class="lead mb-0">
+            <center><h2>Pintarin</h2></center>
             <hr>
-            <p class="lead mb-0">Pintarin adalah Aplikasi yang digunakan untuk belajar anak-anak dan dibawah pemantauan orang tua
+  <center> <h3>           Pintarin adalah Aplikasi yang berguna untuk pembelajaran anak dan bisa dikontrol langsung oleh orang tua</h3>
+  <br>
+  <a href="#fitur" class="btn btn-primary">Apa Fiturnya? </a>
+  </center>
               .<br><br>
             </p>
+
           </div>
         </div>
 
-        <div class="row no-gutters">
-          <div class="col-lg-6 text-white showcase-img" >
+        <div class="row no-gutters" id="fitur">
+          <div class="col-lg-6 text-white section-img" >
             <center><img class="img-intro" src="{{ asset('img/books.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
-          <div class="col-lg-6 my-auto showcase-text">
+          <div class="col-lg-6 my-auto section-text">
             <h2 style="margin-top: -100px;">Banyak Materi</h2>
             <hr>
             <p class="lead mb-0">
@@ -73,10 +55,10 @@
         </div>
 
         <div class="row no-gutters" style="background-color: #ddd;">
-          <div class="col-lg-6 order-lg-2 text-white showcase-img">
+          <div class="col-lg-6 order-lg-2 text-white section-img">
             <center><img class="img-intro" src="{{ asset('img/questions.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
-          <div class="col-lg-6 order-lg-1 my-auto showcase-text">
+          <div class="col-lg-6 order-lg-1 my-auto section-text">
             <h2 style="margin-top: -100px;">Bank Soal</h2>
             <hr>
             <p class="lead mb-0">
@@ -85,11 +67,11 @@
           </div>
         </div>
 
-        <div class="row no-gutters">
-          <div class="col-lg-6 text-white showcase-img">
+        <div class="row no-gutters bg-section">
+          <div class="col-lg-6 text-white section-img">
             <center><img class="img-intro" src="{{ asset('img/learning.png') }}" width="300px" height="300px" style="margin-top: 50px;"></center>
           </div>
-          <div class="col-lg-6 my-auto showcase-text" style="margin-top: -100px;">
+          <div class="col-lg-6 my-auto section-text" >
             <h2 style="margin-top: -100px;">Aktivitas Anak</h2>
             <hr>
             <p class="lead mb-0">
@@ -101,83 +83,109 @@
 
 
 
-        <div class="row no-gutters">
-          <div class="container container-use">
-          <center><h3>Bagaimana Cara Memulai?</h3></center>
-            <div class="row">
+        <div class="row no-gutters bg-features ">
+<div class="container" style="padding: 40px;">
+<center>
+<h3 class="features-title">Apalagi?</h3>
+<h4 class="features-title">Anda bisa melihat semua fitur aplikasi</h4>
+<br>
+<br>
+</center>
+  <div class="row">
+<div class="col-lg-6">
 
-              <div class="col-lg-4">
-              <div class="card">
-                <div class="card-body">
-            <center><i class="fa fa-sign-in fa-3x"></i>
-            <br>
-            <br>
-    <h4>Daftar</h4>
-            </center>
-            </div>
-                
-              </div>
-              </div>
 
-              <div class="col-lg-4">
-              <div class="card">
-                <div class="card-body">
-            <center><i class="fa fa-certificate fa-3x"></i>
-            <br>
-            <br>
-    <h4>Verifikasi Akun</h4>
-            </center>
-            </div>
-                
-              </div>
-              </div>
+              <div class="col-lg-6  centered" >
+              <center>
+                  <img src="{{ asset('img/father.png') }}" class="features-img">
+                  <br>
+                  <br>
+                  <h3 class="features-title">Orang Tua</h3>
+                        </center>
+                  <br>
+                  <ul class="features-list">
+                    <li>Menambahkan Materi Pelajaran</li>
+                    <li>Menambahkan Soal untuk Anak</li>
+                    <li>Melihat Semua Nilai Anak</li>
+                    <li>Melihat Aktivitas Anak Yang Dilakukan Anak di Aplikasi ini</li>
+                  </ul>
+      
 
-              <div class="col-lg-4">
-              <div class="card">
-                <div class="card-body">
-            <center><i class="fa fa-check fa-3x"></i>
-            <br>
-            <br>
-    <h4>Selesai</h4>
-            </center>
-            </div>
-                
-              </div>
-              </div>
-            </div>
+<br>
+<br><br>
+<br><br>
+            </div>          
           </div>
+
+          <div class="col-lg-6">
+
+
+              <div class="col-lg-6  centered" >
+              <center>
+                  <img src="{{ asset('img/boy.png') }}" class="features-img">
+                  <br>
+                  <br>
+                  <h3 class="features-title">Anak</h3>
+                        </center>
+                  <br>
+                  <ul class="features-list">
+                    <li>Mencari dan Membaca Berbagai Materi Pelajaran</li>
+                    <li>Mengerjakan Soal Secara Online</li>
+                    <li>Melihat Nilai dari soal yang sudah ikerjakan </li>
+                  </ul>
+      
+
+<br>
+<br><br>
+<br><br>
+            </div>          
+          </div>
+
+  </div>  
+</div>
+
+
+
+
+
         </div>
 
 
 
+    <br>
+    <br>
+    <br>
 
 
       </div>
-      <br>
 
-<br>
-<br>
-
-<br>
-<br>
-
-        <div class="row no-gutters">
+        <div class="row no-gutters" id="berita">
 
 <div class="container" >
 <center><h4>Berita Terbaru</h4></center>
 <br>
   <div class="row">
-    <div class="col-lg-3">
+          @foreach ($news as $data)
+
+    <div class="col-lg-3 col-12 col-sm-6" style="padding: 10px;">
       <div class="card">
         <div class="card-body">
-            <img src="http://10.42.0.142:8000/img/learning.png" style="width: 100%;height: 200px;">
+            <img src="{{url('uploads/'.$data->photo)}}" class="img-news-home">
             <br>
             <br>
-            <h4>Judul</h4>
+            <a href="{{ url('berita/'.$data->id) }}" >
+            <h4>{{$data->title}}</h4>
+            </a>
         </div>
       </div>
     </div>
+
+            @endforeach
+
   </div>
+  <center>
+  <a href="{{ url('/berita') }}" class="btn btn-primary">Berita Lainnya</a>
+  </center>
 </div>
 </div>
     </section>
