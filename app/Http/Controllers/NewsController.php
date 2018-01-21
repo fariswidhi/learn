@@ -71,6 +71,8 @@ class NewsController extends Controller
     public function show($id)
     {
         //
+        $data = News::find($id);
+        return view('news/detail',compact('data'));
     }
 
     /**

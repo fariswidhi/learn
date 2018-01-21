@@ -9,4 +9,7 @@ class Material extends Model
 {
     //
            use SoftDeletes;
+           public function subject(){
+           	return $this->belongsTo('App\Subjects','id_subject');
+           }
 }

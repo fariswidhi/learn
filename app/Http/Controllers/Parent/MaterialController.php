@@ -10,6 +10,7 @@ use App\Childrens;
 use App\Material;
 use App\Subjects;
 use Auth;
+use App\Level;
 
 class MaterialController extends Controller
 {
@@ -58,7 +59,8 @@ class MaterialController extends Controller
         //
         $url = $this->url;
         $subjects = Subjects::all();
-        return view('dashboard/materials/create',compact('url','subjects'));
+        $levels = Level::all();
+        return view('dashboard/materials/create',compact('url','subjects','levels'));
     }
 
     /**
@@ -76,11 +78,13 @@ class MaterialController extends Controller
         $class->name = $request->name;
         $class->content = $request->content;
         $class->id_subject = $request->subjects;
+        $class->id_user = Auth::id();
+        $class->id_level = $request->levels;
         $save = $class->save();
 
         if ($save == true) {
             $request->session()->flash('success', 'success');
-            return redirect('panel/daftar-materi');
+            return redirect('panel/daftar-materi/dari-saya');
         }
 
 
@@ -137,8 +141,11 @@ class MaterialController extends Controller
     public function edit($id)
     {
         //
-        $data = Childrens::find($id);
-        return view('dashboard/kids/edit',compact('data'));
+        $url = $this->url;
+        $subjects = Subjects::all();
+        $levels = Level::all();
+        $data = Material::find($id);
+        return view('dashboard/materials/edit',compact('data','levels','subjects'));
     }
 
     /**
@@ -151,22 +158,19 @@ class MaterialController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $password = $request->password;
-        $update = Childrens::find($id);
-        if (empty($password)) {
-            $update->name = $request->name;
+        $class = Material::find($id);
+        $class->name = $request->name;
+        $class->content = $request->content;
+        $class->id_subject = $request->subjects;
+        $class->id_user = Auth::id();
+        $class->id_level = $request->levels;
+        $save = $class->save();
+
+        if ($save == true) {
+            $request->session()->flash('success', 'success');
+            return redirect('panel/daftar-materi/dari-saya');
         }
-        else{
 
-            $update->name = $request->name;
-            
-            $update->password = bcrypt($request->password);   
-        }
-        $update->save();
-
-
-        $request->session()->flash('success', 'Berhasil Mengubah Data');
-        return redirect('dashboard/kids');
 
     }
 
@@ -179,9 +183,46 @@ class MaterialController extends Controller
     public function destroy($id,Request $request)
     {
         //
-        $delete = Childrens::find($id);
+        $delete = Material::find($id);
         $delete->delete();
         $request->session()->flash('success', 'Berhasil Menghapus Data');
-        return redirect('dashboard/kids');
+        return redirect('panel/daftar-materi/dari-saya');
     }
+
+    public function fromMe(){
+        if (Auth::user()->type == 2) {
+            # code...
+        $material = Material::where('id_user',Auth::id())->get();
+        }
+        else{
+        $parent = Auth::user()->id_user;
+        $material = Material::where('id_user',$parent)->get();   
+        }
+        $data = [];
+        $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
+
+
+        foreach ($material as $m) {
+            $param = $m->subject->name;
+            $removeParam = strtolower(str_replace($chars, "", $param));
+            $subject = strtolower(str_replace(' ','-',$removeParam));
+
+            $name = $m->name;
+            $removeName = strtolower(str_replace($chars, "", $name));
+            $permalink = strtolower(str_replace(' ','-',$removeName));
+            $data[] = [
+            'name'=>$name,
+            'permalink'=>$permalink,
+            'id'=>$m->id,
+            'subject'=>$subject.'-'.$m->id
+            ];
+        }
+        $no=1;
+
+        return view('dashboard/materials/fromme',compact('data','no'));
+    }
+
+    // public function materialDetail($param,$id){
+    //     echo $id;
+    // }
 }

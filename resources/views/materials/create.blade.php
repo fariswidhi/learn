@@ -22,6 +22,16 @@
                 @endforeach
             </select>
             <br>
+            <label>Jenjang</label>
+            <select class="form-control" required name="levels">  
+                <option value="">Pilih Jenjang</option>
+                @foreach ($levels as $data)
+                    {{-- expr --}}
+                    <option value="{{$data->id}}">{{$data->name}}</option>
+                @endforeach
+            </select>
+            <br>
+            
     			<button type="submit" class="btn btn-success">Simpan</button>
     		</form>
     	</div>

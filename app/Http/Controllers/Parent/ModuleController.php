@@ -42,15 +42,25 @@ class ModuleController extends Controller
         }
     }
 
-    public function detail($params){
+    public function detail($params,Request $request){
+        // print_r($request->method());
+
         $explode = explode('-', $params);
         $id = end($explode);
         $data = Modules::find($id);
-
+        if ($request->isMethod('GET')) {
         $questions = Questions::where('id_module',$id)->get();
         $param = $params;
         $no =1 ;
         return view('dashboard/question/detail-module',compact('data','questions','id','param','no'));
+
+        }
+        else{
+
+            $data->delete();
+            return redirect('/panel/daftar-soal/dari-saya');
+        }
+        // print_r($request->method());
 
     }
 
@@ -88,9 +98,14 @@ return redirect()->back();
     return redirect()->back();
     }
     public function detailQuestion($param,$id){
+        // $explode = explode('-', $param);
+        // $id = end($explode);
+
         $data = Questions::find($id);
         $answers = Answers::where('id_question',$id)->get();
-        return view('dashboard/question/detail-question',compact('data','answers'));
+
+        // print_r($data);
+        return view('dashboard/question/detail-questions',compact('data','answers'));
     }
 
 }

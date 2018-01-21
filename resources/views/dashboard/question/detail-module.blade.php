@@ -13,6 +13,7 @@
         <li class="list-group-item">{{$data->time." Menit"}}</li>
         <li class="list-group-item">{{$data->subject->name}}</li>
         <li class="list-group-item">{{$data->subject_number." Soal"}}</li>
+        <li class="list-group-item"><form method="post" action="{{ url('/panel/soal/'.$param) }}" style="display: inline-block;">{{csrf_field()}}{{method_field('DELETE')}}<button type="submit" class="btn btn-danger">Hapus </button></form></li>
     </ul>
     <br><br>
 

@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Material;
-
 use App\Subjects;
+use App\Level;
+use Auth;
+
 class MaterialController extends Controller
 {
     /**
@@ -35,7 +37,8 @@ class MaterialController extends Controller
         $url = $this->url;
         $title = "Tambah Materi";
         $datas = Subjects::all();
-         return view($this->url.'/create',compact('title','url','datas'));
+        $levels = Level::all();
+         return view($this->url.'/create',compact('title','url','datas','levels'));
     }
 
     /**
@@ -52,6 +55,7 @@ class MaterialController extends Controller
         $class->name = $request->name;
         $class->content = $request->content;
         $class->id_subject = $request->subjects;
+        $class->id_level = $request->levels;
         $class->id_user = Auth::id();
         $save = $class->save();
 
@@ -89,7 +93,9 @@ class MaterialController extends Controller
         $data = Material::find($id);
 
         $subjects = Subjects::all();
-        return view('materials/edit',compact('title','url','id','data','subjects'));
+        $levels = Level::all();
+        
+        return view('materials/edit',compact('title','url','id','data','subjects','levels'));
     }
 
     /**
@@ -106,7 +112,7 @@ class MaterialController extends Controller
         $class->name = $request->name;
         $class->content = $request->content;
         $class->id_subject = $request->subjects;
-
+        $class->id_level = $request->levels;
         $class->save();
         $request->session()->flash('success', 'Berhasil Mengubah Data');
         return redirect('admin/'.$this->url);

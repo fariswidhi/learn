@@ -46,6 +46,7 @@
 					<tr>
 						<td>{{$no++}}</td>
 						<td>{{$data->name}}</td>
+						<td><a href="{{ url('/admin/modules/'.$id.'/'.$data->id) }}" class="btn btn-primary">Detail</a> <a href="{{ url('/admin/modules/'.$id.'/'.$data->id.'/delete') }}" class="btn btn-danger">Hapus</a></td>
 					</tr>
 				@endforeach
 				</table>

@@ -16,7 +16,7 @@
   <br>
     @endif
 
-		<a href="{{@url('dashboard/'.$url.'/create')}}" class="btn btn-primary">Tambah</a>
+		<a href="{{@url('panel/'.$url.'/create')}}" class="btn btn-primary">Tambah</a>
 		<br>
 		<br>
 		<div class="row">

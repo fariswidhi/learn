@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="jumbotron">
-    <a href="subjects/create" class="btn btn-primary">Tambah</a>
+    <a href="materials/create" class="btn btn-primary">Tambah</a>
     @if (Session::has('success'))
     @component('alerts.success')
     @slot('title')

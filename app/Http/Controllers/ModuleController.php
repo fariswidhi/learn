@@ -7,6 +7,8 @@ use App\Modules;
 use App\Subjects;
 use App\Questions;
 use App\Answers;
+use App\Level;
+use App\Material;
 
 class ModuleController extends Controller
 {
@@ -23,7 +25,8 @@ class ModuleController extends Controller
         $datas = Modules::all();
         $no = 1;
         $url = $this->url;
-        return view($this->url.'/index',compact('title','datas','no','url'));
+        $levels = Level::all();
+        return view($this->url.'/index',compact('title','datas','no','url','levels'));
     }
 
     /**
@@ -38,7 +41,8 @@ class ModuleController extends Controller
         $title = "Tambah Modul";
 
         $subjects = Subjects::all();
-         return view($this->url.'/create',compact('title','url','subjects'));
+                $levels = Level::all();
+         return view($this->url.'/create',compact('title','url','subjects','levels'));
     }
 
     /**
@@ -56,6 +60,7 @@ class ModuleController extends Controller
         $class->time = $request->time;
         $class->description = $request->description;
         $class->id_subjects = $request->subjects;
+        $class->id_level = $request->levels;
         $save = $class->save();
 
         if ($save == true) {
@@ -124,10 +129,13 @@ return redirect()->back();
         $title = "Edit Modul";
         $url = $this->url;
 
-        $data = Material::find($id);
+        $data = Modules::find($id);
 
         $subjects = Subjects::all();
-        return view('modules/edit',compact('title','url','id','data','subjects'));
+        $levels = Level::all();
+// echo $data->time;
+        // // print_r($modules);
+        return view('modules/edit',compact('title','url','id','data','subjects','levels'));
     }
 
     /**
@@ -140,11 +148,12 @@ return redirect()->back();
     public function update(Request $request, $id)
     {
         //
-        $class = Material::find($id);
+        $class = Modules::find($id);
         $class->name = $request->name;
-        $class->content = $request->content;
-        $class->id_subject = $request->subjects;
-
+        $class->time = $request->time;
+        $class->description = $request->description;
+        $class->id_subjects = $request->subjects;
+        $class->id_level = $request->levels;
         $class->save();
         $request->session()->flash('success', 'Berhasil Mengubah Data');
         return redirect('admin/'.$this->url);
@@ -167,5 +176,20 @@ return redirect()->back();
                             return redirect('admin/'.$this->url);
         // }
 
+    }
+
+    public function showQestion($q,$id){
+        $title = "Detail Pertanyaan";
+        $answers = Answers::where('id_question',$id)->get();
+        $data = Questions::find($id);
+
+        return view('modules/show-question',compact('title','answers','data'));
+    }
+
+    public function deleteQuestion($q,$id,Request $request){
+        $delete = Questions::find($id);
+        $delete->delete();
+            $request->session()->flash('success', 'success');
+            return redirect()->back();
     }
 }

@@ -9,11 +9,12 @@ use Illuminate\Http\Request;
 use App\Childrens;
 use Auth;
 use App\User;
+use App\Level;
 
 class KidsController extends Controller
 {
 
-    private $url = "kids";
+    private $url = "daftar-anak";
     /**
      * Display a listing of the resource.
      *
@@ -37,8 +38,8 @@ class KidsController extends Controller
     {
         //
         $url = $this->url;
-
-        return view('dashboard/kids/create',compact('url'));
+        $levels = Level::all();
+        return view('dashboard/kids/create',compact('url','levels'));
     }
 
     /**
@@ -65,6 +66,7 @@ class KidsController extends Controller
         $class->type = 3;
         $class->active = 1;
         $class->email = $request->email;
+        $class->id_level = $request->level;
         $class->save();
         $request->session()->flash('success', 'Berhasil Menambah Data');
         return redirect('dashboard/kids');
@@ -98,7 +100,8 @@ class KidsController extends Controller
     {
         //
         $data = User::find($id);
-        return view('dashboard/kids/edit',compact('data'));
+        $levels = Level::all();
+        return view('dashboard/kids/edit',compact('data','levels'));
     }
 
     /**
@@ -121,12 +124,13 @@ class KidsController extends Controller
             $update->name = $request->name;
             
             $update->password = bcrypt($request->password);   
+            $update->id_level = $request->level;
         }
         $update->save();
 
 
         $request->session()->flash('success', 'Berhasil Mengubah Data');
-        return redirect('dashboard/kids');
+        return redirect('panel/daftar-anak');
 
     }
 
@@ -142,6 +146,6 @@ class KidsController extends Controller
         $delete = User::find($id);
         $delete->delete();
         $request->session()->flash('success', 'Berhasil Menghapus Data');
-        return redirect('dashboard/kids');
+        return redirect('panel/daftar-anak');
     }
 }

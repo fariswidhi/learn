@@ -377,10 +377,40 @@ $data = DB::table("users_answers")->select(DB::raw("SUM(point) as count"))->grou
     UsersAnswer::where('sessid',$sessid)->where('id_children',$userid)->update(['on_going'=>0]);
     Session::forget('sessid');
     echo json_encode($response);
+}
+
+public function fromMe(){
+    if (Auth::user()->type==2) {
+        # code...
+    $modules = Modules::where('id_user',Auth::id())->get();
+    }
+    else{
+
+     $id = Auth::user()->id_user;
+    $modules = Modules::where('id_user',$id)->get();   
+    }
+
+        $data = [];
+        $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
 
 
+        foreach ($modules as $m) {
+            $param = $m->subject->name;
+            $removeParam = strtolower(str_replace($chars, "", $param));
+            $subject = strtolower(str_replace(' ','-',$removeParam));
 
+            $name = $m->name;
+            $removeName = strtolower(str_replace($chars, "", $name));
+            $permalink = strtolower(str_replace(' ','-',$removeName));
+            $data[] = [
+            'name'=>$name,
+            'permalink'=>$permalink.'-'.$m->id,
+            'id'=>$m->id,
+            'subject'=>$subject.'-'.$m->id_subjects
+            ];
+        }
 
+    return view('dashboard/question/fromMe',compact('data'));
 }
 
 
