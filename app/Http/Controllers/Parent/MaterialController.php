@@ -12,9 +12,6 @@ use App\Subjects;
 use Auth;
 use App\Level;
 use App\Activities;
-use Carbon\Carbon;
-
-
 class MaterialController extends Controller
 {
 
@@ -178,13 +175,10 @@ class MaterialController extends Controller
 
     public function detail($subject,$material){
 
-        $lastId = 4;
-        $find = Activities::find($lastId);
-        $now = date('Y-m-d H:i:s');
+        // $lastId = 4;
+        // $find = Activities::find($lastId);
+        // $now = date('Y-m-d H:i:s');
         // echo strtotime($find->created_at);
-        $dt = Carbon::now();
-        echo $dt;
-        echo $dt->addMinutes(61);  
 
         $explode = explode('-', $material);
         $id = end($explode);
@@ -192,16 +186,16 @@ class MaterialController extends Controller
         $subjectname = $data->name;
         // print_r($material);
 
-        // $activity = new Activities;
-        // $activity->id_children = Auth::id();
-        // // 1 : Membaca Materi
-        // // 2 : Mengerjakan Soal
-        // $activity->activity = 1;
-        // // 1: materials;
-        // // 2: questions
-        // $activity->type = 1;
-        // $activity->id = $id;
-        // $activity->save();
+        $activity = new Activities;
+        $activity->id_children = Auth::id();
+        // 1 : Membaca Materi
+        // 2 : Mengerjakan Soal
+        $activity->activity = 1;
+        // 1: materials;
+        // 2: questions
+        $activity->type = 1;
+        $activity->id = $id;
+        $activity->save();
 
 
         return view('dashboard/materials/detail-material',compact('data','subjectname'));

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jan 19, 2018 at 10:24 PM
+-- Generation Time: Jan 22, 2018 at 07:15 AM
 -- Server version: 5.7.20-0ubuntu0.16.04.1
--- PHP Version: 7.1.12-3+ubuntu16.04.1+deb.sury.org+1
+-- PHP Version: 7.0.26-2+ubuntu16.04.1+deb.sury.org+2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -42,7 +42,8 @@ CREATE TABLE `activities` (
 --
 
 INSERT INTO `activities` (`id_activity`, `id_children`, `activity`, `type`, `id`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(4, 18, 'Mengerjakan Soal', '2', 1, NULL, '2018-01-16 08:33:06', '2018-01-16 08:33:06');
+(4, 18, 'Mengerjakan Soal', '2', 1, NULL, '2018-01-16 08:33:06', '2018-01-16 08:33:06'),
+(5, 20, '1', '1', 2, NULL, '2018-01-21 16:09:15', '2018-01-21 16:09:15');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,17 @@ INSERT INTO `answers` (`id`, `answer`, `id_question`, `true`, `deleted_at`, `cre
 (15, '3', '9', '0', NULL, '2018-01-16 08:31:10', '2018-01-16 08:31:10'),
 (16, '4', '9', '0', NULL, '2018-01-16 08:31:10', '2018-01-16 08:31:10'),
 (17, '5', '9', '0', NULL, '2018-01-16 08:31:10', '2018-01-16 08:31:10'),
-(18, '1', '9', '1', NULL, '2018-01-16 08:31:10', '2018-01-16 08:31:10');
+(18, '1', '9', '1', NULL, '2018-01-16 08:31:10', '2018-01-16 08:31:10'),
+(19, '1', '11', '0', NULL, '2018-01-20 01:37:06', '2018-01-20 01:37:06'),
+(20, '2', '11', '1', NULL, '2018-01-20 01:37:06', '2018-01-20 01:37:06'),
+(21, '1', '12', '0', NULL, '2018-01-20 03:22:18', '2018-01-20 03:22:18'),
+(22, '2', '12', '1', NULL, '2018-01-20 03:22:18', '2018-01-20 03:22:18'),
+(23, '3', '12', '0', NULL, '2018-01-20 03:22:19', '2018-01-20 03:22:19'),
+(24, '4', '12', '0', NULL, '2018-01-20 03:22:19', '2018-01-20 03:22:19'),
+(25, '1', '13', '1', NULL, '2018-01-20 16:13:14', '2018-01-20 16:13:14'),
+(26, '2', '13', '0', NULL, '2018-01-20 16:13:14', '2018-01-20 16:13:14'),
+(27, '2', '14', '1', NULL, '2018-01-20 16:18:04', '2018-01-20 16:18:04'),
+(28, '3', '14', '0', NULL, '2018-01-20 16:18:04', '2018-01-20 16:18:04');
 
 -- --------------------------------------------------------
 
@@ -120,8 +131,30 @@ CREATE TABLE `childrens` (
 INSERT INTO `childrens` (`id`, `name`, `username`, `password`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (1, '', 'bagus', 'bagus', 12, NULL, NULL, NULL),
 (3, 'Bagus F', 'bagusf', '$2y$10$eHQWYXILwSbAtRuwTzZB2OsVOgT.RAxK.51UVZ0wUSSjX.ztxKI3G', 3, NULL, '2018-01-14 07:19:16', '2018-01-14 07:19:16'),
-(4, 'Ronian', 'roni19', '$2y$10$yXTomTE5./noBLU/SpWA2uV2xJx1zIBF76/I1R9IJsVzREPBZ0CGW', 4, NULL, '2018-01-14 17:34:30', '2018-01-14 17:44:44'),
 (5, 'ahmad', 'ahmadin', '$2y$10$t.Tmwj3YqiVvSzuPRzRqmuKnO6Sz68PMTdE2rUs2JNS5wG9YsJfKO', 7, NULL, '2018-01-15 17:06:37', '2018-01-15 17:06:37');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `levels`
+--
+
+CREATE TABLE `levels` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `levels`
+--
+
+INSERT INTO `levels` (`id`, `name`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(2, 'SD', NULL, '2018-01-20 03:53:55', '2018-01-20 03:53:55'),
+(3, 'SMP', NULL, '2018-01-20 03:54:01', '2018-01-20 03:54:01'),
+(14, 'SMA', NULL, '2018-01-20 03:54:35', '2018-01-20 03:54:35');
 
 -- --------------------------------------------------------
 
@@ -132,8 +165,10 @@ INSERT INTO `childrens` (`id`, `name`, `username`, `password`, `id_user`, `delet
 CREATE TABLE `materials` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `content` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `content` text COLLATE utf8mb4_unicode_ci,
+  `file` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `id_subject` int(11) NOT NULL,
+  `id_level` int(11) DEFAULT NULL,
   `id_user` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -144,8 +179,14 @@ CREATE TABLE `materials` (
 -- Dumping data for table `materials`
 --
 
-INSERT INTO `materials` (`id`, `name`, `content`, `id_subject`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Materi Trigonometri Bab 1', 'Ini adalah Materi', 4, NULL, NULL, '2018-01-13 06:54:33', '2018-01-13 07:02:00');
+INSERT INTO `materials` (`id`, `name`, `content`, `file`, `id_subject`, `id_level`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Materi Trigonometri Bab 1', 'Ini adalah Materi', NULL, 4, NULL, NULL, '2018-01-20 03:53:19', '2018-01-13 06:54:33', '2018-01-20 03:53:19'),
+(2, 'Mari Menghitung Angka', 'mari yuk', NULL, 4, NULL, NULL, NULL, '2018-01-20 00:55:57', '2018-01-20 00:55:57'),
+(3, 'Alamss', 'masmas', NULL, 6, 3, 18, NULL, '2018-01-20 04:07:25', '2018-01-20 15:51:04'),
+(4, 'Mengenal Alam', 'Mengenas', NULL, 6, 2, 18, '2018-01-20 15:58:13', '2018-01-20 07:08:58', '2018-01-20 15:58:13'),
+(5, 'Materi Trigonometri', 'materi', NULL, 4, 2, 8, NULL, '2018-01-20 16:43:04', '2018-01-20 16:43:04'),
+(6, 'Menanam Cabe Rawit', NULL, NULL, 6, 14, 8, NULL, '2018-01-21 08:42:09', '2018-01-21 08:42:09'),
+(7, 'Cabai Rawit', NULL, '1516550217.pdf', 6, 14, 8, NULL, '2018-01-21 08:56:57', '2018-01-21 08:56:57');
 
 -- --------------------------------------------------------
 
@@ -193,7 +234,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (27, '2018_01_18_150551_create_users_table', 3),
 (28, '2018_01_18_150551_create_users_answers_table', 3),
 (29, '2018_01_18_150551_create_users_questions_table', 3),
-(30, '2018_01_18_150551_create_verifications_table', 3);
+(30, '2018_01_18_150551_create_verifications_table', 3),
+(32, '2018_01_20_103332_create_levels_table', 4);
 
 -- --------------------------------------------------------
 
@@ -207,7 +249,9 @@ CREATE TABLE `modules` (
   `time` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `description` text COLLATE utf8mb4_unicode_ci,
   `id_subjects` int(11) NOT NULL,
+  `id_level` int(11) DEFAULT NULL,
   `subject_number` int(11) NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -217,8 +261,13 @@ CREATE TABLE `modules` (
 -- Dumping data for table `modules`
 --
 
-INSERT INTO `modules` (`id`, `name`, `time`, `description`, `id_subjects`, `subject_number`, `deleted_at`, `created_at`, `updated_at`) VALUES
-(1, 'Matematika Kelas 10', '90', NULL, 4, 3, NULL, '2018-01-13 07:24:06', '2018-01-13 07:24:06');
+INSERT INTO `modules` (`id`, `name`, `time`, `description`, `id_subjects`, `id_level`, `subject_number`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
+(1, 'Matematika Kelas 11', '9', NULL, 4, 3, 3, NULL, NULL, '2018-01-13 07:24:06', '2018-01-20 04:38:20'),
+(2, 'Berhitung', '60', NULL, 4, NULL, 5, 8, '2018-01-20 17:09:00', '2018-01-20 01:15:17', '2018-01-20 17:09:00'),
+(3, 'Tes', '90', NULL, 4, NULL, 10, 8, NULL, '2018-01-20 01:21:21', '2018-01-20 01:21:21'),
+(4, 'Ujian Matematika', '10', NULL, 4, 6, 0, NULL, NULL, '2018-01-20 04:10:59', '2018-01-20 04:10:59'),
+(5, 'Membaca', '10', NULL, 5, NULL, 10, 18, NULL, '2018-01-20 08:45:05', '2018-01-20 08:45:05'),
+(6, 'Pertanyaan', '20', NULL, 4, NULL, 10, 18, NULL, '2018-01-20 16:17:46', '2018-01-20 16:17:46');
 
 -- --------------------------------------------------------
 
@@ -286,7 +335,8 @@ CREATE TABLE `points` (
 INSERT INTO `points` (`id`, `id_module`, `sessid`, `point`, `id_user`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (17, '1', 'R2PTGAZ', 66, 18, NULL, '2018-01-18 18:27:04', '2018-01-18 18:27:04'),
 (18, '1', '8MN2KTY', 66, 8, NULL, '2018-01-18 23:05:27', '2018-01-18 23:05:27'),
-(19, '1', '7FPKJMO', 66, 18, NULL, '2018-01-19 00:01:48', '2018-01-19 00:01:48');
+(19, '1', '7FPKJMO', 66, 18, NULL, '2018-01-19 00:01:48', '2018-01-19 00:01:48'),
+(20, '1', 'WSROQJS', 66, 20, NULL, '2018-01-20 17:26:43', '2018-01-20 17:26:43');
 
 -- --------------------------------------------------------
 
@@ -310,8 +360,10 @@ CREATE TABLE `questions` (
 INSERT INTO `questions` (`id`, `name`, `id_module`, `deleted_at`, `created_at`, `updated_at`) VALUES
 (6, '1+1=', '1', NULL, '2018-01-13 09:31:35', '2018-01-13 09:31:35'),
 (7, 'Pangkat 2 =...', '1', NULL, '2018-01-14 18:38:54', '2018-01-14 18:38:54'),
-(8, '2+2 = ...', '1', NULL, '2018-01-16 08:30:19', '2018-01-16 08:30:19'),
-(9, '1+4=', '1', NULL, '2018-01-16 08:31:10', '2018-01-16 08:31:10');
+(10, 'Apa', '3', NULL, '2018-01-20 01:36:56', '2018-01-20 01:36:56'),
+(12, '1+1=...', '3', NULL, '2018-01-20 03:22:18', '2018-01-20 03:22:18'),
+(13, 'Apa caranya', '5', NULL, '2018-01-20 16:13:13', '2018-01-20 16:13:13'),
+(14, '1+1=..', '6', NULL, '2018-01-20 16:18:04', '2018-01-20 16:18:04');
 
 -- --------------------------------------------------------
 
@@ -355,7 +407,9 @@ CREATE TABLE `users` (
   `address` text COLLATE utf8mb4_unicode_ci,
   `gender` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `active` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `photo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_parent` int(11) DEFAULT NULL,
+  `id_level` int(11) DEFAULT NULL,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -365,25 +419,24 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `username`, `password`, `type`, `phone`, `address`, `gender`, `active`, `id_parent`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'ahmad@ahmad.com', 'ahmad.barjo@gmail.com', '', '$2y$10$.KUBYb5JkYdPtrFnse1mRepMfdq42WacTu7yhOKpFKwQl8QBrAZAu', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-13 02:28:18', '2018-01-13 02:28:18'),
-(2, 'Ahmad', 'Ahmadbarjo@gmail.com', '', '$2y$10$K2d6PLB.yXJLgmXbCUiYVu/Cb6BBbYeWRx/g9FUClhORf8D5r9CCq', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-14 01:11:09', '2018-01-14 01:11:09'),
-(3, 'faris', 'fariswidhi@gmail.com', '', '$2y$10$E/gtUwlI7.wR2UOvb07iKO5J62zVuwCWRum8CJjHAm5Y5rw1khqtO', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-14 06:54:42', '2018-01-14 06:54:42'),
-(4, 'Bambang', 'bambang@gmail.com', '', '$2y$10$3QqfvgYNaiUZMYGXbuDlquPDJiavfL9L9TRot8qeaDG731Qcvvzg.', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, 'zWhMKAaxtZgT1kcBeVjDrtn4mQXREaGPPTKusbm0QHpOJeERD6pRCz4zZ4IU', '2018-01-14 17:31:27', '2018-01-14 17:31:27'),
-(5, 'budi', 'budi12@gmail.com', '', '$2y$10$aBXtT.UF..O7jMP0ccvlTuctx1390O3gzkmv7F3zO8yVVZsdywQXm', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, 'BJaOk9GsVznyHJ9xF7Qw9XOmkn3HP9ijDV0OIIashVrdSLnnbyDJeFJnWbqr', '2018-01-14 18:10:10', '2018-01-14 18:10:10'),
-(6, 'Ahmad Budiawan', 'ahmadbudi123@gmail.com', '', '$2y$10$ylsPixS29xDRm/J/FglqrukjKFR/4G8g2UnAweW/y1fL.bhOfw7/u', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, NULL, '2018-01-14 19:05:47', '2018-01-14 19:05:47'),
-(7, 'Yanto', 'suyanto@gmail.com', '', '$2y$10$CuE2kVZCvt9BWB4UZ4dP2ezfrXHePnkNQnhpSqmvEFv0lnUfPqRZG', '2', '0895322931444', NULL, 'laki-laki', '0', NULL, 'zlqF3DZPo519xqzsvnaC7Cc2kJTvWw7KvUttkz0u0xjaXHbk05zwylQ2tepz', '2018-01-15 17:05:23', '2018-01-15 17:05:23'),
-(8, 'yanto', 'yanto@gmail.com', 'yanto', '$2y$10$BccOfsmYI2S9PwNJk/nJx./MD7OopFhHcZwlJ7rmdDfHj3APZfc5y', '2', '08211233423', NULL, 'laki-laki', '0', NULL, '0rb39S1o9o60j20lyh8ejdFHocee0EObYZlU0F5qy4afsm2DnKNrE8Mzp41G', '2018-01-15 17:40:16', '2018-01-15 17:40:16'),
-(9, 'Toni', NULL, 'toni', '$2y$10$9nm2k.wQZob.xt1rj7V28OXaJw7kwDUenec19vSY0Pwhg0x74czvK', '3', NULL, NULL, NULL, '1', 8, NULL, '2018-01-15 20:39:12', '2018-01-15 20:39:49'),
-(10, 'yanto', 'yanto@yahoo.com', 'yanto12', '$2y$10$OL6b9.ZeaP7ba0INSO6hJ.Sl6SW6pPKWkZEXiY52tfWYTADSiRV2K', '2', '018276543', NULL, 'laki-laki', '0', NULL, 'c3K2MPJrdPYPaxrPPTryuO9m98rUjfQjhANnFjqHwhU9jUhPP06NVWhzu1aD', '2018-01-15 21:02:29', '2018-01-15 21:02:29'),
-(11, 'toni abdullah', NULL, 'tonia', '$2y$10$bf05phynlovD2mCdisv9sOdCmS5sCBkFOqsLN.l1E27YKIBygrALS', '3', NULL, NULL, NULL, '1', 10, NULL, '2018-01-15 21:02:56', '2018-01-15 21:02:56'),
-(12, 'budi', 'budi@mail.com', 'budiawan', '$2y$10$DhVKfR4ZhrrfwK4IAniUE.NMdVcgxg/f5f.HigDht3u4Yhs4dPjGW', '2', '0812712', NULL, 'laki-laki', '0', NULL, 'A6tTGcrrfmnZG379tZgjWrzawNoDvB2hRMR1mZ6dBQvS0xNwWTefSmGtch0R', '2018-01-15 21:09:23', '2018-01-15 21:09:23'),
-(14, 'ahmad budiawan', 'budiawan@mail.com', 'budiawan19', '$2y$10$6oxYUzhCxOrv99AVsd6vv.vWrJHrqqGj3SbNXRLKGVdJfMDBFTOtK', '3', NULL, NULL, NULL, '1', 12, 'eoMmIj5A90m24dlvIYocFvPToFBnizmmtzaIdNgAdzJs0AYxdrxMjzoeL16e', '2018-01-15 21:19:08', '2018-01-15 21:19:08'),
-(15, 'jjj', 'jjj@gmail.com', 'username', '$2y$10$4HiTSEr459ggeW9sdUhzWOseyrISz0oIcei0RDVsT.URWoe0Ec.0.', '2', '9929929299', NULL, 'laki-laki', '0', NULL, 'V5f5uuECg3e4kbMEVx1swiua4742TTmu8YijMBmskOLxgoXrksr9xb3dAMFr', '2018-01-15 21:47:46', '2018-01-15 21:47:46'),
-(16, 'faris', 'fariswidhiarta123@gmail.com', 'faris', '$2y$10$T3yURq0j9Boi/578vRcNUu/M2D3uP2f22z7Qb1cFhZywDSoX6HUAi', '3', NULL, NULL, NULL, '1', 15, 'BmY2MDkNw509x54JSJR3Z5Ku22mp4pXOT3Zw843jxCKgdOA6fcMRcxOcMl9W', '2018-01-15 21:49:01', '2018-01-15 21:49:01'),
-(17, 'adam', 'adam@adam.com', 'admin', '$2y$10$k5LTN7hEsvYDu0GtjnsAG.KfvPe2VD2S.Rh7JAtG5p2J1MbC0k5ce', '2', '08182812', NULL, 'laki-laki', '0', NULL, 'QDGDayIg0GnjhhIYYKV8myTeNJiPgyyjQ0BPPmr8KMvP5SMUJjGEJM1Qebvy', '2018-01-15 22:27:51', '2018-01-15 22:27:51'),
-(18, 'maryono', 'maryono@gmail.com', 'maryono', '$2y$10$M9PyJV3FHZ..HKN1r7Tm1eAWd9VVCo10GuJT0NPZshEQfrjWzP1s6', '3', NULL, NULL, NULL, '1', 8, '3VbbHvZNopmTgUzRgBsFtlvUuYOwp65Q17f8Atbi8sGY7I7SIdJxfrWCYqoQ', '2018-01-16 06:50:56', '2018-01-16 06:52:08'),
-(19, 'admin', 'admin@admin.com', 'adminis', '$2y$10$xuEsPBJb081kZ/IDJxRJD.9d5XFvz3utS6BR7YrmskqeznKqH4U/G', '1', '0891221', NULL, 'laki-laki', '0', NULL, 'Yqm8tXOSDkP8pw5Nmqlxje8j6ofnekdziQQNKRFkGPWgLps3zB84ZkLrwRvh', '2018-01-19 00:37:49', '2018-01-19 00:37:49');
+INSERT INTO `users` (`id`, `name`, `email`, `username`, `password`, `type`, `phone`, `address`, `gender`, `active`, `photo`, `id_parent`, `id_level`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'ahmad@ahmad.com', 'ahmad.barjo@gmail.com', '', '$2y$10$.KUBYb5JkYdPtrFnse1mRepMfdq42WacTu7yhOKpFKwQl8QBrAZAu', '2', '0895322931444', NULL, 'laki-laki', '0', '', NULL, NULL, NULL, '2018-01-13 02:28:18', '2018-01-13 02:28:18'),
+(2, 'Ahmad', 'Ahmadbarjo@gmail.com', '', '$2y$10$K2d6PLB.yXJLgmXbCUiYVu/Cb6BBbYeWRx/g9FUClhORf8D5r9CCq', '2', '0895322931444', NULL, 'laki-laki', '0', '', NULL, NULL, NULL, '2018-01-14 01:11:09', '2018-01-14 01:11:09'),
+(3, 'faris', 'fariswidhi@gmail.com', '', '$2y$10$E/gtUwlI7.wR2UOvb07iKO5J62zVuwCWRum8CJjHAm5Y5rw1khqtO', '2', '0895322931444', NULL, 'laki-laki', '0', '', NULL, NULL, NULL, '2018-01-14 06:54:42', '2018-01-14 06:54:42'),
+(4, 'Bambang', 'bambang@gmail.com', '', '$2y$10$3QqfvgYNaiUZMYGXbuDlquPDJiavfL9L9TRot8qeaDG731Qcvvzg.', '2', '0895322931444', NULL, 'laki-laki', '0', '', NULL, NULL, 'zWhMKAaxtZgT1kcBeVjDrtn4mQXREaGPPTKusbm0QHpOJeERD6pRCz4zZ4IU', '2018-01-14 17:31:27', '2018-01-14 17:31:27'),
+(5, 'budi', 'budi12@gmail.com', '', '$2y$10$aBXtT.UF..O7jMP0ccvlTuctx1390O3gzkmv7F3zO8yVVZsdywQXm', '2', '0895322931444', NULL, 'laki-laki', '0', '', NULL, NULL, 'BJaOk9GsVznyHJ9xF7Qw9XOmkn3HP9ijDV0OIIashVrdSLnnbyDJeFJnWbqr', '2018-01-14 18:10:10', '2018-01-14 18:10:10'),
+(6, 'Ahmad Budiawan', 'ahmadbudi123@gmail.com', '', '$2y$10$ylsPixS29xDRm/J/FglqrukjKFR/4G8g2UnAweW/y1fL.bhOfw7/u', '2', '0895322931444', NULL, 'laki-laki', '0', '', NULL, NULL, NULL, '2018-01-14 19:05:47', '2018-01-14 19:05:47'),
+(7, 'Yanto', 'suyanto@gmail.com', '', '$2y$10$CuE2kVZCvt9BWB4UZ4dP2ezfrXHePnkNQnhpSqmvEFv0lnUfPqRZG', '2', '0895322931444', NULL, 'laki-laki', '0', '', NULL, NULL, 'zlqF3DZPo519xqzsvnaC7Cc2kJTvWw7KvUttkz0u0xjaXHbk05zwylQ2tepz', '2018-01-15 17:05:23', '2018-01-15 17:05:23'),
+(8, 'yanto', 'yanto@gmail.com', 'yanto', '$2y$10$BccOfsmYI2S9PwNJk/nJx./MD7OopFhHcZwlJ7rmdDfHj3APZfc5y', '2', '08211233423', NULL, 'laki-laki', '0', '', NULL, NULL, 'fsGkeLBtQZB8hTdPY1dLmcqhQ42L0O21ARsIl98FfT79U2BV6InzJiiulTPc', '2018-01-15 17:40:16', '2018-01-15 17:40:16'),
+(10, 'yanto', 'yanto@yahoo.com', 'yanto12', '$2y$10$OL6b9.ZeaP7ba0INSO6hJ.Sl6SW6pPKWkZEXiY52tfWYTADSiRV2K', '2', '018276543', NULL, 'laki-laki', '0', '', NULL, NULL, 'c3K2MPJrdPYPaxrPPTryuO9m98rUjfQjhANnFjqHwhU9jUhPP06NVWhzu1aD', '2018-01-15 21:02:29', '2018-01-15 21:02:29'),
+(11, 'toni abdullah', NULL, 'tonia', '$2y$10$bf05phynlovD2mCdisv9sOdCmS5sCBkFOqsLN.l1E27YKIBygrALS', '3', NULL, NULL, NULL, '1', '', 10, NULL, NULL, '2018-01-15 21:02:56', '2018-01-15 21:02:56'),
+(12, 'budi', 'budi@mail.com', 'budiawan', '$2y$10$DhVKfR4ZhrrfwK4IAniUE.NMdVcgxg/f5f.HigDht3u4Yhs4dPjGW', '2', '0812712', NULL, 'laki-laki', '0', '', NULL, NULL, 'A6tTGcrrfmnZG379tZgjWrzawNoDvB2hRMR1mZ6dBQvS0xNwWTefSmGtch0R', '2018-01-15 21:09:23', '2018-01-15 21:09:23'),
+(14, 'ahmad budiawan', 'budiawan@mail.com', 'budiawan19', '$2y$10$6oxYUzhCxOrv99AVsd6vv.vWrJHrqqGj3SbNXRLKGVdJfMDBFTOtK', '3', NULL, NULL, NULL, '1', '', 12, NULL, 'eoMmIj5A90m24dlvIYocFvPToFBnizmmtzaIdNgAdzJs0AYxdrxMjzoeL16e', '2018-01-15 21:19:08', '2018-01-15 21:19:08'),
+(15, 'jjj', 'jjj@gmail.com', 'username', '$2y$10$4HiTSEr459ggeW9sdUhzWOseyrISz0oIcei0RDVsT.URWoe0Ec.0.', '2', '9929929299', NULL, 'laki-laki', '0', '', NULL, NULL, 'V5f5uuECg3e4kbMEVx1swiua4742TTmu8YijMBmskOLxgoXrksr9xb3dAMFr', '2018-01-15 21:47:46', '2018-01-15 21:47:46'),
+(16, 'faris', 'fariswidhiarta123@gmail.com', 'faris', '$2y$10$T3yURq0j9Boi/578vRcNUu/M2D3uP2f22z7Qb1cFhZywDSoX6HUAi', '3', NULL, NULL, NULL, '1', '', 15, NULL, 'BmY2MDkNw509x54JSJR3Z5Ku22mp4pXOT3Zw843jxCKgdOA6fcMRcxOcMl9W', '2018-01-15 21:49:01', '2018-01-15 21:49:01'),
+(17, 'adam', 'adam@adam.com', 'admin', '$2y$10$k5LTN7hEsvYDu0GtjnsAG.KfvPe2VD2S.Rh7JAtG5p2J1MbC0k5ce', '2', '08182812', NULL, 'laki-laki', '0', '', NULL, NULL, 'QDGDayIg0GnjhhIYYKV8myTeNJiPgyyjQ0BPPmr8KMvP5SMUJjGEJM1Qebvy', '2018-01-15 22:27:51', '2018-01-15 22:27:51'),
+(19, 'admin', 'admin@admin.com', 'adminis', '$2y$10$xuEsPBJb081kZ/IDJxRJD.9d5XFvz3utS6BR7YrmskqeznKqH4U/G', '3', '0891221', NULL, 'laki-laki', '0', '', NULL, NULL, 'Yqm8tXOSDkP8pw5Nmqlxje8j6ofnekdziQQNKRFkGPWgLps3zB84ZkLrwRvh', '2018-01-19 00:37:49', '2018-01-19 00:37:49'),
+(20, 'maryono', 'maryono@gmail.com', 'maryono', '$2y$10$0l4DMeZMp82s1jE1/fm7wey4rMt8.FmkfutMjhIF59AVslvPD8yhq', '3', NULL, NULL, NULL, '1', '', 8, 3, 'Q3fJjNyawuz2srV32wJxC0I4jsOfeNKgcF76yFfHWnpPQzZlqMZ4C4HqeauJ', '2018-01-20 16:49:20', '2018-01-20 16:49:20');
 
 -- --------------------------------------------------------
 
@@ -438,7 +491,9 @@ INSERT INTO `users_answers` (`id`, `id_children`, `id_question`, `id_answer`, `s
 (48, 8, 65, '5', '8MN2KTY', 0, 33, NULL, '2018-01-18 23:05:22', '2018-01-18 23:05:28'),
 (49, 18, 72, '5', '7FPKJMO', 0, 33, NULL, '2018-01-19 00:01:36', '2018-01-19 00:01:49'),
 (50, 18, 73, '14', '7FPKJMO', 0, 0, NULL, '2018-01-19 00:01:40', '2018-01-19 00:01:49'),
-(51, 18, 74, '10', '7FPKJMO', 0, 0, NULL, '2018-01-19 00:01:45', '2018-01-19 00:01:49');
+(51, 18, 74, '10', '7FPKJMO', 0, 0, NULL, '2018-01-19 00:01:45', '2018-01-19 00:01:49'),
+(52, 20, 75, '5', 'WSROQJS', 0, 33, NULL, '2018-01-20 17:26:35', '2018-01-20 17:26:43'),
+(53, 20, 76, '9', 'WSROQJS', 0, 0, NULL, '2018-01-20 17:26:39', '2018-01-20 17:26:43');
 
 -- --------------------------------------------------------
 
@@ -514,7 +569,9 @@ INSERT INTO `users_questions` (`id`, `sessid`, `id_module`, `id_question`, `id_a
 (71, '4O3X8JV', 1, 6, NULL, 18, NULL, NULL, '2018-01-18 23:53:19', '2018-01-18 23:53:19'),
 (72, '7FPKJMO', 1, 6, NULL, 18, NULL, NULL, '2018-01-19 00:01:30', '2018-01-19 00:01:30'),
 (73, '7FPKJMO', 1, 8, NULL, 18, NULL, NULL, '2018-01-19 00:01:31', '2018-01-19 00:01:31'),
-(74, '7FPKJMO', 1, 7, NULL, 18, NULL, NULL, '2018-01-19 00:01:31', '2018-01-19 00:01:31');
+(74, '7FPKJMO', 1, 7, NULL, 18, NULL, NULL, '2018-01-19 00:01:31', '2018-01-19 00:01:31'),
+(75, 'WSROQJS', 1, 6, NULL, 20, NULL, NULL, '2018-01-20 17:26:29', '2018-01-20 17:26:29'),
+(76, 'WSROQJS', 1, 7, NULL, 20, NULL, NULL, '2018-01-20 17:26:29', '2018-01-20 17:26:29');
 
 -- --------------------------------------------------------
 
@@ -557,6 +614,12 @@ ALTER TABLE `answers`
 -- Indexes for table `childrens`
 --
 ALTER TABLE `childrens`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `levels`
+--
+ALTER TABLE `levels`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -640,7 +703,7 @@ ALTER TABLE `verifications`
 -- AUTO_INCREMENT for table `activities`
 --
 ALTER TABLE `activities`
-  MODIFY `id_activity` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_activity` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `admins`
 --
@@ -650,27 +713,32 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 --
 -- AUTO_INCREMENT for table `childrens`
 --
 ALTER TABLE `childrens`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
+-- AUTO_INCREMENT for table `levels`
+--
+ALTER TABLE `levels`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
 -- AUTO_INCREMENT for table `materials`
 --
 ALTER TABLE `materials`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 --
 -- AUTO_INCREMENT for table `modules`
 --
 ALTER TABLE `modules`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `news`
 --
@@ -680,12 +748,12 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT for table `points`
 --
 ALTER TABLE `points`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 --
 -- AUTO_INCREMENT for table `subjects`
 --
@@ -695,17 +763,17 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 --
 -- AUTO_INCREMENT for table `users_answers`
 --
 ALTER TABLE `users_answers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `users_questions`
 --
 ALTER TABLE `users_questions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=75;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 --
 -- AUTO_INCREMENT for table `verifications`
 --
