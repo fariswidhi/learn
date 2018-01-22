@@ -21,11 +21,12 @@
     <div class="row">
 
     @foreach ($arr as $d)
-    	<div class="col-6">
+    	<div class="col-lg-6 col-12">
 
 			<div class="row">
 				<div class="col-lg-3">
 			<center><i class="fa fa-user fa-4x"></i>
+			<br>
 			{{$d['username']}}
 			</center>
 

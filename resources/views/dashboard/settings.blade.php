@@ -11,10 +11,19 @@
     {{session('success')}}
     @endslot
 @endcomponent
+
+    @endif
+   @if (Session::has('fail'))
+    @component('alerts.danger')
+    @slot('title')
+    {{session('fail')}}
+    @endslot
+@endcomponent
   <br>
     @endif
 			<div class="row">
 				<div class="col-lg-6">
+				<h3>Edit Profil</h3>
 					<form action="{{ url('/panel/pengaturan') }}" method="post">
 					{{csrf_field()}}
 					{{method_field('POST')}}
@@ -39,6 +48,41 @@
 						<button class="btn btn-success">Simpan</button>
 					</form>
 				</div>
+
+@if ($active == 0)
+				<div class="col-lg-6">
+	<h3>Verifikasi Akun</h3>
+
+	@if (empty(session('verify')))
+	<form action="{{ url('/panel/pengaturan/verifikasi') }}" method="post">
+	{{csrf_field()}}
+	<label>Nomor Hp</label>
+	<input type="hidden" name="type" value="phone">
+	<input type="textarea" name="phone" class="form-control" value="{{$data->phone}}">
+	<br>
+
+
+
+	<button type="submit" class="btn btn-success">Kirim</button>
+	</form>
+	@else
+		<form action="{{ url('/panel/pengaturan/verifikasi') }}" method="post">
+	{{csrf_field()}}
+	<label>Kode</label>
+	<input type="textarea" name="code" class="form-control" value="">
+	<input name="type" value="code" type="hidden">
+	<br>
+
+
+
+	<button type="submit" class="btn btn-success">Kirim</button>
+	</form>
+
+	@endif
+	{{-- expr --}}
+
+				</div>
+@endif
 			</div>
 	</div>
 </div>

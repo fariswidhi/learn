@@ -2,6 +2,12 @@
 
 @section('content')
 <div class="container">
+@if ($active == 0)
+	{{-- expr --}}
+<span class="alert alert-danger">Maaf Akun Anda Belum Terverifikasi <a href="{{ url('/panel/pengaturan') }}">klik disini</a> untuk verifikasi akun</span>
+<br>
+<br>
+@endif
 
 	<div class="row">
 	@if ($level == 2)

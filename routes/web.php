@@ -79,23 +79,24 @@ Route::get('/panel/daftar-materi/dari-orangtua','Parent\MaterialController@fromM
 Route::resource('/panel/daftar-materi','Parent\MaterialController');
 Route::resource('/panel/daftar-anak','Parent\KidsController');
 Route::get('/panel/daftar-soal/dari-saya','Kids\QuestionsController@fromMe');
-Route::get('/panel/daftar-soal/dari-orangtua','Kids\QuestionsController@fromMe');
+Route::get('/panel/daftar-soal/dari-orangtua','Kids\QuestionsController@fromMe')->middleware('isVerify');
 Route::get('/panel/pengaturan','DashboardController@settings');
 Route::post('/panel/pengaturan','DashboardController@changeProfile');
-Route::resource('/panel/daftar-soal','Kids\QuestionsController');
-Route::get('panel/soal/{material}/{subject}','Kids\QuestionsController@detail');
-Route::get('/panel/soal/buat','Parent\ModuleController@create');
-Route::post('/panel/soal/buat','Parent\ModuleController@store');
-Route::post('/panel/soal/{param}/tambah','Parent\ModuleController@addQuestions');
-Route::get('/panel/soal/{param}/hapus/{id}','Parent\ModuleController@delete');
-Route::get('/panel/soal/{param}/{id}','Parent\ModuleController@detailQuestion');
-Route::match(['get','delete'],'/panel/soal/{param}','Parent\ModuleController@detail');
+Route::post('/panel/pengaturan/verifikasi','DashboardController@verify');
+Route::resource('/panel/daftar-soal','Kids\QuestionsController')->middleware('isVerify');
+Route::get('panel/soal/{material}/{subject}','Kids\QuestionsController@detail')->middleware('isVerify');
+Route::get('/panel/soal/buat','Parent\ModuleController@create')->middleware('isVerify');
+Route::post('/panel/soal/buat','Parent\ModuleController@store')->middleware('isVerify');
+Route::post('/panel/soal/{param}/tambah','Parent\ModuleController@addQuestions')->middleware('isVerify');
+Route::get('/panel/soal/{param}/hapus/{id}','Parent\ModuleController@delete')->middleware('isVerify');
+Route::get('/panel/soal/{param}/{id}','Parent\ModuleController@detailQuestion')->middleware('isVerify');
+Route::match(['get','delete'],'/panel/soal/{param}','Parent\ModuleController@detail')->middleware('isVerify');
 Route::get('panel/daftar-materi/{material}/{subject}','Parent\MaterialController@detail');
 Route::get('panel/soal/{material}/{subject}/mulai','Kids\QuestionsController@start');
 Route::get('panel/nilai-saya','Kids\QuestionsController@myScore');
 Route::get('dashboard/question/{material}/{subject}/json','Kids\QuestionsController@listQuestions');
 Route::get('api/question/{id}','Kids\QuestionsController@getQuestionById');
-Route::get('/panel/aktivitas-anak','DashboardController@kidsActivity');
+Route::get('/panel/aktivitas-anak','DashboardController@kidsActivity')->middleware('isVerify');
 Route::get('/panel/aktivitas-anak/{username}','DashboardController@activities');
 Route::get('/berita','BeritaController@index');
 Route::get('/berita/{id}','BeritaController@store');
@@ -104,5 +105,5 @@ Route::post('/api/questions/end','Kids\QuestionsController@end');
 // =======
 Route::post('/api/questions/end','Kids\QuestionsController@end');
 
-Route::get('panel/nilai','Parent\PointsController@index');
+Route::get('panel/nilai','Parent\PointsController@index')->middleware('isVerify');
 // >>>>>>> 4e9bff22f7106a396bd0ace05d2d501c867febc7

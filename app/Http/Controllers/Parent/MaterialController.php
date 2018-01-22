@@ -12,6 +12,7 @@ use App\Subjects;
 use Auth;
 use App\Level;
 use App\Activities;
+use Session;
 class MaterialController extends Controller
 {
 
@@ -25,16 +26,30 @@ class MaterialController extends Controller
     {
         // parent::__construct();s
         // //Do your magic here
-        if (Auth::user()->type==2) {
-        if (Auth::user()->active==0) {
-            # code...
-        }
+// if (Auth::check())
+// {
+        // print_r(auth()->user());
+        // dd(Auth::user());
 
-        }
+
+//      echo $id;
+// // }
+     $this->middleware('isVerify');
+
+//      echo $id->id;
+        // if (Auth::user()->type==2) {
+        // if (Auth::user()->active==0) {
+        //     Session::flash('verify','Maaf Akun Anda Belum Terverifikasi');
+     
+        //     return redirect('/panel/');
+        // }
+
+        // }
     }
     public function index()
     {
-        //
+        //;
+
         $url = $this->url;
         // $userid = Auth::id();
         // $data =  Childrens::where('id_user',$userid)->get();

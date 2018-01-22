@@ -29,7 +29,7 @@
                 <a class="btn btn-default baken" href="{{ url('/panel') }}" style="color: #fff;">Panel</a>
               
             @endif
-            @if (Request::segment(1) == 'berita')
+            @if (Request::segment(1) != '')
                 <a class="btn btn-default baken" href="{{ url('/berita') }}" style="color: #fff;">Berita</a>
               @else
                   <a class="btn btn-default baken" href="#berita" style="color: #fff;">Berita</a>

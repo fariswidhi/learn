@@ -20,7 +20,8 @@ class IsVerify
                 # code...
                 return redirect('panel/pengaturan');
 
-                // return $next($request);
+
         }
+                        return $next($request);
     }
 }

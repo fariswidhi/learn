@@ -21,13 +21,34 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-              <a href="{{@url('dashboard/kids')}}" class="nav-link">
+              <a href="{{@url('panel/daftar-anak')}}" class="nav-link">
               Anak
               </a>
       </li>
       <li class="nav-item">
-              <a href="{{@url('dashboard/kids-activity')}}" class="nav-link">
+              <a href="{{@url('panel/aktivitas-anak')}}" class="nav-link">
               Aktivitas Anak  
+              </a>
+      </li>
+      <li class="nav-item">
+              <a href="{{@url('panel/nilai')}}" class="nav-link">
+              Nilai
+              </a>
+      </li>
+      <li class="nav-item">
+              <a href="{{@url('panel/daftar-materi')}}" class="nav-link">
+              Materi
+              </a>
+      </li>
+
+      <li class="nav-item">
+              <a href="{{@url('panel/daftar-soal')}}" class="nav-link">
+              Soal
+              </a>
+      </li>
+      <li class="nav-item">
+              <a href="{{@url('panel/pengaturan')}}" class="nav-link">
+              Pengaturan
               </a>
       </li>
     </ul>
