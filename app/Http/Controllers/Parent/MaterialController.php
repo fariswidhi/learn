@@ -23,7 +23,7 @@ class MaterialController extends Controller
      */
     public function __construct()
     {
-        // parent::__construct();
+        // parent::__construct();s
         // //Do your magic here
         if (Auth::user()->type==2) {
         if (Auth::user()->active==0) {
