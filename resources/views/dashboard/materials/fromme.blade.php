@@ -5,7 +5,7 @@
 <div class="card">
 	<div class="card-body">
 
-	<h3>Daftar Materi Pelajaran Dari Saya</h3>
+	<h3>Daftar Materi Pelajaran Dari {{Auth::user()->type==2 ? 'Saya':'Orang Tua'}}</h3>
 		<br>
 		<br>
 		@if (Auth::user()->type==2)
@@ -25,7 +25,7 @@
 				{{-- expr --}}
 				<tr>
 				<td>{{$no++}}</td>
-					<td><a href="{{ url('panel/materi/'.$d['subject'].'/'.$d['permalink'].'-'.$d['id']) }}">{{$d['name'] }}</a></td>
+					<td><a href="{{ url('panel/daftar-materi/'.$d['subject'].'/'.$d['permalink'].'-'.$d['id']) }}">{{$d['name'] }}</a></td>
 					@if (Auth::user()->type ==2)
 						{{-- expr --}}
 					<td><a href="{{ url('panel/daftar-materi/'.$d['id'].'/edit') }}" class="btn btn-success ">Edit</a> <form style="display: inline-block;" action="{{ url('panel/daftar-materi/'.$d['id']) }}" method="post">{{ csrf_field() }}

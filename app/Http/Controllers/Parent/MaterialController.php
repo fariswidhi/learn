@@ -11,6 +11,9 @@ use App\Material;
 use App\Subjects;
 use Auth;
 use App\Level;
+use App\Activities;
+use Carbon\Carbon;
+
 
 class MaterialController extends Controller
 {
@@ -27,11 +30,12 @@ class MaterialController extends Controller
         $url = $this->url;
         // $userid = Auth::id();
         // $data =  Childrens::where('id_user',$userid)->get();
-        $materials= Material::all();
+                $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
+        if (Auth::user()->type==2) {
+            # code...
         $subjects = Subjects::all();
 
-        $data = [];
-        $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
+
 
         foreach ($subjects as $subject) {
             $name = $subject->name;
@@ -45,8 +49,48 @@ class MaterialController extends Controller
         }
 
 
-        // print_r($data);
-        return view('dashboard/'.$this->url,compact('url','data'));
+        }
+        elseif (Auth::user()->type==3) {
+
+            $subjects= Material::where('id_level',Auth::user()->type)->groupBy('id_subject')->get();
+        $data = [];
+
+     foreach ($subjects as $subject) {
+            # code...
+
+            $name = $subject->subject->name;
+            $removeName = strtolower(str_replace($chars, "", $name));
+            $permalink = strtolower(str_replace(' ','-',$removeName));
+            $data[] = [
+            'name'=>$name,
+            'permalink'=>$permalink,
+            'id'=>$subject->id
+            ];
+}
+
+        }
+   
+        
+//         $subjects = Subjects::all();
+
+
+
+//         foreach ($subjects as $subject) {
+//             $name = $subject->name;
+//             $removeName = strtolower(str_replace($chars, "", $name));
+//             $permalink = strtolower(str_replace(' ','-',$removeName));
+//             $data[] = [
+//             'name'=>$name,
+//             'permalink'=>$permalink,
+//             'id'=>$subject->id
+//             ];
+//         }
+
+        $colors = ['bg-primary','bg-success','bg-secondary','bg-danger','bg-dark','bg-warning'];
+// // echo $colors[array_rand($colors)];
+
+        return view('dashboard/'.$this->url,compact('url','data','colors'));
+
     }
 
     /**
@@ -74,9 +118,19 @@ class MaterialController extends Controller
         //e
 
         $requests = $request->except(['_token','_method']);
+
+        if (!empty($request->file('file'))) {
+        $file = $request->file('file');
+        $name = time().'.'.$file->getClientOriginalExtension();
+        $file->move(public_path('uploads'),$name);
+
+        }
         $class = new Material;
         $class->name = $request->name;
         $class->content = $request->content;
+        if (!empty($request->file('file'))) {
+        $class->file = $name;
+        }
         $class->id_subject = $request->subjects;
         $class->id_user = Auth::id();
         $class->id_level = $request->levels;
@@ -123,11 +177,33 @@ class MaterialController extends Controller
     }
 
     public function detail($subject,$material){
+
+        $lastId = 4;
+        $find = Activities::find($lastId);
+        $now = date('Y-m-d H:i:s');
+        // echo strtotime($find->created_at);
+        $dt = Carbon::now();
+        echo $dt;
+        echo $dt->addMinutes(61);  
+
         $explode = explode('-', $material);
         $id = end($explode);
         $data = Material::find($id);
         $subjectname = $data->name;
         // print_r($material);
+
+        // $activity = new Activities;
+        // $activity->id_children = Auth::id();
+        // // 1 : Membaca Materi
+        // // 2 : Mengerjakan Soal
+        // $activity->activity = 1;
+        // // 1: materials;
+        // // 2: questions
+        // $activity->type = 1;
+        // $activity->id = $id;
+        // $activity->save();
+
+
         return view('dashboard/materials/detail-material',compact('data','subjectname'));
 
     }

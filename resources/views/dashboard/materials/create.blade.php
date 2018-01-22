@@ -7,7 +7,8 @@
 		<h3>Buat Materi</h3>
 		<div class="row">
 			<div class="col-lg-5">
-				<form action="{{ route('daftar-materi.store') }}" method="post">
+				<form action="{{ route('daftar-materi.store') }}" method="post" enctype="multipart/form-data">
+
 				{{csrf_field()}}
 				<label>Judul</label>
 					<input type="text" name="name" class="form-control">
@@ -19,6 +20,9 @@
 					<option value="{{$subject->id}}">{{$subject->name}}</option>
 				@endforeach
 				</select>
+				<br>
+				<label>File PDF</label>
+				<input type="file" name="file" class="form-control">
 				<br>
 				<label>Jenjang</label>
 				<select class="form-control" name="levels">

@@ -31,7 +31,7 @@ class DashboardController extends Controller
         // print_r(Session::get('logged'));
              // $this->redirecting();
         // return "as";
-
+        // print_r(Request::segment(1));
         $level = Auth::user()->type;
     	return view('dashboard/index',compact('level'));
     }

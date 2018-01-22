@@ -131,6 +131,27 @@
   }
 
 </style>
+
+
+
+
+  <div class="container">
+{{-- 
+
+    <nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+  @for($i = 1; $i <= count(Request::segments()); $i++) 
+  @php
+    $link = url('panel');
+  @endphp
+  <li class="breadcrumb-item"> @if($i < count(Request::segments()) & $i > 0) @php $link = Request::segment($i); @endphp <a href="{{$link}}">{{Request::segment($i)}}</a> {!!'<i class="fa fa-angle-right"></i>'!!} @else {{Request::segment($i)}} @endif 
+  </li> @endfor 
+
+  </ol>
+</nav> --}}
+  </div>
+
+
 	@yield('content')
 
 

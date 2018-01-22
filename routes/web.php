@@ -90,7 +90,7 @@ Route::post('/panel/soal/{param}/tambah','Parent\ModuleController@addQuestions')
 Route::get('/panel/soal/{param}/hapus/{id}','Parent\ModuleController@delete');
 Route::get('/panel/soal/{param}/{id}','Parent\ModuleController@detailQuestion');
 Route::match(['get','delete'],'/panel/soal/{param}','Parent\ModuleController@detail');
-Route::get('panel/materi/{material}/{subject}','Parent\MaterialController@detail');
+Route::get('panel/daftar-materi/{material}/{subject}','Parent\MaterialController@detail');
 Route::get('panel/soal/{material}/{subject}/mulai','Kids\QuestionsController@start');
 Route::get('dashboard/question/{material}/{subject}/json','Kids\QuestionsController@listQuestions');
 Route::get('api/question/{id}','Kids\QuestionsController@getQuestionById');

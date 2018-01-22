@@ -37,6 +37,7 @@
 <!-- Content -->
 <div class="main">
   <div class="hipsum">
+  
      @yield('content')
 
   </div>
