@@ -107,3 +107,6 @@ Route::post('/api/questions/end','Kids\QuestionsController@end');
 
 Route::get('panel/nilai','Parent\PointsController@index')->middleware('isVerify');
 // >>>>>>> 4e9bff22f7106a396bd0ace05d2d501c867febc7
+Route::get('panel/daftar-anak/{id}','DamalController@index')->middleware('isVerify');
+
+
