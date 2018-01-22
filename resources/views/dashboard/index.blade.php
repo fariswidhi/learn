@@ -130,10 +130,10 @@
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
-	            <a href="{{ url('panel/questions') }}">
+	            <a href="{{ url('panel/nilai-saya') }}">
 			<div class="menu-item blue ">
 			<center>
-	                <i class="fa fa-list fa-5x"></i>
+	                <i class="fa fa-trophy fa-5x"></i>
 	                <br><br>
 	                <p>Nilai</p>
 	        </center>

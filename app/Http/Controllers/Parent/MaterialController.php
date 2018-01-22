@@ -21,6 +21,17 @@ class MaterialController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        // parent::__construct();
+        // //Do your magic here
+        if (Auth::user()->type==2) {
+        if (Auth::user()->active==0) {
+            # code...
+        }
+
+        }
+    }
     public function index()
     {
         //
@@ -38,18 +49,18 @@ class MaterialController extends Controller
             $name = $subject->name;
             $removeName = strtolower(str_replace($chars, "", $name));
             $permalink = strtolower(str_replace(' ','-',$removeName));
-            $data[] = [
-            'name'=>$name,
-            'permalink'=>$permalink,
-            'id'=>$subject->id
-            ];
+                $data[] = [
+                    'name'=>$name,
+                    'permalink'=>$permalink,
+                'id'=>$subject->id
+                ];
         }
 
 
         }
         elseif (Auth::user()->type==3) {
 
-            $subjects= Material::where('id_level',Auth::user()->type)->groupBy('id_subject')->get();
+            $subjects= Material::where('id_user',Auth::user()->id_parent)->groupBy('id_subject')->get();
         $data = [];
 
      foreach ($subjects as $subject) {
@@ -186,6 +197,8 @@ class MaterialController extends Controller
         $subjectname = $data->name;
         // print_r($material);
 
+
+        if (Auth::user()->type==3) {
         $activity = new Activities;
         $activity->id_children = Auth::id();
         // 1 : Membaca Materi
@@ -196,6 +209,8 @@ class MaterialController extends Controller
         $activity->type = 1;
         $activity->id = $id;
         $activity->save();
+
+        }
 
 
         return view('dashboard/materials/detail-material',compact('data','subjectname'));

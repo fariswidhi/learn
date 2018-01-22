@@ -19,7 +19,7 @@ use App\Answers;
 use App\UsersAnswer;
 use App\UsersQuestions;
 use App\Points;
-
+use App\User;
 class QuestionsController extends Controller
 {
 
@@ -413,7 +413,11 @@ public function fromMe(){
     return view('dashboard/question/fromMe',compact('data'));
 }
 
-
+public function myScore(){
+    $data = Points::where('id_user',Auth::id())->get();
+    $no =1;
+    return view('dashboard/my-score',compact('data','no'));
+}
 
 
 }

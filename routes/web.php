@@ -92,9 +92,11 @@ Route::get('/panel/soal/{param}/{id}','Parent\ModuleController@detailQuestion');
 Route::match(['get','delete'],'/panel/soal/{param}','Parent\ModuleController@detail');
 Route::get('panel/daftar-materi/{material}/{subject}','Parent\MaterialController@detail');
 Route::get('panel/soal/{material}/{subject}/mulai','Kids\QuestionsController@start');
+Route::get('panel/nilai-saya','Kids\QuestionsController@myScore');
 Route::get('dashboard/question/{material}/{subject}/json','Kids\QuestionsController@listQuestions');
 Route::get('api/question/{id}','Kids\QuestionsController@getQuestionById');
 Route::get('/panel/aktivitas-anak','DashboardController@kidsActivity');
+Route::get('/panel/aktivitas-anak/{username}','DashboardController@activities');
 Route::get('/berita','BeritaController@index');
 Route::get('/berita/{id}','BeritaController@store');
 // <<<<<<< HEAD
