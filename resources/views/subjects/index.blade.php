@@ -17,7 +17,7 @@
         <th>#</th>
         <th>Nama</th>
         <th>Opsi</th>
-      </thead>
+      </thead>w
       <tbody>
       @foreach ($datas as $data)
         <tr>
