@@ -8,7 +8,7 @@
 		<h3>{{$data->name}}</h3>
 
 	<div class="row">
-		<div class="col-lg-6">
+		<div class="col-12 col-sm-6 col-lg-6">
 			<table class="table table-condensed">
 				<tr>
 					<td>Mata Pelajaran</td><td>:</td><td>{{$data->subject->name}}</td>

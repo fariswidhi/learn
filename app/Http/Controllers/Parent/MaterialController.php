@@ -46,14 +46,44 @@ class MaterialController extends Controller
 
         // }
     }
-    public function index()
+    public function index(Request $request)
     {
         //;
 
+
+        if (!empty($request->q)) {
+            # code...
+            $q=$request->q;
+
+        $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
+        $material = Material::where('name','LIKE','%'.$q.'%')->get();
+        $data=[];
+            foreach ($material as $m) {
+
+
+            $param = $m->subject->name;
+            $removeParam = strtolower(str_replace($chars, "", $param));
+            $subject = strtolower(str_replace(' ','-',$removeParam));
+
+
+            $name = $m->name;
+            $removeName = strtolower(str_replace($chars, "", $name));
+            $permalink = strtolower(str_replace(' ','-',$removeName));
+            $data[] = [
+            'name'=>$name,
+            'permalink'=>$permalink,
+            'id'=>$m->id,
+            'subject'=>$subject.'-'.$m->id
+            ];
+        }
+
+        return view('dashboard/search',compact('data','q'));
+
+        // print_r($data);
+        }
+        else{
         $url = $this->url;
-        // $userid = Auth::id();
-        // $data =  Childrens::where('id_user',$userid)->get();
-                $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
+        $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
         if (Auth::user()->type==2) {
             # code...
         $subjects = Subjects::all();
@@ -75,13 +105,13 @@ class MaterialController extends Controller
         }
         elseif (Auth::user()->type==3) {
 
-            $subjects= Material::where('id_user',Auth::user()->id_parent)->groupBy('id_subject')->get();
+        $subjects = Subjects::all();
         $data = [];
 
      foreach ($subjects as $subject) {
             # code...
 
-            $name = $subject->subject->name;
+            $name = $subject->name;
             $removeName = strtolower(str_replace($chars, "", $name));
             $permalink = strtolower(str_replace(' ','-',$removeName));
             $data[] = [
@@ -113,6 +143,12 @@ class MaterialController extends Controller
 // // echo $colors[array_rand($colors)];
 
         return view('dashboard/'.$this->url,compact('url','data','colors'));
+    }
+
+    }
+
+    public function search($q){
+
 
     }
 
@@ -150,7 +186,8 @@ class MaterialController extends Controller
         }
         $class = new Material;
         $class->name = $request->name;
-        $class->content = $request->content;
+
+        $class->content = nl2br($request->content);
         if (!empty($request->file('file'))) {
         $class->file = $name;
         }
@@ -176,10 +213,12 @@ class MaterialController extends Controller
     public function show($param)
     {
         //
+
         $no = 1;
         $explode = explode('-', $param);
         $id = end($explode);
         $material = Material::where('id_subject',$id)->get();
+
 
         $data = [];
         $chars = array ('{','}',')','(','|','`','~','!','@','%','$','^','&','*','=','?','+','-','/','\\',',','.','#',':',';','\'','"','[',']');
@@ -209,6 +248,12 @@ class MaterialController extends Controller
         $explode = explode('-', $material);
         $id = end($explode);
         $data = Material::find($id);
+
+        if (count($data) ==0) {
+            # code...
+            return abort(404);
+        }
+        else{
         $subjectname = $data->name;
         // print_r($material);
 
@@ -229,6 +274,8 @@ class MaterialController extends Controller
 
 
         return view('dashboard/materials/detail-material',compact('data','subjectname'));
+
+        }
 
     }
 
@@ -260,7 +307,10 @@ class MaterialController extends Controller
         //
         $class = Material::find($id);
         $class->name = $request->name;
-        $class->content = $request->content;
+
+        $class->content = nl2br($request->content);
+
+        
         $class->id_subject = $request->subjects;
         $class->id_user = Auth::id();
         $class->id_level = $request->levels;

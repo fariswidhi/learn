@@ -77,6 +77,7 @@
 
 	<button type="submit" class="btn btn-success">Kirim</button>
 	</form>
+	<a href="{{ url('/panel/pengaturan/ulangi') }}">Nomor Salah / Ulangi?</a>
 
 	@endif
 	{{-- expr --}}

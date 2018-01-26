@@ -15,6 +15,13 @@
 			</thead>
 			<tbody>
 
+			@if (count($data) == 0)
+				{{-- expr --}}
+				<tr>
+					<td colspan="2"><center>Tidak Ada data</center></td>
+				</tr>
+			@else
+
 			@foreach ($data as $d)
 				{{-- expr --}}
 				<tr>
@@ -22,6 +29,7 @@
 					<td><a href="{{ url('panel/daftar-materi/'.$param.'/'.$d['permalink'].'-'.$d['id']) }}">{{$d['name'] }}</a></td>
 				</tr>
 			@endforeach
+			@endif
 			</tbody>
 		</table>
 	</div>

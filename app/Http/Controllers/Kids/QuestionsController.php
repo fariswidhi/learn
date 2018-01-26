@@ -20,6 +20,8 @@ use App\UsersAnswer;
 use App\UsersQuestions;
 use App\Points;
 use App\User;
+use Carbon\Carbon;
+
 class QuestionsController extends Controller
 {
 
@@ -51,8 +53,9 @@ class QuestionsController extends Controller
             ];
         }
 
+        $colors = ['bg-primary','bg-success','bg-secondary','bg-danger','bg-dark','bg-warning'];
 
-    	return view('dashboard/question/index',compact('data'));
+    	return view('dashboard/question/index',compact('data','colors'));
     }
     public function show($param)
     {
@@ -78,12 +81,14 @@ class QuestionsController extends Controller
         }
 
            $param = $param;
+        $colors = ['bg-primary','bg-success','bg-secondary','bg-danger','bg-dark','bg-warning'];
 
 
-        return view('dashboard/question/detail',compact('no','data','param'));
+        return view('dashboard/question/detail',compact('no','data','param','colors'));
     }
 
     public function detail($params,$str){
+
         $explode = explode('-', $str);
         $id = end($explode);
         $data = Modules::find($id);
@@ -91,6 +96,9 @@ class QuestionsController extends Controller
         $time = $data->time;
         $param1 = $params; 
         $param2 = $str;
+
+        $subject_no= $data->subject_number;
+        $module = $data->name;
 
          $characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
 $code = '';
@@ -112,7 +120,6 @@ if ($validation != 0) {
 
 
 
-
         // Session::forget('sessid');
         Session::put('sessid',$sessid);
         
@@ -123,7 +130,7 @@ if ($validation != 0) {
         }
         
 
-		return view('dashboard/question/question-detail',compact('data','time','subject','param1','param2'));
+		return view('dashboard/question/question-detail',compact('data','time','subject','module','param1','param2','subject_no'));
     }
 
     public function start($params,$str){
@@ -139,7 +146,9 @@ if ($validation != 0) {
     	// // $class->save();
         // $current =  URL::current();
         $sessid = Session::get('sessid');
-
+    if (empty($sessid)) {
+        return redirect('panel/soal/'.$params.'/'.$str);
+    }
         $explode = explode('-', $str);
         $id = end($explode);
         $limit = Modules::find($id)->subject_number;
@@ -190,11 +199,19 @@ if ($validation != 0) {
 
 
 // // echo $limitsess;
-
+        $ModuleTime = Modules::find($id)->time;
         // Session::push('user.questions', $d);
         // Session::flush();
+
         $current = "dashboard/question/".$params."/".$str;
-    	return view('dashboard/question/start',compact('current'));
+        $d = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->orderBy('created_at','desc')->first();
+    $start = $d->created_at;
+    $date = Carbon::parse($start);
+    $time = $date->addMinutes($ModuleTime);
+
+    // print_r($time);
+        return view('dashboard/question/start',compact('current','time'));
+        // print_r($time);
     }
 
     public function listQuestions($params,$str){
@@ -279,6 +296,8 @@ public function getQuestionById($id){
 }
 public function insertAnswer(Request $request){
     $sessid = Session::get('sessid');
+
+
     $id_children = Auth::id();
     $id_question = $request->question;
     $id_answer  = $request->id;
@@ -297,8 +316,11 @@ public function insertAnswer(Request $request){
     $d = UsersQuestions::where('id',$id_question)->first();
     // echo $d->usersQuestions();
     $question = $d->id_question;
+    $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
 
     $answer = Answers::where(['id_question'=>$question,'true'=>1])->first();
+        $subject_no = Modules::find($id_module)->subject_number;    
+    $point = 100/$subject_no;
     $true = $answer->id;
     if ($count ==0 ) {
     $class = new UsersAnswer;
@@ -313,8 +335,7 @@ public function insertAnswer(Request $request){
 
     $full = 100;
     $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
-    $subject_no = Modules::find(1)->subject_number;    
-    $point = 100/$subject_no;
+
 
             $find = UsersAnswer::where(['id_question'=>$id_question,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
         // $getId = $data->first()->id;
@@ -334,8 +355,8 @@ public function insertAnswer(Request $request){
     $answer = Answers::where(['id_question'=>$question,'true'=>1])->first();
     $true = $answer->id;
     $full = 100;
-    $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
-    $subject_no = Modules::find(1)->subject_number;    
+
+    $subject_no = Modules::find($id_module)->subject_number;    
     $point = 100/$subject_no;
 
             $find = UsersAnswer::where(['id_question'=>$id_question,'id_children'=>Auth::id(),'sessid'=>$sessid])->first();
@@ -355,7 +376,14 @@ public function end(){
     $userid = Auth::id();
 
     // $data = UsersAnswer::where(['id_children'=>$userid,'sessid'=>$sessid])->sum('point')->groupBy('sessid')->get();
-$data = DB::table("users_answers")->select(DB::raw("SUM(point) as count"))->groupBy(DB::raw("sessid"));                                                                                                     $score = $data->first()->count;
+$data = DB::table("users_answers")->select(DB::raw("SUM(point) as count"))->where(['sessid'=>$sessid,'id_children'=>$userid])->groupBy(DB::raw("sessid"));                                                                                                     
+    if ($data->count() != 0) {
+        # code...
+        $score = $data->first()->count;
+    }
+    else{
+        $score=0;
+    }
 
     
     $id_module = UsersQuestions::where(['sessid'=>$sessid,'id_user'=>Auth::id()])->first()->id_module;
@@ -380,13 +408,14 @@ $data = DB::table("users_answers")->select(DB::raw("SUM(point) as count"))->grou
 }
 
 public function fromMe(){
+
     if (Auth::user()->type==2) {
         # code...
     $modules = Modules::where('id_user',Auth::id())->get();
     }
     else{
 
-     $id = Auth::user()->id_user;
+     $id = Auth::user()->id_parent;
     $modules = Modules::where('id_user',$id)->get();   
     }
 
@@ -410,11 +439,12 @@ public function fromMe(){
             ];
         }
 
-    return view('dashboard/question/fromMe',compact('data'));
+        $colors = ['bg-primary','bg-success','bg-secondary','bg-danger','bg-dark','bg-warning'];
+    return view('dashboard/question/fromMe',compact('data','colors'));
 }
 
 public function myScore(){
-    $data = Points::where('id_user',Auth::id())->get();
+    $data = Points::where('id_user',Auth::id())->orderBy('created_at','desc')->paginate(10);
     $no =1;
     return view('dashboard/my-score',compact('data','no'));
 }

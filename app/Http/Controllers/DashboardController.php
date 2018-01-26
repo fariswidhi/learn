@@ -41,8 +41,8 @@ class DashboardController extends Controller
         // print_r(Request::segment(1));
         $level = Auth::user()->type;
         $active = Auth::user()->active;
-
-    	return view('dashboard/index',compact('level','active'));
+        $type =Auth::user()->type;
+    	return view('dashboard/index',compact('level','active','type'));
 
     }
    
@@ -260,5 +260,20 @@ class DashboardController extends Controller
 
 
 
+    }
+
+    public function kidsDetail(){
+
+echo "string";
+    }
+
+    public function profile(){
+        $data = User::find(Auth::id());
+        return view('dashboard/profile',compact('data'));
+    }
+
+    public function reset(){
+        Session::forget('verify');
+        return redirect()->back();
     }
 }

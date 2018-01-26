@@ -2,13 +2,16 @@
 
 @section('content')
 <div class="container">
+@if ($type==2)
+	{{-- expr --}}
+
 @if ($active == 0)
 	{{-- expr --}}
 <span class="alert alert-danger">Maaf Akun Anda Belum Terverifikasi <a href="{{ url('/panel/pengaturan') }}">klik disini</a> untuk verifikasi akun</span>
 <br>
 <br>
 @endif
-
+@endif
 	<div class="row">
 	@if ($level == 2)
 
@@ -89,6 +92,21 @@
 		</div>
 
 
+		<div class="col-6 col-lg-4" style="padding: 10px;">
+			<div class="card panel card-body">
+	            <a href="{{ url('panel/profil') }}">
+			<div class="menu-item blue ">
+			<center>
+	                <i class="fa fa-user fa-5x"></i>
+	                <br><br>
+	                <p>Profil</p>
+	        </center>
+             </div>
+	            </a>
+         	</div>
+		</div>
+
+
 
 		<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
@@ -103,6 +121,8 @@
 	            </a>
          	</div>
 		</div>
+
+
 	@elseif($level == 3)
 			<div class="col-6 col-lg-4" style="padding: 10px;">
 			<div class="card panel card-body">
@@ -142,6 +162,19 @@
 	                <i class="fa fa-trophy fa-5x"></i>
 	                <br><br>
 	                <p>Nilai</p>
+	        </center>
+             </div>
+	            </a>
+         	</div>
+		</div>
+		<div class="col-6 col-lg-4" style="padding: 10px;">
+			<div class="card panel card-body">
+	            <a href="{{ url('panel/profil') }}">
+			<div class="menu-item blue ">
+			<center>
+	                <i class="fa fa-user fa-5x"></i>
+	                <br><br>
+	                <p>Profil</p>
 	        </center>
              </div>
 	            </a>

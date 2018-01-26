@@ -23,6 +23,7 @@
     <li><a href="{{url('/admin/materials')}}"><i class="fa fa-server"></i><span>Materi </span></a></li>
     <li><a href="{{url('/admin/modules')}}"><i class="fa fa-calendar"></i><span>Modul Soal</span></a></li>
     <li><a href="{{url('/admin/levels')}}"><i class="fa fa-calendar"></i><span>Jenjang</span></a></li>
+        <li><a href="{{url('/admin/users')}}"><i class="fa fa-users"></i><span>Pengguna</span></a></li>
     <li><a href="{{ route('logout') }}" onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
 

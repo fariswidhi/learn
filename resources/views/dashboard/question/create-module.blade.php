@@ -25,7 +25,15 @@
             <label>Waktu</label>
             <input type="number" name="time" class="form-control">
             <label>Jumlah Soal</label>
-            <input type="number" name="number" class="form-control">
+            <input type="number" name="number" class="form-control">       
+            <label>Jenjang</label>
+            <select class="form-control" required name="levels">  
+                <option value="">Pilih Jenjang</option>
+                @foreach ($levels as $level)
+                    {{-- expr --}}
+                    <option value="{{$level->id}}">{{$level->name}}</option>
+                @endforeach
+            </select>
             <label>Deskripsi</label>
             <textarea name="desription" class="form-control"></textarea>
             <br>

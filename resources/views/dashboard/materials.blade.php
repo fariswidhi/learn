@@ -4,7 +4,11 @@
 <div class="container">
 <div class="card">
 	<div class="card-body">
-
+<div class="pull-right">
+	<form action="{{ url('/panel/daftar-materi/') }}" method="get">
+		<input type="text" name="q" class="form-control" placeholder="Cari Materi">
+	</form>
+</div>
    @if (Session::has('success'))
     @component('alerts.success')
     @slot('title')
@@ -19,7 +23,7 @@
 		<br>
 		<div class="row">
 
-					<div class="col-6 col-lg-3" style="padding: 10px;">
+					<div class="col-12 col-lg-3" style="padding: 10px;">
 						@if (Auth::user()->type == 2)
 					<a href="{!! url("/panel/daftar-materi/dari-saya") !!}">
 					@else
@@ -40,7 +44,7 @@
 						</a>
 					</div>
 				@foreach ($data as $d)
-					<div class="col-6 col-lg-3" style="padding: 10px;">
+					<div class="col-12 col-sm-6 col-lg-3" style="padding: 10px;">
 					<a href="{!! url("/panel/daftar-materi/".$d['permalink'].'-'.$d['id']) !!}">
 						<div class="card text-white {{$colors[array_rand($colors)]}} mb-3" style="height: 200px">
 							<div class="card-body">

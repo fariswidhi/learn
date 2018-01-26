@@ -15,6 +15,9 @@ class IsVerify
      */
     public function handle($request, Closure $next)
     {
+
+        if (Auth::user()->type==2) {
+
         if (Auth::user()->active == 0) {
 
                 # code...
@@ -22,6 +25,9 @@ class IsVerify
 
 
         }
-                        return $next($request);
+                       
     }
+
+     return $next($request);
+        }
 }

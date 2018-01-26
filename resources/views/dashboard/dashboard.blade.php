@@ -58,6 +58,42 @@
   </div>
   @endif
   @endif
+
+
+  @if (Auth::user()->type ==3)
+    {{-- expr --}}
+  @if (!empty(Request::segment(2)))
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+              <a href="{{@url('panel/daftar-materi')}}" class="nav-link">
+              Materi
+              </a>
+      </li>
+      <li class="nav-item">
+              <a href="{{@url('panel/daftar-soal')}}" class="nav-link">
+                  Soal
+              </a>
+      </li>
+      <li class="nav-item">
+              <a href="{{@url('panel/nilai-saya')}}" class="nav-link">
+              Nilai
+              </a>
+      </li>
+      <li class="nav-item">
+              <a href="{{@url('panel/profil')}}" class="nav-link">
+              Profil
+              </a>
+      </li>
+
+    </ul>
+
+
+
+  </div>
+  @endif
+  @endif
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
   </div>
 
@@ -86,11 +122,46 @@
 <div  class="nav-mobile">
       <button class="btn btn-default btn-close pull-right" style="margin: 10px;"><i class="fa fa-times"></i></button>
       <ul>
-        <li><a class="" href="{{ route('login') }}" style="color: #777;" >Login</a></li>
-        <li><a class="" href="{{ route('register') }}" style="color: #777;" >Daftar</a></li>
-        <li><a class="" href="{{ url('berita') }}" style="color: #777;" >Berita</a></li>
+
+
+  @if (Auth::user()->type ==2)
+    {{-- expr --}}
+  @if (!empty(Request::segment(2)))
+
+        <li><a href="{{ url('panel/daftar-anak') }}" style="color: #777;" >Anak</a></li>
+
+        <li><a href="{{ url('panel/aktivitas-anak') }}" style="color: #777;" >Aktivitas Anak</a></li>
+        <li><a href="{{ url('panel/nilai') }}" style="color: #777;" >Nilai</a></li>
+  <li><a href="{{ url('panel/daftar-materi') }}" style="color: #777;" >Materi</a></li>
+    <li><a href="{{ url('panel/daftar-soal') }}" style="color: #777;" >Soal</a></li>
+  <li><a href="{{ url('panel/pengaturan') }}" style="color: #777;" >Pengaturan</a></li>
+
+  </div>
+  @endif
+  @endif
+
+
+
+  @if (Auth::user()->type ==3)
+    {{-- expr --}}
+  @if (!empty(Request::segment(2)))
+
+        <li><a href="{{ url('panel/daftar-materi') }}" style="color: #777;" >Materi</a></li>
+
+        <li><a href="{{ url('panel/daftar-soal') }}" style="color: #777;" >Soal</a></li>
+        <li><a href="{{ url('panel/nilai-saya') }}" style="color: #777;" >Nilai Saya</a></li>
+  <li><a href="{{ url('panel/profil') }}" style="color: #777;" >Profil</a></li>
+  </div>
+  @endif
+  @endif
+
+
+
+
       </ul>
   </div>
+
+
 
 
 <!-- navbar -->

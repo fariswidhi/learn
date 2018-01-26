@@ -61,7 +61,7 @@
                     <tr>
                         <td>{{$no++}}</td>
                         <td>{{$data->name}}</td>
-                        <td><a href="{{url('panel/soal/'.$param.'/'.$data->id)}}" class="btn btn-primary btn-sm">Detail</a> <a href="{{url('panel/soal/'.$param.'/hapus/'.$data->id)}}" class="btn btn-danger btn-sm">Hapus</a></td>
+                        <td><a href="{{url('panel/soal/'.$param.'/detail/'.$data->id)}}" class="btn btn-primary btn-sm">Detail</a> <a href="{{url('panel/soal/'.$param.'/hapus/'.$data->id)}}" class="btn btn-danger btn-sm">Hapus</a></td>
                     </tr>
                 @endforeach
                 </table>

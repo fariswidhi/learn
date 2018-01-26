@@ -4,23 +4,30 @@
 <div class="container">
 
 		<div class="row">
-
-				@foreach ($data as $d)
-					<div class="col-lg-3" style="padding: 10px;">
-					<a href="{!! url("/panel/soal/".$param.'/'.$d['permalink'].'-'.$d['id']) !!}">
+			@if (count($data) == 0)
+				{{-- expr --}}
+					<div class="col-lg-12">
 						<div class="card">
 							<div class="card-body">
-							<center><h3>{{$d['name']}}</h3>
-							<br>
-														<i class="fa fa-clock-o"></i> {{$d['time']. " Menit"}}
-							</center>
+								<center>Tidak Ada Data</center>
+							</div>
+						</div>
+					</div>
+			@else
+
+				@foreach ($data as $d)
+			<div class="col-12 col-lg-3" style="padding: 10px;">
+					<a href="{!! url("/panel/soal/".$param.'/'.$d['permalink'].'-'.$d['id']) !!}">
+				<div class="card text-white {{$colors[array_rand($colors)]}} mb-3" style="height: 200px">
+							<div class="card-body">
+							<center><h3 {!! strlen($d['name']) > 15 ? 'style="margin-top: 20%;font-size: 23px;"' : 'style="margin-top: 20%;font-size: 25px;"' !!}>{{$d['name']}}</h3></center>
 
 							</div>
 						</div>
 						</a>
 					</div>
 				@endforeach
-
+@endif
 		</div>
 	</div>
 
@@ -30,3 +37,4 @@
             'id'=>$m->id,
             'time'=>$m->time, --}}
 @endsection
+

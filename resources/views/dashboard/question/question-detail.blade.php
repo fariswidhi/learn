@@ -12,11 +12,18 @@
 							<div class="card-body">
 							<div class="col-lg-6" style="float: none;margin: 0 auto;">
 								<table class="table table-hover">
+
+									<tr>
+										<td>Nama Modul</td><td>{{$module}}</td>
+									</tr>
 									<tr>
 										<td>Mata Pelajaran</td><td>{{$subject}}</td>
 									</tr>
 									<tr>
-										<td>Waktu</td><td>{{$time}}</td>
+										<td>Waktu</td><td>{{$time." Menit"}}</td>
+									</tr>
+									<tr>
+										<td>Jumlah Soal</td><td>{{$subject_no}}</td>
 									</tr>
 								</table>
 								<center>

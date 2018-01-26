@@ -53,7 +53,7 @@ class MaterialController extends Controller
 
         $class = new Material;
         $class->name = $request->name;
-        $class->content = $request->content;
+        $class->content = nl2br($request->content);
         $class->id_subject = $request->subjects;
         $class->id_level = $request->levels;
         $class->id_user = Auth::id();
@@ -110,7 +110,7 @@ class MaterialController extends Controller
         //
         $class = Material::find($id);
         $class->name = $request->name;
-        $class->content = $request->content;
+        $class->content = nl2br($request->content);
         $class->id_subject = $request->subjects;
         $class->id_level = $request->levels;
         $class->save();

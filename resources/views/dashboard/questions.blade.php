@@ -19,6 +19,8 @@
 		<br>
 		<div class="row">
 
+
+
 				@foreach ($data as $d)
 					<div class="col-lg-3" style="padding: 10px;">
 					<a href="{!! url("/dashboard/materials/".$d['permalink'].'-'.$d['id']) !!}">

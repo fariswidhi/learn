@@ -36,6 +36,11 @@
 				@endforeach
 				</select>
 				<br>
+				<label>Jenis Kelamin</label>
+				<select class="form-control" name="gender">
+				<option value="laki-laki">Laki - Laki</option>
+					<option value="perempuan">Perempuan</option>
+				</select>
 				<button type="submit" class="btn btn-success">Simpan</button>
 			</form>
 		</div>

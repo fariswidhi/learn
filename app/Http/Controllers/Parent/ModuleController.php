@@ -13,12 +13,14 @@ use Auth;
 use App\Modules;
 use App\Questions;
 use App\Answers;
-
+use App\Level;
 class ModuleController extends Controller
 {
     public function create(){
         $subjects = Subjects::all();
-        return view('dashboard/question/create-module',compact('subjects'));
+        $levels = Level::all();
+
+        return view('dashboard/question/create-module',compact('subjects','levels'));
     }
 
     public function store(Request $request){

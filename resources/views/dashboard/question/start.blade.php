@@ -1,8 +1,22 @@
 @extends('dashboard.dashboard')
 
 @section('content')
+
+
 <div class="row" style="width: 95%;margin: 0 auto;">
+		<div class="col-lg-3">
+						<div class="pull-left" style="width: 100%;">
+<button type="button" style="width: 100%;" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">
+	<i class="fa fa-exclamation-triangle"></i> Berhenti
+</button>
+<br>
+</div>
+		</div>
+		<div class="col-lg-9" style="font-size: 25px;">
+				<span><i class="fa fa-clock-o"></i></span> <span id="demo"></span>
+		</div>
 	<div class="col-lg-3" style="margin-bottom: 50px;">
+				
 			<div class="card">
 			<div class="card-body">
 			<h5>Daftar Soal</h5>
@@ -38,10 +52,6 @@
 				<button class='pull-right btn btn-primary btn-pagination btn-next'>Selanjutnya</button>
 			</div>
 			<br><br>
-			<div class="pull-left" style="width: 100%;">
-<button type="button" style="width: 100%;" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">
-	<i class="fa fa-exclamation-triangle"></i> Berhenti
-</button>
 </div>
 
 			</div>
@@ -64,7 +74,7 @@
 	Apakah Anda Ingin Berhenti?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary close-btn" data-dismiss="modal">Batal</button>
         <button type="button" class="btn btn-primary btn-done">OK</button>
       </div>
     </div>
@@ -75,7 +85,7 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Nilai Anda </h5>
+        <h5 class="modal-title modal-score" id="exampleModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -128,6 +138,7 @@ $(document).on('click','.btn-done',function(){
 		success: function(res){
 			if(res.success == 'true'){
 				$("#exampleModal").modal('toggle');
+				$(".modal-score").text('Berhenti');
 				$('#success').modal({backdrop: 'static', keyboard: false})  
 				$("#success").modal("show");
 				$(".point").text(res.point);
@@ -418,8 +429,8 @@ $(document).on('click','.btn-prev',function(){
 	success:function(res){
 		var html = '';
 		var no =1;
-
-			parse(res[0].id,res[0].max,res[0].min,res[0].num,res[0].value);
+			var i = $(".num1").attr('data-value');
+			parse(res[0].id,res[0].max,res[0].min,res[0].num,i);
 			// html += "<button  data-value="+res[i].iduser+" data-num="+res[i].num+" data-max="+res[i].max+" data-min="+res[i].min+" data-id="+res[i].id+" class='"+(res[i].answered == "true" ? "btn btn-success" : "btn btn-outline-success"   )+" map num"+n+"'>"+n+"</button> ";
 
 
@@ -428,6 +439,57 @@ $(document).on('click','.btn-prev',function(){
 	}
 });
 
+
+// Set the date we're counting down to
+var countDownDate = new Date("{{$time}}").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get todays date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now an the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + ":" + hours + ":"
+  + minutes + ":" + seconds;
+
+  // If the count down is finished, write some text 
+  if (distance < 0) {
+    clearInterval(x);
+
+	$.ajax({
+		url: "{{ url('/api/questions/end') }}",
+		type: "POST",
+		dataType: "json",
+		success: function(res){
+			if(res.success == 'true'){
+				$("#exampleModal").modal('toggle');
+				$(".modal-score").text('Waktu Habis');
+				$('#success').modal({backdrop: 'static', keyboard: false})  
+				$("#success").modal("show");
+				$(".point").text(res.point);
+				 window.setTimeout(function(){
+
+        // Move to a new location or you can do something else
+        window.location.href = "{{ url('/panel') }}";
+
+    }, 3000);
+
+			}
+		}
+	});
+  }
+}, 1000);
+
 // $(document).on('ready',function(e){
 // 	e.preventDefault();
 // 	alert($("#subject").text());
@@ -435,7 +497,7 @@ $(document).on('click','.btn-prev',function(){
 </script>
 @endpush
 
-<style type="text/css">/* only demo styles */
+<style type="text/css">
 
 
 .checkbox-custom, .radio-custom {
@@ -481,7 +543,7 @@ $(document).on('click','.btn-prev',function(){
 
 
 .checkbox-custom:focus + .checkbox-custom-label, .radio-custom:focus + .radio-custom-label {
-  outline: 1px solid #ddd; /* focus style */
+  outline: 1px solid #ddd; 
 }
 </style>
 @endsection
